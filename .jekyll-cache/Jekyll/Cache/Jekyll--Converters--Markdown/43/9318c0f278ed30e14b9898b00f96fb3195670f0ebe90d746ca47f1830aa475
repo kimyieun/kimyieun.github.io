@@ -1,0 +1,63 @@
+I"�<h2 id="whats-vis-and-why-do-it">What’s Vis, and Why Do It?</h2>
+
+<h3 id="11-the-big-picture">1.1 The Big Picture</h3>
+
+<h3 id="12-why-have-a-human-in-the-loop">1.2 Why have a human in the loop?</h3>
+<ul>
+  <li>vis는 사용자가 정확히 자신이 가진 문제점이 뭔지 모르는 상황에서 데이터 분석시 도움을 준다.</li>
+  <li>사용자가 well-defined question을 가지고 있다면, 통계학이나 머신러닝을 사용해 해결 가능하다.</li>
+  <li>
+    <p>완전하게 자동화되는 솔루션이 필요하다면, human judgement가 필요없고 결과적으로 vis tool이 필요 없다.</p>
+  </li>
+  <li>그러나, 많은 분석 문제들은 ill specified이다. 어떻게 문제에 접근하는지 모른다.</li>
+  <li>이런 케이스에서 가장 좋은 방법은 사용자를 분석 과정의 loop안에 집어 넣는 것이다.</li>
+  <li>
+    <p>Vis systems are appropriate for use when your goal is to <strong>augment human capabilities</strong>, rather than completely replace the human in the loop.</p>
+  </li>
+  <li>여러 사용 방법
+    <ul>
+      <li>Transitional use
+        <ul>
+          <li>goal : “work itself out of a job”</li>
+          <li>예를 들어, 수학적인 모델을 고안하기 이전에 requirements를 이해하기 위한 vis tool이 있다고 가정해보자. 이는, transition process의 가장 초기 단계에 사용된다. 이 분석 툴의 결과는 사용자 task에 대한 보다 명확한 이해를 하는데 도움을 준다.</li>
+          <li>middle stage에서는, computational solution을 refine, debug, extend 하거나 알고리즘의 parameters에 따른 효과를 이해하기 위해 사용한다.</li>
+        </ul>
+      </li>
+      <li>Long-term use
+        <ul>
+          <li>no intention of replacing the human</li>
+          <li>연구 과정이 완전하게 자동화되기 힘든 분야에서 사용.</li>
+        </ul>
+      </li>
+      <li>For presentation
+        <ul>
+          <li>이미 알고 있는 지식이나 사실을 다른 사람들에게 설명하기 위한 수단으로 사용한다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="13-why-have-a-computer-in-the-loop">1.3 Why have a computer in the loop?</h3>
+<ul>
+  <li>사람의 attention span은 굉장히 한정되어 있다. 이에 반해 real-world datasets는 방대하고, 시시각각 변화한다. computer-based tool을 사용함으로써 manual creation에 비해 노력이 상대적으로 덜 필요하다.</li>
+</ul>
+
+<h3 id="14-why-use-an-external-representation">1.4 Why use an external representation?</h3>
+<ul>
+  <li>인간의 내부 인지와 메모리는 제한되어 있다. Vis는 external representation을 사용해서 사용자의 internal cognition과 memory의 필요성을 없애준다.</li>
+  <li>다양한 형태의 external representation이 있지만, 이 책에서는 2D display surface로만 언급하겠다.</li>
+</ul>
+
+<h3 id="15-why-depends-on-vision">1.5 Why depends on vision?</h3>
+<ul>
+  <li>visual system은 매우 높은 대역폭 channel을 제공한다. 시각적 정보 처리의 양은 preconscious level와 거의 parallel하게 발생한다. visual popout.</li>
+  <li>소리는 vision에 비해 많은 양의 정보의 overview를 제공하는데 적합하지 않다.</li>
+  <li>taste, smell, haptic 등의 감각들은 아직 기술적인 한계로 인해 쉽지 않다.</li>
+</ul>
+
+<h3 id="16-why-show-the-data-in-detail">1.6 Why show the data in detail?</h3>
+<ul>
+  <li></li>
+</ul>
+:ET

@@ -1,0 +1,23 @@
+I"�<p>테스트 코드 작성하시나요?
+왜 안하게 되는가요?</p>
+<ul>
+  <li>힘들고 일정에 치여서…나중에 하자.</li>
+  <li>나중은 결코 오지 않는다.</li>
+</ul>
+
+<p>TDD의 궁극적 목표</p>
+<ul>
+  <li>Clean Code that works</li>
+</ul>
+
+<p>Test First Programming</p>
+
+<p>TDD Cycle</p>
+
+<p>왜 어려운가?</p>
+<ul>
+  <li>코드가 Testable 하지 않다.</li>
+  <li>Testable code를 작성하면 해결된다.</li>
+</ul>
+
+:ET

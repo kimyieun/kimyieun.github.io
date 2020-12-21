@@ -1,0 +1,17 @@
+I"<h2 id="whats-vis-and-why-do-it">What’s Vis, and Why Do It?</h2>
+
+<h3 id="11-the-big-picture">1.1 The Big Picture</h3>
+
+<h3 id="12-why-have-a-human-in-the-loop">1.2 Why have a human in the loop?</h3>
+<ul>
+  <li>vis는 사용자가 정확히 자신이 가진 문제점이 뭔지 모르는 상황에서 데이터 분석시 도움을 준다.</li>
+  <li>사용자가 well-defined question을 가지고 있다면, 통계학이나 머신러닝을 사용해 해결 가능하다.</li>
+  <li>
+    <p>완전하게 자동화되는 솔루션이 필요하다면, human judgement가 필요없고 결과적으로 vis tool이 필요 없다.</p>
+  </li>
+  <li>그러나, 많은 분석 문제들은 ill specified이다. 어떻게 문제에 접근하는지 모른다.</li>
+  <li>이런 케이스에서 가장 좋은 방법은 사용자를 분석 과정의 loop안에 집어 넣는 것이다.</li>
+  <li>Vis systems are appropriate for use when your goal is to <strong>augment human capabilities</strong>, rather than completely replace the human in the loop.</li>
+</ul>
+
+:ET

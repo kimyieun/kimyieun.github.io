@@ -9,27 +9,29 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Site Title</title>
-<meta name="description" content="An amazing website.">
+<!-- begin _includes/seo.html --><title>Frontend - TDD(Test Driven Development) - Site Title</title>
+<meta name="description" content="테스트 코드 작성하시나요? 왜 안하게 되는가요?    힘들고 일정에 치여서…나중에 하자.   나중은 결코 오지 않는다.">
 
 
   <meta name="author" content="Your Name">
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Site Title">
-<meta property="og:title" content="Site Title">
-<meta property="og:url" content="http://localhost:4000/">
+<meta property="og:title" content="Frontend - TDD(Test Driven Development)">
+<meta property="og:url" content="http://localhost:4000/frontend/tdd/Frontend-TDD/">
 
 
-  <meta property="og:description" content="An amazing website.">
-
-
-
+  <meta property="og:description" content="테스트 코드 작성하시나요? 왜 안하게 되는가요?    힘들고 일정에 치여서…나중에 하자.   나중은 결코 오지 않는다.">
 
 
 
+
+
+
+
+  <meta property="article:published_time" content="2020-12-21T00:00:00+09:00">
 
 
 
@@ -40,7 +42,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/">
+<link rel="canonical" href="http://localhost:4000/frontend/tdd/Frontend-TDD/">
 
 
 
@@ -102,7 +104,7 @@
 
   </head>
 
-  <body class="layout--home">
+  <body class="layout--single">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -258,24 +260,207 @@
 
 
 
-  <div class="archive">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Frontend - TDD(Test Driven Development)">
+    <meta itemprop="description" content="테스트 코드 작성하시나요?왜 안하게 되는가요?  힘들고 일정에 치여서…나중에 하자.  나중은 결코 오지 않는다.">
+    <meta itemprop="datePublished" content="2020-12-21T00:00:00+09:00">
     
-      <h1 id="page-title" class="page__title"></h1>
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Frontend - TDD(Test Driven Development)
+</h1>
+          
+
+
+  <p class="page__meta">
+
     
+
     
 
-<h3 class="archive__subtitle">Recent posts</h3>
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    
+
+  </p>
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>테스트 코드 작성하시나요?
+왜 안하게 되는가요?</p>
+<ul>
+  <li>힘들고 일정에 치여서…나중에 하자.</li>
+  <li>나중은 결코 오지 않는다.</li>
+</ul>
+
+<p>TDD의 궁극적 목표</p>
+<ul>
+  <li>Clean Code that works</li>
+</ul>
+
+<p>Test First Programming</p>
+
+<p>TDD Cycle</p>
+
+<p>왜 어려운가?</p>
+<ul>
+  <li>코드가 Testable 하지 않다.</li>
+  <li>Testable code를 작성하면 해결된다.</li>
+</ul>
+
+<p>Separation of Concerns</p>
+<ul>
+  <li>각 요소가 자신이 관심이 있는 부분만 해결</li>
+</ul>
+
+<p>Example(To-Do App)</p>
+<ul>
+  <li>Testcode 먼저 만들기</li>
+  <li>브라우저 rendering 확인은 스타일이나 레이아웃 잡을 때 외에는 거의 사용하지 않게 됨</li>
+  <li>testcode가 빠른 feedback을 주기 때문에</li>
+</ul>
+
+<p>Redux
+왜 쓰는가?</p>
+<ul>
+  <li>상태 관리</li>
+  <li>React의 관심사 : state reflection! 반면 state management에는 관심이 없다.</li>
+</ul>
+
+<p>컴포넌트를 만들 때, 각 컴포넌트를 작게 만들도록 주의를 기울여라.
+이게 과연 이 컴포넌트의 관심사가 맞는가?</p>
+
+<p>SRP (Single Responsibility Priciple) 단일 책임 원칙</p>
+
+<p>고정된 데이터
+fixtures folder에 저장</p>
+
+<p>BDD (Behavior driven development)</p>
+<ul>
+  <li>테스트 짤 때 행위 중심으로 생각</li>
+</ul>
+
+<p>상황에 따라 다르게 행동 (describe context it template 이 유용)</p>
+
+<p>with tasks, render tasks
+without tasks, renders not task message</p>
+
+<p>fire event</p>
+
+<p>tdd할 때 중복 제거가 중요</p>
+<ul>
+  <li>빠르게 제거. 문제가 되어도 test에서 바로 찾을 수 있으니 바로바로 지워라.</li>
+</ul>
 
 
+        
+      </section>
 
-
-<div class="entries-list">
+      <footer class="page__meta">
+        
+        
   
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
     
+      
+      
+      <a href="/tags/#frontend" class="page__taxonomy-item" rel="tag">frontend</a>
+    
+    </span>
+  </p>
 
 
 
-<div class="list__item">
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#frontend" class="page__taxonomy-item" rel="tag">frontend</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#tdd" class="page__taxonomy-item" rel="tag">tdd</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-12-21T00:00:00+09:00">December 21, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Frontend+-+TDD%28Test+Driven+Development%29%20http%3A%2F%2Flocalhost%3A4000%2Ffrontend%2Ftdd%2FFrontend-TDD%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Ffrontend%2Ftdd%2FFrontend-TDD%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Ffrontend%2Ftdd%2FFrontend-TDD%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/http/HTTP-Request/" class="pagination--pager" title="HTTP Request
+">Previous</a>
+    
+    
+      <a href="/Visualization-study-chapter-1/" class="pagination--pager" title="What’s Vis, and Why Do It?
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -310,57 +495,12 @@
   </article>
 </div>
 
-  
-    
+        
+          
 
 
 
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/frontend/tdd/Frontend-TDD/" rel="permalink">Frontend - TDD(Test Driven Development)
-</a>
-      
-    </h2>
-    
-
-
-  <p class="page__meta">
-
-    
-
-    
-
-    
-      
-      
-
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        less than 1 minute read
-      
-    
-
-  </p>
-
-    <p class="archive__item-excerpt" itemprop="description">테스트 코드 작성하시나요?
-왜 안하게 되는가요?
-
-  힘들고 일정에 치여서…나중에 하자.
-  나중은 결코 오지 않는다.
-
-</p>
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -396,12 +536,12 @@ Hyper Text Transfer Protocol. 인터넷에서 컴퓨터사이에 데이터를 �
   </article>
 </div>
 
-  
-    
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -436,14 +576,13 @@ Hyper Text Transfer Protocol. 인터넷에서 컴퓨터사이에 데이터를 �
   </article>
 </div>
 
+        
+      </div>
+    </div>
+  
   
 </div>
 
-
-
-
-  </div>
-</div>
     </div>
 
     

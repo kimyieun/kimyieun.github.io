@@ -1,1 +1,221 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-08-21T15:44:11+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Site Title</title><subtitle>An amazing website.</subtitle><author><name>Your Name</name></author></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-21T15:58:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Site Title</title><subtitle>An amazing website.</subtitle><author><name>Your Name</name></author><entry><title type="html">Frontend - TDD(Test Driven Development)</title><link href="http://localhost:4000/frontend/tdd/Frontend-TDD/" rel="alternate" type="text/html" title="Frontend - TDD(Test Driven Development)" /><published>2020-12-21T00:00:00+09:00</published><updated>2020-12-21T00:00:00+09:00</updated><id>http://localhost:4000/frontend/tdd/Frontend-TDD</id><content type="html" xml:base="http://localhost:4000/frontend/tdd/Frontend-TDD/">&lt;p&gt;테스트 코드 작성하시나요?
+왜 안하게 되는가요?&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;힘들고 일정에 치여서…나중에 하자.&lt;/li&gt;
+  &lt;li&gt;나중은 결코 오지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;TDD의 궁극적 목표&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Clean Code that works&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Test First Programming&lt;/p&gt;
+
+&lt;p&gt;TDD Cycle&lt;/p&gt;
+
+&lt;p&gt;왜 어려운가?&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;코드가 Testable 하지 않다.&lt;/li&gt;
+  &lt;li&gt;Testable code를 작성하면 해결된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Separation of Concerns&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;각 요소가 자신이 관심이 있는 부분만 해결&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example(To-Do App)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Testcode 먼저 만들기&lt;/li&gt;
+  &lt;li&gt;브라우저 rendering 확인은 스타일이나 레이아웃 잡을 때 외에는 거의 사용하지 않게 됨&lt;/li&gt;
+  &lt;li&gt;testcode가 빠른 feedback을 주기 때문에&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Redux
+왜 쓰는가?&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;상태 관리&lt;/li&gt;
+  &lt;li&gt;React의 관심사 : state reflection! 반면 state management에는 관심이 없다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;컴포넌트를 만들 때, 각 컴포넌트를 작게 만들도록 주의를 기울여라.
+이게 과연 이 컴포넌트의 관심사가 맞는가?&lt;/p&gt;
+
+&lt;p&gt;SRP (Single Responsibility Priciple) 단일 책임 원칙&lt;/p&gt;
+
+&lt;p&gt;고정된 데이터
+fixtures folder에 저장&lt;/p&gt;
+
+&lt;p&gt;BDD (Behavior driven development)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;테스트 짤 때 행위 중심으로 생각&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;상황에 따라 다르게 행동 (describe context it template 이 유용)&lt;/p&gt;
+
+&lt;p&gt;with tasks, render tasks
+without tasks, renders not task message&lt;/p&gt;
+
+&lt;p&gt;fire event&lt;/p&gt;
+
+&lt;p&gt;tdd할 때 중복 제거가 중요&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;빠르게 제거. 문제가 되어도 test에서 바로 찾을 수 있으니 바로바로 지워라.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Your Name</name></author><category term="frontend" /><category term="tdd" /><category term="frontend" /><summary type="html">테스트 코드 작성하시나요? 왜 안하게 되는가요? 힘들고 일정에 치여서…나중에 하자. 나중은 결코 오지 않는다.</summary></entry><entry><title type="html">What’s Vis, and Why Do It?</title><link href="http://localhost:4000/Visualization-study-chapter-1/" rel="alternate" type="text/html" title="What’s Vis, and Why Do It?" /><published>2020-12-21T00:00:00+09:00</published><updated>2020-12-21T00:00:00+09:00</updated><id>http://localhost:4000/Visualization-study-chapter-1</id><content type="html" xml:base="http://localhost:4000/Visualization-study-chapter-1/">&lt;h2 id=&quot;whats-vis-and-why-do-it&quot;&gt;What’s Vis, and Why Do It?&lt;/h2&gt;
+
+&lt;h3 id=&quot;11-the-big-picture&quot;&gt;1.1 The Big Picture&lt;/h3&gt;
+
+&lt;h3 id=&quot;12-why-have-a-human-in-the-loop&quot;&gt;1.2 Why have a human in the loop?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;vis는 사용자가 정확히 자신이 가진 문제점이 뭔지 모르는 상황에서 데이터 분석시 도움을 준다.&lt;/li&gt;
+  &lt;li&gt;사용자가 well-defined question을 가지고 있다면, 통계학이나 머신러닝을 사용해 해결 가능하다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;완전하게 자동화되는 솔루션이 필요하다면, human judgement가 필요없고 결과적으로 vis tool이 필요 없다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;그러나, 많은 분석 문제들은 ill specified이다. 어떻게 문제에 접근하는지 모른다.&lt;/li&gt;
+  &lt;li&gt;이런 케이스에서 가장 좋은 방법은 사용자를 분석 과정의 loop안에 집어 넣는 것이다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Vis systems are appropriate for use when your goal is to &lt;strong&gt;augment human capabilities&lt;/strong&gt;, rather than completely replace the human in the loop.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;여러 사용 방법
+    &lt;ul&gt;
+      &lt;li&gt;Transitional use
+        &lt;ul&gt;
+          &lt;li&gt;goal : “work itself out of a job”&lt;/li&gt;
+          &lt;li&gt;예를 들어, 수학적인 모델을 고안하기 이전에 requirements를 이해하기 위한 vis tool이 있다고 가정해보자. 이는, transition process의 가장 초기 단계에 사용된다. 이 분석 툴의 결과는 사용자 task에 대한 보다 명확한 이해를 하는데 도움을 준다.&lt;/li&gt;
+          &lt;li&gt;middle stage에서는, computational solution을 refine, debug, extend 하거나 알고리즘의 parameters에 따른 효과를 이해하기 위해 사용한다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Long-term use
+        &lt;ul&gt;
+          &lt;li&gt;no intention of replacing the human&lt;/li&gt;
+          &lt;li&gt;연구 과정이 완전하게 자동화되기 힘든 분야에서 사용.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;For presentation
+        &lt;ul&gt;
+          &lt;li&gt;이미 알고 있는 지식이나 사실을 다른 사람들에게 설명하기 위한 수단으로 사용한다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;13-why-have-a-computer-in-the-loop&quot;&gt;1.3 Why have a computer in the loop?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;사람의 attention span은 굉장히 한정되어 있다. 이에 반해 real-world datasets는 방대하고, 시시각각 변화한다. computer-based tool을 사용함으로써 manual creation에 비해 노력이 상대적으로 덜 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;14-why-use-an-external-representation&quot;&gt;1.4 Why use an external representation?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;인간의 내부 인지와 메모리는 제한되어 있다. Vis는 external representation을 사용해서 사용자의 internal cognition과 memory의 필요성을 없애준다.&lt;/li&gt;
+  &lt;li&gt;다양한 형태의 external representation이 있지만, 이 책에서는 2D display surface로만 언급하겠다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;15-why-depends-on-vision&quot;&gt;1.5 Why depends on vision?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;visual system은 매우 높은 대역폭 channel을 제공한다. 시각적 정보 처리의 양은 preconscious level와 거의 parallel하게 발생한다. visual popout.&lt;/li&gt;
+  &lt;li&gt;소리는 vision에 비해 많은 양의 정보의 overview를 제공하는데 적합하지 않다.&lt;/li&gt;
+  &lt;li&gt;taste, smell, haptic 등의 감각들은 아직 기술적인 한계로 인해 쉽지 않다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;16-why-show-the-data-in-detail&quot;&gt;1.6 Why show the data in detail?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;dataset의 간단한 summary를 제공하는 것보다, 구조에 대해 자세한 정보를 제공하는 것이 좋다.&lt;/li&gt;
+  &lt;li&gt;예를 들어, dataset의 통계적인 특징은 가장 흔한 접근 방법 중 하나이다. 그러나, summarization을 함으로써 정보의 손실이 발생한다는 한계가 있다. Anscombe’s Quartet.&lt;/li&gt;
+  &lt;li&gt;그림 설명&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;17-why-use-interactivity&quot;&gt;1.7 Why use interactivity?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Interactivity 는 시각화 툴에서 가장 강력한 무기이다. dataset이 커질수록 사용자와 dispaly의 한계로 인해 모든 데이터를 한번에 보여줄 수 없다.&lt;/li&gt;
+  &lt;li&gt;거의 대부분의 상황에서 interaction은 필수적이다.&lt;/li&gt;
+  &lt;li&gt;예를 들어, 고차원적인 overview에서부터 작은 부분의 detailed view까지 모두 지원가능하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;18-why-is-the-vis-idiom-design-space-huge&quot;&gt;1.8 Why is the vis idiom design space huge?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;vis idiom : a distinct approach to creating and manipulationg visual representations.&lt;/li&gt;
+  &lt;li&gt;visual encoding&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;19-why-focus-on-tasks&quot;&gt;1.9 Why focus on tasks?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;동일한 dataset에서 하나의 task에 적합한 툴은 다른 테스크에는 적절하지 않을 수 있다.
+domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변경하는 작업을 통해, 사용자가 실제환경에서 필요로 하는 것들간의 공통점과 차이점을 알 수 있다.&lt;/li&gt;
+  &lt;li&gt;Discovery : 새로운 dataset에서 새로운 가정을 생성하거나, 이미 알고 있는 dataset에서 존재하는 가설을 검증하기 위한 목적으로 사용됨.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;110-why-focus-on-effectiveness&quot;&gt;1.10 Why focus on effectiveness?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;user tasks를 얼마나 잘 지원하는지에 대한 평가&lt;/li&gt;
+  &lt;li&gt;correctness, accuracy, truth&lt;/li&gt;
+  &lt;li&gt;“it’s not just about making pretty pictures” - vis designer는 artists가 아니다. 결과에 대한 목표는 예쁜 것이 아니라, 효과적이어야 한다.&lt;/li&gt;
+  &lt;li&gt;시각화에 있어서 correctness - 데이터에 대한 모든 묘사는 abstraction이다. 모든 결정이 어떠한 면을 강조할지에 따라 이루어지기 때문에 correctness를 평가하기 어렵다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;111-why-are-most-designs-ineffective&quot;&gt;1.11 Why are most designs ineffective?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;visual design space는 매우 방대하다. 그러나 대부분은 ineffective하다. 그 이유로는 인간의 인지적, 지각적 시스템에 적합하지 않아서, 또는 의도하는 task에 맞지 않아서 등등. 아주 일부만이 좋은 디자인이라 할 수 있다.&lt;/li&gt;
+  &lt;li&gt;이 때 randomly 디자인을 탐색하는 것은 정말 비효율적이다. 아래 그림을 보자.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;112-why-is-validation-difficult&quot;&gt;1.12 Why is validation difficult?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;vis design에 대한 validation은 어렵다. goal을 만족하는지 판단할 때 할 수 있는 질문이 무궁무진하기 때문에…&lt;/li&gt;
+  &lt;li&gt;이 디자인이 다른 디자인에 비해 좋거나 안좋은 이유가 뭘까? better이라는 의미는? 사용자가 태스크를 빠르게 수행하나? 사용자들이 이 tool을 통해 더 재밌는 것을 많이 하나? 효과적으로 일을 하게 되었나? effectively하다는 것은 여기서 무슨 의미인가? 등 등….&lt;/li&gt;
+  &lt;li&gt;사용자는 누구인가? 이 태스크를 수년이상 수행해본 전문가인가? 아니면 시작하기전에 태스크가 무엇인지 설명을 들어야하는 수준의 novice인가? 이 시스템을 처음 보는 사람인가? 아니면 익숙한 사람인가?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;113-why-are-there-resource-limitations&quot;&gt;1.13 Why are there resource limitations?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;시각화 시스템을 설계할 때 3가지 limitation에 대한 고려가 필요하다.
+    &lt;ul&gt;
+      &lt;li&gt;computational capacity&lt;/li&gt;
+      &lt;li&gt;human perceptual and cognitive capacity&lt;/li&gt;
+      &lt;li&gt;display capacity&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;시각화 시스템은 필연적으로 방대한 양의 데이터를 다루어야 하므로 &lt;strong&gt;scalability&lt;/strong&gt; 가 주요한 이슈이다.
+    &lt;ul&gt;
+      &lt;li&gt;여러 다양한 이유로 dataset 사이즈는 계속해서 증가하는 추세.&lt;/li&gt;
+      &lt;li&gt;computer capacity 또한 향상되어 가고 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Computer side&lt;/li&gt;
+  &lt;li&gt;Human side
+    &lt;ul&gt;
+      &lt;li&gt;memory and attention 이 제한된 자원이다.&lt;/li&gt;
+      &lt;li&gt;인간은 놀랄만큼 굉장히 적은 정보를 저장할 수 있다. &lt;strong&gt;change blindness&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;하나의 view에서 무언가 일을 수행하고 있을 때 다른 부분에서 엄청난 변화가 발생해도 우리는 이를 눈치채지 못한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Display capacity
+    &lt;ul&gt;
+      &lt;li&gt;모든 정보를 동시에 보여주기에는 해상도가 충분하지 못하다.&lt;/li&gt;
+      &lt;li&gt;Information density : 사용하지 않는 공간 대비 encoded된 정보의 양에 대한 measure 방법&lt;/li&gt;
+      &lt;li&gt;모든 정보를 한번에 제공함으로써 navigation과 exploration의 필요성을 줄이는 장점과 비용 간의 trade-off가 있다. 좋은 디자인의 목표는 이 두가지 중에 적절한 balance를 찾는 것이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;114-why-analyze&quot;&gt;1.14 Why analyze?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;high-level framework for analyzing vis use according to three questions
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;What&lt;/strong&gt; data the user sees,&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Why&lt;/strong&gt; the user intends to use a vis tool,&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;How&lt;/strong&gt; the visual encoding and interaction idioms are constructed in terms of design choices&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;what-why-how  = data-task-idiom&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;이 3단계를 하나의 instance라 한다.&lt;/li&gt;
+  &lt;li&gt;단순한 vis tool은 독립된 instance로도 구성할 수 있지만, 복잡한 vis tool은 dependencies가 있는 instances chaining을 필요로 한다. output이 또다른 instance의 input이 되는 형태이다.&lt;/li&gt;
+  &lt;li&gt;예를 들어, 사용자가 vis tool에서 보이는 항목들을 소팅한다. 이는 소팅 그 자체가 결과물로 소팅된 list를 갖는 것이 목적일 수도 있지만, 이를 통해 outlier를 발견하기 위한 수단이 될 수도 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;115-further-reading&quot;&gt;1.15 Further Reading&lt;/h3&gt;</content><author><name>Your Name</name></author><summary type="html">What’s Vis, and Why Do It?</summary></entry><entry><title type="html">HTTP Request</title><link href="http://localhost:4000/http/HTTP-Request/" rel="alternate" type="text/html" title="HTTP Request" /><published>2020-08-26T00:00:00+09:00</published><updated>2020-08-26T00:00:00+09:00</updated><id>http://localhost:4000/http/HTTP-Request</id><content type="html" xml:base="http://localhost:4000/http/HTTP-Request/">&lt;p&gt;HTTP?
+Hyper Text Transfer Protocol. 인터넷에서 컴퓨터사이에 데이터를 주고받을 수 있는 프로토콜(규약)&lt;/p&gt;</content><author><name>Your Name</name></author><category term="HTTP" /><category term="HTTP" /><summary type="html">HTTP? Hyper Text Transfer Protocol. 인터넷에서 컴퓨터사이에 데이터를 주고받을 수 있는 프로토콜(규약)</summary></entry><entry><title type="html">github.io blog start</title><link href="http://localhost:4000/blog/first-post/" rel="alternate" type="text/html" title="github.io blog start" /><published>2020-08-21T00:00:00+09:00</published><updated>2020-08-21T00:00:00+09:00</updated><id>http://localhost:4000/blog/first-post</id><content type="html" xml:base="http://localhost:4000/blog/first-post/">&lt;p&gt;Github Blog service - github.io blog start test&lt;br /&gt;
+test&lt;/p&gt;</content><author><name>Your Name</name></author><category term="Blog" /><category term="Blog" /><summary type="html">GitHub Blog service - github.io blog start</summary></entry></feed>
