@@ -1,8 +1,9 @@
 # "What's Vis, and Why Do It?"
 
-## What's Vis, and Why Do It?
+## Chapter 1
 
 ### 1.1 The Big Picture
+
 
 ### 1.2 Why have a human in the loop?
 - 시각화는 사용자가 정확히 자신이 가진 문제점이 뭔지 모르는 상황에서 데이터 분석시 도움을 준다.
@@ -38,7 +39,7 @@
 <br/>
 
 ### 1.3 Why have a computer in the loop?
-- 사람의 attention span은 굉장히 한정되어 있기 때문에 수백개의 데이터를 처리하는 데에도 수시간에서 수일 소요된다.   
+- 사람의 attention span은 굉장히 한정되어 있기 때문에 수백개의 데이터를 처리하는 데에도 수시간에서 수일이 소요된다.   
   그러나 real-world datasets는 방대하고 계속하여 변화한다. 따라서 computer-based tool을 사용함으로써 human effort를 줄여줄 수 있다.  
   - Scalability, generalization 가능하다.
 <br/>
@@ -60,7 +61,7 @@
 - Visual system 은 bandwidth가 넓다(100MB/s, 귀는 < 100B/s).  
  Preattentive processing : Preconscious level과 동등하게 시각적인 정보 처리가 발생한다.
   - Visual popout 
-    - vision의 전체 범위에 걸쳐 병렬적으로 발생하기 때문에 다른 물체의 범위 크기에 관계 없이 발생한다. 
+    - vision의 전체 범위에 걸쳐 병렬적으로 발생하기 때문에 다른 물체의 범위나 크기에 관계 없이 발생한다. 
   
 <p align="center">
 <img src="../assets/images/visualPopout.png" height="300px" width="500px">
