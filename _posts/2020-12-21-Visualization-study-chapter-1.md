@@ -54,7 +54,6 @@
 <img src="../assets/images/diagram.png" height="300px" width="500px">
 </p>  
 <br/>
-<br/>
 
 ### 1.5 Why depend on vision?
 - 시각화는 human visual system을 의사소통의 수단으로 사용한다.
