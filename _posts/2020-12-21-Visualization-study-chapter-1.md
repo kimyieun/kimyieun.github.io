@@ -61,14 +61,13 @@
 - Visual system 은 bandwidth가 넓다(100MB/s, 귀는 < 100B/s).  
  Preattentive processing : Preconscious level과 동등하게 시각적인 정보 처리가 발생한다.
   - Visual popout 
-    - vision의 전체 범위에 걸쳐 병렬적으로 발생하기 때문에 다른 물체의 범위나 크기에 관계 없이 발생한다. 
   
 <p align="center">
 <img src="../assets/images/visualPopout.png" height="300px" width="500px">
 </p>  
 <br/>
 
-- 소리는 vision에 비해 많은 양의 정보의 overview를 제공하는데 적합하지 않다. 또한, 소리는 sequential stream으로 인지기 때문에 오랜 시간에 걸쳐 발생한 소리는 자동으로 합쳐진다.
+- 소리는 vision에 비해 많은 양의 정보의 overview를 제공하는데 적합하지 않다. 또한, 소리는 sequential stream으로 인지하기 때문에 오랜 시간에 걸쳐 발생한 소리는 자동으로 합쳐진다.
 - taste, smell, haptic 등의 감각들은 아직 기술적인 한계로 어렵다.  
 <br/>
 
