@@ -196,6 +196,7 @@ kramdown:
 # Sass/SCSS
 sass:
   sass_dir: _sass
+  
   style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
 
 # Outputting
@@ -230,6 +231,7 @@ whitelist:
 #  - <base_path>/tags/my-awesome-tag/index.html ~> path: /tags/
 #  - <base_path>/categories/my-awesome-category/index.html ~> path: /categories/
 #  - <base_path>/my-awesome-category/index.html ~> path: /
+category_list: [ javascript, frontend, visualization ]
 category_archive:
   type: liquid
   path: /categories/
