@@ -8,7 +8,7 @@
 
 ### Babel
 
-- Transpiler
+- Javascript Transpiler (Compiler 의 일종)
   - ES6+/ES.NEXT 로 구현된 최신 사양의 소스코드를 구형 브라우저에서도 동작하는 ES5 사양의 소스코드로 Transpiling 한다.
 - Babel 을 사용려면 @babel/preset-env 를 설치해야 한다.
 
@@ -22,3 +22,26 @@
 
 - Transpiling
   - Babel CLI 명령어를 사용하여 트랜스파일링할 수도 있으나, 매번 CLI 명령어를 입력하는 것은 번거로우므로, npm scripts 에 Babel CLI 명령어를 등록해 사용한다.
+
+# Webpack
+
+- 앞서 언급한 ESM의 불완전함을 이유로 Webpack 을 사용하는 것이 더 일반적이다.
+- 의존 관계에 있는 js, css, image 등의 리소스를 하나(또는 여러 개)의 파일로 번들링하는 모듈 번들러이다.
+- Webpack 말고도 Rollup & Parcel 번들러도 있다.
+  - 상황에 따라 적절하게 선태해 사용하면 된다.
+- 의존 모듈이 하나의 파일로 번들링되므로 별도의 모듈 로더가 필요 없다. 그리고 html 파일에서 여러 개의 script 태그를 사용할 필요도 없다.
+
+### 1. webpack 설치
+
+- npm install webpack webpack-cli
+
+### 2. babel-loader 설치
+
+- webpack이 모듈을 번들링할 때 Babel을 사용해 ES6+/ES.NEXT 사양의 소스코드를 ES5 사양의 소스코드로 트랜스파일링하도록 babel-loader 를 설치한다.
+- npm scripts 를 변경하여 Babel 대신에 Webpack을 실행하도록 수정한다.
+
+### 3. webpack.config.js 설정 파일 작성
+
+- webpack.config.js 설정 파일에 필요한 부분들을 작성한다.
+
+### 4. babel-polyfill 설치
