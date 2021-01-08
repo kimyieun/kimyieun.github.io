@@ -1,0 +1,148 @@
+I"�P<h1 id="asyncawait">async/await</h1>
+
+<ul>
+  <li>generator를 사용하여 비동기 처리를 동기 처리처럼 동작하도록 구현했지만 코드가 무척 장황하고 가독성이 떨어진다.</li>
+  <li>ES8에서는 비동기 처리를 동기 처리처럼 동작하도록 구현하는 async/await를 도입하였다.
+    <ul>
+      <li>async/await 는 promise 를 기반으로 동작한다. 프로미스의 후속 처리 메소드에 콜백 함수를 전달해 비동기 처리 결과를 후속 처리할 필요 없이 마치 동기 처리처럼 프로미스를 사용할 수 있다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">fetchTodo</span><span class="p">(){</span>
+    <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/todos/1</span><span class="dl">'</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">todo</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">fetchTodo</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="async-함수">async 함수</h3>
+<ul>
+  <li>await 키워드는 반드시 async 함수 내부에서 사용해야 한다. async 함수는 언제나 프로미스를 반환한다.</li>
+  <li>명시적으로 프로미스를 반환하지 않더라고 암묵적으로 반환값을 resolve하는 프로미스를 반환한다.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//async 함수 선언문</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span><span class="k">return</span> <span class="nx">n</span><span class="p">};</span>
+<span class="nx">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">v</span><span class="p">));</span> <span class="c1">// 1</span>
+
+<span class="c1">//async 함수 표현식</span>
+<span class="kd">const</span> <span class="nx">bar</span> <span class="o">=</span> <span class="k">async</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span><span class="k">return</span> <span class="nx">n</span><span class="p">};</span>
+<span class="nx">bar</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">v</span><span class="p">));</span> <span class="c1">// 2</span>
+
+<span class="c1">//async 화살표 함수</span>
+<span class="kd">const</span> <span class="nx">baz</span> <span class="o">=</span> <span class="k">async</span> <span class="nx">n</span> <span class="o">=&gt;</span> <span class="nx">n</span><span class="p">;</span>
+<span class="nx">baz</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">v</span><span class="p">));</span> <span class="c1">// 3</span>
+
+<span class="c1">//async 메소드</span>
+<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">async</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span><span class="k">return</span> <span class="nx">n</span><span class="p">;}</span>
+<span class="p">};</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="mi">4</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">v</span><span class="p">));</span> <span class="c1">// 4</span>
+
+<span class="c1">//async class method</span>
+<span class="kd">class</span> <span class="nx">MyClass</span><span class="p">{</span>
+    <span class="k">async</span> <span class="nx">bar</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span><span class="k">return</span> <span class="nx">n</span><span class="p">;}</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">myClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span>
+<span class="nx">myClass</span><span class="p">.</span><span class="nx">bar</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">v</span><span class="p">));</span> <span class="c1">// 5</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>클래스의 constructor 메소드는 async 메소드가 될 수 없다. constructor 메소드는 instance를 반환해야 하는데, async 함수는 언제나 프로미스를 반환하기 때문이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="await-키워드">await 키워드</h3>
+<ul>
+  <li>await 키워드는 프로미스가 settled 상태(비동기 처리가 수행된 상태)가 될 때까지 대기하다가 settled 상태가 되면 프로미스가 resolve 한 결과를 반환한다.</li>
+  <li>await 키워드는 반드시 프로미스 앞에서 사용해야 한다.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">getGithubUserName</span> <span class="o">=</span> <span class="k">async</span> <span class="nx">id</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`https://api.github.com/users/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span> <span class="c1">// 1</span>
+    <span class="kd">const</span> <span class="p">{</span><span class="nx">name</span><span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span> <span class="c1">// 2</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span> <span class="c1">//YIEUN</span>
+<span class="p">};</span>
+<span class="nx">getGithubUserName</span><span class="p">(</span><span class="dl">'</span><span class="s1">Yieun</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>1에서 fetch 함수가 수행한 HTTP 요청에 대한 서버의 응답이 도착해서 FETCH 함수가 반환한 프로미스가 settled 상태가 될 때까지 1은 대기한다. 이후, <strong>프로미스가 settled 상태가 되면 프로미스가 resolve 한 처리 결과가 res 변수에 할당된다.</strong></li>
+    </ul>
+  </li>
+  <li>await 키워드는 다음 실행을 일시 중지시켰다가 프로미스가 settled 상태가 되면 다시 재개한다.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">foo</span><span class="p">(){</span>
+  <span class="kd">const</span> <span class="nx">res1</span> <span class="o">=</span> <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">3000</span><span class="p">));</span>
+  <span class="kd">const</span> <span class="nx">res2</span> <span class="o">=</span> <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2000</span><span class="p">));</span>
+  <span class="kd">const</span> <span class="nx">res3</span> <span class="o">=</span> <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1000</span><span class="p">));</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">([</span><span class="nx">res1</span><span class="p">,</span> <span class="nx">res2</span><span class="p">,</span> <span class="nx">res3</span><span class="p">]);</span> <span class="c1">// [1,2,3]</span>
+<span class="p">}</span>
+<span class="nx">foo</span><span class="p">();</span> <span class="c1">// 약 6초가 소요된다.</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>그러나, 위의 프로미스들은 각각 독립적인 역할을 수행한다. 순차적으로 처리할 필요가 없다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">foo</span><span class="p">(){</span>
+    <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span>
+        <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">3000</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2000</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1000</span><span class="p">))</span>
+    <span class="p">])</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span> <span class="c1">// [1,2,3]</span>
+<span class="p">}</span>
+<span class="nx">foo</span><span class="p">();</span> <span class="c1">// 약 3초가 소요된다.</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span>
+    <span class="kd">const</span> <span class="nx">res1</span> <span class="o">=</span> <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">n</span><span class="p">),</span> <span class="mi">3000</span><span class="p">));</span>
+    <span class="kd">const</span> <span class="nx">res2</span> <span class="o">=</span> <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">res1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2000</span><span class="p">));</span>
+    <span class="kd">const</span> <span class="nx">res3</span> <span class="o">=</span> <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">res2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1000</span><span class="p">));</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">([</span><span class="nx">res1</span><span class="p">,</span> <span class="nx">res2</span><span class="p">,</span> <span class="nx">res3</span><span class="p">]);</span> <span class="c1">// [1,2,3]</span>
+<span class="p">}</span>
+<span class="nx">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 약 6초가 소요된다.</span>
+</code></pre></div></div>
+
+<h3 id="에러-처리">에러 처리</h3>
+<ul>
+  <li>비동기 함수의 콜백 함수를 호출하는 것은 비동기 함수가 아니기 때문에 try …catch 문을 사용해 에러를 캐치할 수 없다.</li>
+  <li>async/await 에서 에러 처리는 try … catch 문을 사용할 수 있다. 콜백 함수를 인수로 전달받는 비동기 함수와 달리 프로미스를 반환하는 비동기 함수는 명시적으로 호출할 수 있기 때문에 caller 가 명확하다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span><span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">wrongURL</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://wrong.url</span><span class="dl">'</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">wrongURL</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="c1">//TypeError : Failed to fetch</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">foo</span><span class="p">();</span>
+</code></pre></div></div>
+
+<ul>
+  <li>foo 함수의 catch 문은 HTTP 통신 에러 뿐만 아니라 try 코드 블록 내의 모든 문에서 발생하는 일반적인 에러도 캐치할 수 있다.</li>
+  <li>async 함수 내에서 catch 문을 사용하지 않으면, async 함수는 발생한 에러를 reject하는 프로미스를 반환한다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node-fetch</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">wrongURL</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://wrong.url</span><span class="dl">'</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">wrongURL</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">foo</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span> <span class="c1">//TypeError : Failed to fetch</span>
+</code></pre></div></div>
+:ET

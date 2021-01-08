@@ -7,8 +7,8 @@ main:
   - title: "Home"
     url: /index.html
   - title: "Category"
-    url: /category/
-  - title: "Sample Collections"
-    url: /collection-archive/
-  - title: "Sitemap"
-    url: /sitemap/
+    url: /category
+  # - title: "Sample Collections"
+  #   url: /collection-archive/
+  # - title: "Sitemap"
+  #   url: /sitemap/

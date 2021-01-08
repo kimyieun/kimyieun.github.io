@@ -1,0 +1,109 @@
+I"�(<h1 id="module">module</h1>
+
+<ul>
+  <li>application 을 구성하는 개별적 요소로 재사용 가능한 코드 조각</li>
+  <li>일반적으로 모듈은 기능을 기준으로 파일 단위로 분리한다. 모듈은 자신만의 파일 스코프(모듈 스코프)를 가질 수 있어야 한다.</li>
+  <li>각 모듈은 모든 자산의 <strong>캡슐화</strong>되어 있다. 공개가 필요한 자산에 한정해 선택적으로 공개 가능하다 - export</li>
+  <li>모듈 사용자는 모듈이 export 한 자산 중 일부나 전체를 선택해 자신의 스코프 내로 불러들여 재사용한다 - import</li>
+</ul>
+
+<h3 id="자바스크립트와-모듈">자바스크립트와 모듈</h3>
+
+<ul>
+  <li>자바스크립트는 모듈 시스템을 지원하지 않았다.<br />
+따라서 자바스크립트 파일을 여러 개로 분리해 script 태그로 로드해도 분리된 자바스크립트 파일들은 결국 하나의 자바스크립트 파일 내에 있는 것처럼 동작한다.</li>
+  <li>자바스크립트 런타임 환경인 Node.js 는 모듈 시스템의 사실상의 표준인 CommonJS 를 채택해 독자적인 진화를 거쳐, 현재는 모듈 시스템을 지원한다.</li>
+</ul>
+
+<h3 id="es6-모듈esm">ES6 모듈(ESM)</h3>
+
+<ul>
+  <li>ES6에서는 클라이언트 사이드 자바스크립트에서 동작하는 모듈 기능을 추가했다.</li>
+</ul>
+
+<h4 id="es6-모듈을-현재의-브라우저에서-사용하기-위해서는-모듈-로더-or-webpack-모듈번들러를-사용해야-한다">ES6 모듈을 현재의 브라우저에서 사용하기 위해서는 모듈 로더 or Webpack 모듈번들러를 사용해야 한다.</h4>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"module"</span> <span class="na">src=</span><span class="s">"app.mjs"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h3 id="module-scope">module scope</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//foo.mjs</span>
+<span class="c1">//x 변수는 전역 변수가 아니며 window 객체의 프로퍼티가 아니다.</span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">foo</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// foo</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// undefined</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//bar.mjs</span>
+<span class="c1">//x 변수는 전역 변수가 아니며 window 객체의 프로퍼티가 아니다.</span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">bar</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// bar</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// undefined</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"module"</span> <span class="na">src=</span><span class="s">"foo.mjs"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"module"</span> <span class="na">src=</span><span class="s">"bar.mjs"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h3 id="export-키워드">export 키워드</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//lib.mjs</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">pi</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">square</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//lib.mjs</span>
+<span class="kd">const</span> <span class="nx">pi</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">square</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//변수, 함수, 클래스를 하나의 객체로 구성하여 export 한다.</span>
+<span class="k">export</span> <span class="p">{</span> <span class="nx">pi</span><span class="p">,</span> <span class="nx">square</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="import-키워드">import 키워드</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//app.mjs</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">pi</span><span class="p">,</span> <span class="nx">square</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./lib.mjs</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">square</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+</code></pre></div></div>
+
+<ul>
+  <li>app.mjs 는 application의 entry point 로 반드시 script 태그로 로드해야 하지만, lib.mjs는 app.mjs 의 import 문에 의해 로드되는 dependency이므로 script 태그로 로드되지 않아도 된다.</li>
+  <li>모듈이 export한 식별자의 이름을 일일이 지정하지 않고 하나의 이름으로 한 번에 import 할 수 있다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//lib.mjs 모듈이 export 한 모든 식별자를 lib 객체의 프로퍼티로 모아서 import 한다.</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">lib</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./lib.mjs</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">lib</span><span class="p">.</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">lib</span><span class="p">.</span><span class="nx">square</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">pi</span> <span class="k">as</span> <span class="nx">PI</span><span class="p">,</span> <span class="nx">square</span> <span class="k">as</span> <span class="nx">sq</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./lib.mjs</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">PI</span><span class="p">,</span> <span class="nx">sq</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+</code></pre></div></div>
+
+<ul>
+  <li>모듈에서 하나의 값만 export 한다면 default 키워드 사용할 수 있다. default 키워드를 사용하면 이름 없이 하나의 값을 export 한다.</li>
+  <li>default 뒤에 var, let, const 키워드 사용할 수 없다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//lib.mjs</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>{} 없이 임의의 이름으로 import 한다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">square</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./lib.mjs</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">square</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span> <span class="c1">// 9</span>
+</code></pre></div></div>
+:ET

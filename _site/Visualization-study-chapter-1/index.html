@@ -9,21 +9,21 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>What’s Vis, and Why Do It? - Site Title</title>
-<meta name="description" content="What’s Vis, and Why Do It?">
+<!-- begin _includes/seo.html --><title>Visualization Study Chapter 1 - YIEUN BLOG</title>
+<meta name="description" content="“What’s Vis, and Why Do It?”">
 
 
-  <meta name="author" content="Your Name">
+  <meta name="author" content="Yieun Kim">
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="Site Title">
-<meta property="og:title" content="What’s Vis, and Why Do It?">
+<meta property="og:site_name" content="YIEUN BLOG">
+<meta property="og:title" content="Visualization Study Chapter 1">
 <meta property="og:url" content="http://localhost:4000/Visualization-study-chapter-1/">
 
 
-  <meta property="og:description" content="What’s Vis, and Why Do It?">
+  <meta property="og:description" content="“What’s Vis, and Why Do It?”">
 
 
 
@@ -52,7 +52,7 @@
     "@context": "https://schema.org",
     
       "@type": "Person",
-      "name": "Your Name",
+      "name": "YIEUN KIM",
       "url": "http://localhost:4000/"
     
   }
@@ -66,7 +66,7 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Site Title Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="YIEUN BLOG Feed">
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -126,11 +126,13 @@
       <nav id="site-nav" class="greedy-nav">
         
         <a class="site-title" href="/">
-          Site Title
+          YIEUN BLOG
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+              <a href="/index.html">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/category">Category</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -161,11 +163,11 @@
 
   <div class="author__content">
     
-      <h3 class="author__name" itemprop="name">Your Name</h3>
+      <h3 class="author__name" itemprop="name">Yieun Kim</h3>
     
     
       <div class="author__bio" itemprop="description">
-        <p>I am an <strong>amazing</strong> person.</p>
+        <p>BigData Center, Samsung Electronics</p>
 
       </div>
     
@@ -176,7 +178,7 @@
     <ul class="author__urls social-icons">
       
         <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Somewhere</span>
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Seoul, Republic of Korea</span>
         </li>
       
 
@@ -261,15 +263,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="What’s Vis, and Why Do It?">
-    <meta itemprop="description" content="What’s Vis, and Why Do It?">
+    <meta itemprop="headline" content="Visualization Study Chapter 1">
+    <meta itemprop="description" content="“What’s Vis, and Why Do It?”">
     <meta itemprop="datePublished" content="2020-12-21T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">What’s Vis, and Why Do It?
+          <h1 id="page-title" class="page__title" itemprop="headline">Visualization Study Chapter 1
 </h1>
           
 
@@ -286,7 +288,7 @@
 
       <i class="far fa-clock" aria-hidden="true"></i>
       
-        4 minute read
+        5 minute read
       
     
 
@@ -297,107 +299,221 @@
 
       <section class="page__content" itemprop="text">
         
-        <h2 id="whats-vis-and-why-do-it">What’s Vis, and Why Do It?</h2>
+        <h1 id="whats-vis-and-why-do-it">“What’s Vis, and Why Do It?”</h1>
+
+<p>Book : Visualization Analysis and Design - Tamara Munzner</p>
+
+<h2 id="chapter-1">Chapter 1</h2>
 
 <h3 id="11-the-big-picture">1.1 The Big Picture</h3>
 
 <h3 id="12-why-have-a-human-in-the-loop">1.2 Why have a human in the loop?</h3>
+
 <ul>
-  <li>vis는 사용자가 정확히 자신이 가진 문제점이 뭔지 모르는 상황에서 데이터 분석시 도움을 준다.</li>
-  <li>사용자가 well-defined question을 가지고 있다면, 통계학이나 머신러닝을 사용해 해결 가능하다.</li>
   <li>
-    <p>완전하게 자동화되는 솔루션이 필요하다면, human judgement가 필요없고 결과적으로 vis tool이 필요 없다.</p>
-  </li>
-  <li>그러나, 많은 분석 문제들은 ill specified이다. 어떻게 문제에 접근하는지 모른다.</li>
-  <li>이런 케이스에서 가장 좋은 방법은 사용자를 분석 과정의 loop안에 집어 넣는 것이다.</li>
-  <li>
-    <p>Vis systems are appropriate for use when your goal is to <strong>augment human capabilities</strong>, rather than completely replace the human in the loop.</p>
-  </li>
-  <li>여러 사용 방법
+    <p>시각화는 사용자가 정확히 자신이 가진 문제점이 뭔지 모르는 상황에서 데이터 분석시 도움을 준다.</p>
+
     <ul>
-      <li>Transitional use
+      <li>사용자가 가진 문제가 well-defined question 이라면, 통계학이나 머신러닝과 같은 computational technique 으로 해결 가능하다.</li>
+      <li>완전하게 자동화되는 솔루션이 가능하다면, human judgement, vis tool이 필요하지 않다.
         <ul>
-          <li>goal : “work itself out of a job”</li>
-          <li>예를 들어, 수학적인 모델을 고안하기 이전에 requirements를 이해하기 위한 vis tool이 있다고 가정해보자. 이는, transition process의 가장 초기 단계에 사용된다. 이 분석 툴의 결과는 사용자 task에 대한 보다 명확한 이해를 하는데 도움을 준다.</li>
-          <li>middle stage에서는, computational solution을 refine, debug, extend 하거나 알고리즘의 parameters에 따른 효과를 이해하기 위해 사용한다.</li>
-        </ul>
-      </li>
-      <li>Long-term use
-        <ul>
-          <li>no intention of replacing the human</li>
-          <li>연구 과정이 완전하게 자동화되기 힘든 분야에서 사용.</li>
-        </ul>
-      </li>
-      <li>For presentation
-        <ul>
-          <li>이미 알고 있는 지식이나 사실을 다른 사람들에게 설명하기 위한 수단으로 사용한다.</li>
+          <li>Stock market trading 분야</li>
         </ul>
       </li>
     </ul>
   </li>
+  <li>그러나, 많은 분석 문제들은 명확하게 구체화되어 있지 않을 뿐더러, 어떻게 문제에 접근하는지 조차 모른다. 심지어 가능한 질문들이 <strong>수십에서 수천</strong>에 달한다. 그러나, 어떤 질문이 올바른 것인지 미리 알 수 없다.</li>
+  <li>이 때, 가장 좋은 방법은 사용자를 분석 과정 안에 넣는 것이다.</li>
+  <li><em>Vis systems are appropriate for use when your goal is to <strong>augment human capabilities</strong>, rather than completely replace the human in the loop.</em><br />
+<br /></li>
 </ul>
 
+<h3 id="use-cases">Use Cases</h3>
+
+<ol>
+  <li>
+    <p>Transitional use</p>
+
+    <ul>
+      <li><em>“work itself out of a job”</em> - 순수하게 computational solution 도출을 돕는 것.</li>
+      <li>Early stage
+        <ul>
+          <li>e.g., 수학적 모델 고안하기 전, 태스크나 분석의 requirements를 파악하기 위한 발판으로 vis tool을 사용한다.</li>
+        </ul>
+      </li>
+      <li>Middle stage
+        <ul>
+          <li>e.g., Computational solution을 refine, debug, extend 하거나 알고리즘의 parameters 에 따른 효과를 이해하기 위해 사용한다.</li>
+          <li>여기서는 최종 시스템의 end user가 아닌 다른 사용자(Algorithm developers)를 targeting한다. 만약 end user를 위한 vis tool이 필요하다면, <strong>새로운 디자인</strong>이 필요하다.</li>
+          <li>Stock market trading 예시로 보면, vis tool 을 통해 다양한 trading algorithms을 정교화하는 데에는 도움을 줄 수 있지만, 최종적인 stock market trading 시스템의 end user에게는 도움을 줄 수 없다.</li>
+        </ul>
+      </li>
+      <li>Late stage
+        <ul>
+          <li>e.g., 시스템 결과가 신뢰할만한 결과를 도출하는지 확인하기 위한 용도</li>
+        </ul>
+      </li>
+      <li>Decision 이 완료되면 버려진다.</li>
+    </ul>
+  </li>
+  <li>Long-term use
+    <ul>
+      <li>사용자가 loop에 머무르면서, 시스템을 계속해서 monitoring 한다.</li>
+      <li>현재로서 연구 과정이 완전하게 자동화되기 힘든 분야에서 사용한다.
+        <ul>
+          <li>e.g., scientific discovery - 사용자가 가설을 세우고 확인하는 능력을 향상시켜주기 위한 목적</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>For presentation - 이미 알고 있는 지식이나 사실을 다른 사람들에게 설명하기 위한 수단으로 사용한다.
+    <ul>
+      <li>Storytelling
+<br /></li>
+    </ul>
+  </li>
+</ol>
+
 <h3 id="13-why-have-a-computer-in-the-loop">1.3 Why have a computer in the loop?</h3>
+
 <ul>
-  <li>사람의 attention span은 굉장히 한정되어 있다. 이에 반해 real-world datasets는 방대하고, 시시각각 변화한다. computer-based tool을 사용함으로써 manual creation에 비해 노력이 상대적으로 덜 필요하다.</li>
+  <li>사람의 attention span은 굉장히 한정되어 있기 때문에 수백개의 데이터를 처리하는 데에도 수시간에서 수일이 소요된다.<br />
+ 그러나 real-world datasets는 방대하고 계속하여 변화한다. 따라서 computer-based tool을 사용함으로써 human effort를 줄여줄 수 있다.
+    <ul>
+      <li>Scalability, generalization 가능하다.
+<br /></li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="14-why-use-an-external-representation">1.4 Why use an external representation?</h3>
+
 <ul>
-  <li>인간의 내부 인지와 메모리는 제한되어 있다. Vis는 external representation을 사용해서 사용자의 internal cognition과 memory의 필요성을 없애준다.</li>
-  <li>다양한 형태의 external representation이 있지만, 이 책에서는 2D display surface로만 언급하겠다.</li>
+  <li>인간의 가진 인지 능력과 메모리는 제한되어 있다. Vis는 external representation을 사용하여 사용자의 internal cognition과 memory의 필요성을 줄여준다.</li>
+  <li>다양한 형태의 external representation이 있지만, 이 책에서는 2D display surface로만 언급될 예정이다.</li>
+  <li>Diagram
+    <ul>
+      <li>사람의 자연스러운 인지 추론 과정을 도와주기 위해 디자인됨.</li>
+      <li>아이템이나 정보를 그룹화함으로써 search, recognition을 도와준다. (cf. recall)<br />
+<br /></li>
+    </ul>
+    <p align="center">
+<img src="../assets/images/diagram.png" height="300px" width="500px" />
+</p>
+    <p><br /></p>
+  </li>
 </ul>
 
-<h3 id="15-why-depends-on-vision">1.5 Why depends on vision?</h3>
+<h3 id="15-why-depend-on-vision">1.5 Why depend on vision?</h3>
+
 <ul>
-  <li>visual system은 매우 높은 대역폭 channel을 제공한다. 시각적 정보 처리의 양은 preconscious level와 거의 parallel하게 발생한다. visual popout.</li>
-  <li>소리는 vision에 비해 많은 양의 정보의 overview를 제공하는데 적합하지 않다.</li>
-  <li>taste, smell, haptic 등의 감각들은 아직 기술적인 한계로 인해 쉽지 않다.</li>
+  <li>시각화는 human visual system을 의사소통의 수단으로 사용한다.</li>
+  <li>Visual system 은 bandwidth가 넓다(100MB/s, 귀는 &lt; 100B/s).<br />
+Preattentive processing : Preconscious level과 동등하게 시각적인 정보 처리가 발생한다.
+    <ul>
+      <li>Visual popout</li>
+    </ul>
+  </li>
+</ul>
+
+<p align="center">
+<img src="../assets/images/visualPopout.png" height="300px" width="500px" />
+</p>
+<p><br /></p>
+
+<ul>
+  <li>소리는 vision에 비해 많은 양의 정보의 overview를 제공하는데 적합하지 않다. 또한, 소리는 sequential stream으로 인지하기 때문에 오랜 시간에 걸쳐 발생한 소리는 자동으로 합쳐진다.</li>
+  <li>taste, smell, haptic 등의 감각들은 아직 기술적인 한계로 어렵다.<br />
+<br /></li>
 </ul>
 
 <h3 id="16-why-show-the-data-in-detail">1.6 Why show the data in detail?</h3>
+
 <ul>
-  <li>dataset의 간단한 summary를 제공하는 것보다, 구조에 대해 자세한 정보를 제공하는 것이 좋다.</li>
-  <li>예를 들어, dataset의 통계적인 특징은 가장 흔한 접근 방법 중 하나이다. 그러나, summarization을 함으로써 정보의 손실이 발생한다는 한계가 있다. Anscombe’s Quartet.</li>
-  <li>그림 설명</li>
+  <li>dataset의 간단한 summary를 제공하기보다 구조에 대한 자세한 정보를 제공하는 것이 좋다.</li>
+  <li>dataset의 통계적인 특징은 가장 흔한 접근 방법 중 하나이다. 그러나 summarization을 함으로써 정보의 손실이 발생한다는 한계가 있다 (Over-simplify).</li>
+  <li>Anscombe’s Quartet
+    <ul>
+      <li>4가지 데이터셋은 모두 동일한 mean, variance, correlation, linear regression line 을 갖는다.</li>
+      <li>1 : normal 2 : nonlinear pattern 3 : one outlier 4 : completely misleading</li>
+    </ul>
+  </li>
 </ul>
 
+<p align="center">
+<img src="../assets/images/Anscombe's_quartet.png" height="400px" width="600px" />
+</p>
+<p><br /></p>
+
 <h3 id="17-why-use-interactivity">1.7 Why use interactivity?</h3>
+
 <ul>
-  <li>Interactivity 는 시각화 툴에서 가장 강력한 무기이다. dataset이 커질수록 사용자와 dispaly의 한계로 인해 모든 데이터를 한번에 보여줄 수 없다.</li>
-  <li>거의 대부분의 상황에서 interaction은 필수적이다.</li>
-  <li>예를 들어, 고차원적인 overview에서부터 작은 부분의 detailed view까지 모두 지원가능하다.</li>
+  <li>Interactivity 는 vis tool 의 complexity와 volumn을 다루기 위해 필수적이다. dataset이 커질수록 사용자와 display 의 한계로 인해 모든 데이터를 한번에 보여줄 수 없다.</li>
+  <li>다이나믹 쿼리를 지원하기 위해서는 <strong>interaction 은 필수적</strong>이다.</li>
+  <li>고차원적인 overview 에서부터 작은 부분의 detailed view 까지 다양한 레벨의 detail 을 지원한다.<br />
+<br /></li>
 </ul>
 
 <h3 id="18-why-is-the-vis-idiom-design-space-huge">1.8 Why is the vis idiom design space huge?</h3>
+
 <ul>
-  <li>vis idiom : a distinct approach to creating and manipulationg visual representations.</li>
-  <li>visual encoding</li>
-  <li></li>
+  <li>vis Idiom
+    <ul>
+      <li>a distinct approach to creating and manipulating visual representations.</li>
+    </ul>
+  </li>
+  <li>Interaction 까지 추가되면서 design space 는 더 방대해졌다.
+    <ul>
+      <li>Interaction 을 사용하여 여러 개의 간단한 차트들을 linking 가능.<br />
+<br /></li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="19-why-focus-on-tasks">1.9 Why focus on tasks?</h3>
+
 <ul>
-  <li>동일한 dataset에서 하나의 task에 적합한 툴은 다른 테스크에는 적절하지 않을 수 있다.
-domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변경하는 작업을 통해, 사용자가 실제환경에서 필요로 하는 것들간의 공통점과 차이점을 알 수 있다.</li>
-  <li>Discovery : 새로운 dataset에서 새로운 가정을 생성하거나, 이미 알고 있는 dataset에서 존재하는 가설을 검증하기 위한 목적으로 사용됨.</li>
+  <li>동일한 dataset에서 하나의 task에 적합하도록 디자인된 툴은 다른 테스크에는 적절하지 않을 수 있다.</li>
+  <li>Why를 설명하기 위하여 domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변경하는 작업이 필요하다 (generic words의 필요성).<br />
+<br /></li>
 </ul>
 
 <h3 id="110-why-focus-on-effectiveness">1.10 Why focus on effectiveness?</h3>
+
 <ul>
-  <li>user tasks를 얼마나 잘 지원하는지에 대한 평가</li>
-  <li>correctness, accuracy, truth</li>
-  <li>“it’s not just about making pretty pictures” - vis designer는 artists가 아니다. 결과에 대한 목표는 예쁜 것이 아니라, 효과적이어야 한다.</li>
-  <li>시각화에 있어서 correctness - 데이터에 대한 모든 묘사는 abstraction이다. 모든 결정이 어떠한 면을 강조할지에 따라 이루어지기 때문에 correctness를 평가하기 어렵다.</li>
+  <li>user tasks를 얼마나 잘 지원하는지에 대한 평가
+    <ul>
+      <li>correctness, accuracy, truth</li>
+    </ul>
+  </li>
+  <li><em>“it’s not just about making pretty pictures”</em>
+    <ul>
+      <li>vis designer는 artists가 아니다. 결과에 대한 목표는 예쁜 것이 아니라, 효과적이어야 한다.</li>
+    </ul>
+  </li>
+  <li>correctness
+    <ul>
+      <li>데이터에 대한 모든 표현은 abstraction 형태이다. 모든 결정이 어떠한 면을 강조할지에 따라 이루어지기 때문에 correctness를 평가하기 어렵다.</li>
+    </ul>
+  </li>
+  <li>아이러니하게도 targeted design 일수록, popular design 이 될 확률이 높다.<br />
+<br /></li>
 </ul>
 
 <h3 id="111-why-are-most-designs-ineffective">1.11 Why are most designs ineffective?</h3>
+
 <ul>
   <li>visual design space는 매우 방대하다. 그러나 대부분은 ineffective하다. 그 이유로는 인간의 인지적, 지각적 시스템에 적합하지 않아서, 또는 의도하는 task에 맞지 않아서 등등. 아주 일부만이 좋은 디자인이라 할 수 있다.</li>
-  <li>이 때 randomly 디자인을 탐색하는 것은 정말 비효율적이다. 아래 그림을 보자.</li>
+  <li>아래 그림과 같이 known space, consideration space 를 넓힐수록 effective design 을 찾을 수 있다.</li>
+  <li>즉각적으로 하나의 솔루션을 고정하기보다는 다양한 대안들을 충분히 살펴보는 것이 중요하다.</li>
 </ul>
+<p align="center">
+<img src="../assets/images/search_space.png" height="300px" width="600px" />
+</p>
+<p><br /></p>
 
 <h3 id="112-why-is-validation-difficult">1.12 Why is validation difficult?</h3>
+
 <ul>
   <li>vis design에 대한 validation은 어렵다. goal을 만족하는지 판단할 때 할 수 있는 질문이 무궁무진하기 때문에…</li>
   <li>이 디자인이 다른 디자인에 비해 좋거나 안좋은 이유가 뭘까? better이라는 의미는? 사용자가 태스크를 빠르게 수행하나? 사용자들이 이 tool을 통해 더 재밌는 것을 많이 하나? 효과적으로 일을 하게 되었나? effectively하다는 것은 여기서 무슨 의미인가? 등 등….</li>
@@ -405,15 +521,20 @@ domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변�
 </ul>
 
 <h3 id="113-why-are-there-resource-limitations">1.13 Why are there resource limitations?</h3>
+
 <ul>
-  <li>시각화 시스템을 설계할 때 3가지 limitation에 대한 고려가 필요하다.
+  <li>
+    <p>시각화 시스템을 설계할 때 3가지 limitation에 대한 고려가 필요하다.</p>
+
     <ul>
       <li>computational capacity</li>
       <li>human perceptual and cognitive capacity</li>
       <li>display capacity</li>
     </ul>
   </li>
-  <li>시각화 시스템은 필연적으로 방대한 양의 데이터를 다루어야 하므로 <strong>scalability</strong> 가 주요한 이슈이다.
+  <li>
+    <p>시각화 시스템은 필연적으로 방대한 양의 데이터를 다루어야 하므로 <strong>scalability</strong> 가 주요한 이슈이다.</p>
+
     <ul>
       <li>여러 다양한 이유로 dataset 사이즈는 계속해서 증가하는 추세.</li>
       <li>computer capacity 또한 향상되어 가고 있다.</li>
@@ -422,21 +543,24 @@ domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변�
   <li>Computer side</li>
   <li>Human side
     <ul>
-      <li>memory and attention 이 제한된 자원이다.</li>
-      <li>인간은 놀랄만큼 굉장히 적은 정보를 저장할 수 있다. <strong>change blindness</strong></li>
-      <li>하나의 view에서 무언가 일을 수행하고 있을 때 다른 부분에서 엄청난 변화가 발생해도 우리는 이를 눈치채지 못한다.</li>
+      <li>memory and attention 자원이 제한되어 있다.</li>
+      <li>인간은 놀랄만큼 굉장히 적은 정보를 저장할 수 있다.</li>
+      <li><strong>change blindness</strong>
+        <ul>
+          <li>사람은 무언가 일을 집중하여 수행하고 있을 때 다른 부분에서 엄청난 변화가 발생해도 이를 눈치채지 못한다.</li>
+        </ul>
+      </li>
     </ul>
   </li>
-  <li>Display capacity
-    <ul>
-      <li>모든 정보를 동시에 보여주기에는 해상도가 충분하지 못하다.</li>
-      <li>Information density : 사용하지 않는 공간 대비 encoded된 정보의 양에 대한 measure 방법</li>
-      <li>모든 정보를 한번에 제공함으로써 navigation과 exploration의 필요성을 줄이는 장점과 비용 간의 trade-off가 있다. 좋은 디자인의 목표는 이 두가지 중에 적절한 balance를 찾는 것이다.</li>
-    </ul>
-  </li>
+  <li>Display capacity - 모든 정보를 동시에 보여주기에는 해상도가 충분하지 못하다. - Information density : 사용하지 않는 공간 대비 encoded된 정보의 양에 대한 measure 방법 - 모든 정보를 한번에 제공함으로써 navigation과 exploration의 필요성을 줄이는 장점과 비용 간의 trade-off가 있다. 좋은 디자인의 목표는 이 둘 사이의 적절한 balance를 찾는 것이다.</li>
 </ul>
+<p align="center">
+<img src="../assets/images/informationDensity.png" height="300px" width="500px" />
+</p>
+<p><br /></p>
 
 <h3 id="114-why-analyze">1.14 Why analyze?</h3>
+
 <ul>
   <li>high-level framework for analyzing vis use according to three questions
     <ul>
@@ -445,13 +569,24 @@ domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변�
       <li><strong>How</strong> the visual encoding and interaction idioms are constructed in terms of design choices</li>
     </ul>
   </li>
-  <li><strong>what-why-how  = data-task-idiom</strong></li>
+</ul>
+
+<p align="center">
+<img src="../assets/images/whatwhyhow.png" height="200px" width="200px" />
+</p>
+<p><br /></p>
+
+<ul>
+  <li><strong>what-why-how = data-task-idiom</strong></li>
   <li>이 3단계를 하나의 instance라 한다.</li>
   <li>단순한 vis tool은 독립된 instance로도 구성할 수 있지만, 복잡한 vis tool은 dependencies가 있는 instances chaining을 필요로 한다. output이 또다른 instance의 input이 되는 형태이다.</li>
   <li>예를 들어, 사용자가 vis tool에서 보이는 항목들을 소팅한다. 이는 소팅 그 자체가 결과물로 소팅된 list를 갖는 것이 목적일 수도 있지만, 이를 통해 outlier를 발견하기 위한 수단이 될 수도 있다.</li>
 </ul>
 
-<h3 id="115-further-reading">1.15 Further Reading</h3>
+<p align="center">
+<img src="../assets/images/whatwhyhow_chaining.png" height="300px" width="400px" />
+</p>
+<p><br /></p>
 
         
       </section>
@@ -472,7 +607,7 @@ domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변�
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=What%27s+Vis%2C+and+Why+Do+It%3F%20http%3A%2F%2Flocalhost%3A4000%2FVisualization-study-chapter-1%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Visualization+Study+Chapter+1%20http%3A%2F%2Flocalhost%3A4000%2FVisualization-study-chapter-1%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FVisualization-study-chapter-1%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -487,7 +622,8 @@ domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변�
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/brower-rendering/" class="pagination--pager" title="Brower Rendering
+">Next</a>
     
   </nav>
 
@@ -511,7 +647,7 @@ domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변�
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/frontend/tdd/Frontend-TDD/" rel="permalink">Frontend - TDD(Test Driven Development)
+        <a href="/jscourse30/" rel="permalink">Jscourse30
 </a>
       
     </h2>
@@ -536,11 +672,9 @@ domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변�
 
   </p>
 
-    <p class="archive__item-excerpt" itemprop="description">테스트 코드 작성하시나요?
-왜 안하게 되는가요?
-
-  힘들고 일정에 치여서…나중에 하자.
-  나중은 결코 오지 않는다.
+    <p class="archive__item-excerpt" itemprop="description">
+  30일 간의 javascript 미니 프로젝트를 수행한다.
+  no framework, no compiler, no library. only vanila javascript만 사용한다.
 
 </p>
   </article>
@@ -556,7 +690,7 @@ domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변�
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/http/HTTP-Request/" rel="permalink">HTTP Request
+        <a href="/node/" rel="permalink">Node
 </a>
       
     </h2>
@@ -575,14 +709,55 @@ domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변�
 
       <i class="far fa-clock" aria-hidden="true"></i>
       
-        less than 1 minute read
+        1 minute read
       
     
 
   </p>
 
-    <p class="archive__item-excerpt" itemprop="description">HTTP?
-Hyper Text Transfer Protocol. 인터넷에서 컴퓨터사이에 데이터를 주고받을 수 있는 프로토콜(규약)
+    <p class="archive__item-excerpt" itemprop="description">
+  Node.js 는 자바스크립트 런타임 환경으로 주로 서버 사이드 애플리케이션 개발에 사용되는 소프트웨어 플랫폼이다.
+  브라우저 외부 환경에서 자바스크립트 애플리케이션 개발에 사용되며, 이에 필요한 모듈, 파일 시스템, HTTP 등 Built-in API를 제공한다.
+  자바...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/module/" rel="permalink">Module
+</a>
+      
+    </h2>
+    
+
+
+  <p class="page__meta">
+
+    
+
+    
+
+    
+      
+      
+
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    
+
+  </p>
+
+    <p class="archive__item-excerpt" itemprop="description">module
 </p>
   </article>
 </div>
@@ -597,7 +772,7 @@ Hyper Text Transfer Protocol. 인터넷에서 컴퓨터사이에 데이터를 �
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/blog/first-post/" rel="permalink">github.io blog start
+        <a href="/Babel-Webpack/" rel="permalink">Babel Webpack
 </a>
       
     </h2>
@@ -616,13 +791,13 @@ Hyper Text Transfer Protocol. 인터넷에서 컴퓨터사이에 데이터를 �
 
       <i class="far fa-clock" aria-hidden="true"></i>
       
-        less than 1 minute read
+        1 minute read
       
     
 
   </p>
 
-    <p class="archive__item-excerpt" itemprop="description">GitHub Blog service - github.io blog start
+    <p class="archive__item-excerpt" itemprop="description">Babel과 Webpack을 이용한 ES6+/ES.NEXT 개발 환경 구축
 </p>
   </article>
 </div>
@@ -669,7 +844,7 @@ Hyper Text Transfer Protocol. 인터넷에서 컴퓨터사이에 데이터를 �
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 Your Name. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 YIEUN KIM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

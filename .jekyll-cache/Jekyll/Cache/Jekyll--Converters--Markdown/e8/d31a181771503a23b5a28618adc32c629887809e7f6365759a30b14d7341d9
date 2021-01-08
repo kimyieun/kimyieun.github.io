@@ -1,0 +1,501 @@
+I"��<h1 id="event">Event</h1>
+
+<h3 id="event-driven-programming">Event Driven Programming</h3>
+<ul>
+  <li>클릭, 키보드 입력, 마우스 이동 등의 이벤트가 발생하면 브라우저가 이를 감지해 특정 타입의 이벤트를 발생시킨다.</li>
+  <li>Event handler(listener)
+    <ul>
+      <li>이벤트가 발생했을 때 호출될 함수. 브라우저에 호출을 위임한 함수.</li>
+    </ul>
+  </li>
+  <li>Event handler 등록
+    <ul>
+      <li>이벤트가 발생했을 때 브라우저에게 이벤트 핸들러의 호출을 위임하는 것</li>
+    </ul>
+  </li>
+  <li>“언제 함수를 호출해야 하는가?”
+    <ul>
+      <li>브라우저는 특정 사건을 감지하여 이벤트를 발생시킬 수 있다. 개발자는 함수가 언제 호출될지 알 수 없기 때문에 브라우저에게 함수 호출을 위임하는 것이다.</li>
+    </ul>
+  </li>
+  <li>Event driven programming
+    <ul>
+      <li>프로그램의 흐름을 이벤트 중심으로 제어하는 프로그래밍 방식</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="event-type">Event Type</h3>
+<ul>
+  <li>이벤트 종류. 약 200여 가지가 있다.</li>
+  <li>DOM mutation event
+    <ul>
+      <li>DOMContentLoaded
+        <ul>
+          <li>HTML 문서의 로드와 파싱이 완료되어 <strong>DOM 생성이 완료</strong> 되었을 때</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>View event
+    <ul>
+      <li>resize
+        <ul>
+          <li>브라우저 윈도우의 크기를 리사이즈할 때 연속적으로 발생한다.<br />
+오직 windows 객체에서만 발생한다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Resource event
+    <ul>
+      <li>load
+        <ul>
+          <li>DOMContentLoaded 이벤트가 발생한 이후, 모든 리소스(이미지, 폰트 등)의 로딩이 완료되었을 때(주로 window 객체에서 발생한다)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="event-handler-등록">Event Handler 등록</h3>
+<ol>
+  <li>Event handler attribute 방식
+    <ul>
+      <li>HTML 요소의 attribute 중 하나. event handler attribute 이름은 on 접두사 + event type 으로 이루어져 있다. 이 attribute의 값으로 함수 호출문 등의 문을 할당하면 이벤트 핸들러가 등록된다.</li>
+      <li>이벤트 핸들러 등록할 때 콜백 함수와 마찬가지로 함수 참조를 등록해야 브라우저가 이벤트 핸들러를 호출 할 수 있다. 함수 호출문을 등록하면 함수 호출문의 평가 결과가 이벤트 핸들러로 등록된다.</li>
+      <li>event handler attribute 값은 사실 암묵적으로 생성될 event handler 의 함수 몸체를 의미한다.</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"sayHi('Lee')"</span><span class="nt">&gt;</span>click me<span class="nt">&lt;/button&gt;</span>
+</code></pre></div></div>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">onclick</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+    <span class="nx">sayHi</span><span class="p">(</span><span class="dl">'</span><span class="s1">Lee</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>위와 같이 동작하는 이유는, <strong>이벤트 핸들러에 인수를 전달하기 위해서다.</strong></li>
+  <li>아래 같이 함수 참조를 할당하면 이벤트 핸들러에 인수를 전달하기 곤란하다.
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"sayHi"</span><span class="nt">&gt;</span>click me<span class="nt">&lt;/button&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>HTML과 자바스크립트가 뒤섞인다는 문제점이 있다. 그러므로 분리하는 것이 좋다. 그러나, 모던 자바스크립트에서는 이 방식을 사용하는 경우가 있다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="cm">/* React */</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="dl">"</span><span class="s2">{handleClick</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">save</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<ol>
+  <li>Event Handler property 방식
+    <ul>
+      <li>window 객체와 DOM 노드 객체는 이벤트에 대응하는 이벤트 핸들러 프로퍼티를 가지고 있다. 이 프로퍼티의 key 는 “on 접두사 + event type” 로 이루어져 있다.</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+    <span class="kd">const</span> <span class="nx">$button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">);</span>
+
+    <span class="nx">$button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">button click</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>event handler property 에 함수를 바인딩하면 이벤트 핸들러가 등록된다.
+    <ul>
+      <li>event target ($button) : 이벤트를 발생시킬 객체</li>
+      <li>event type (onclick) : 이벤트 종류 의미</li>
+      <li>event handler (function(){ … })</li>
+    </ul>
+  </li>
+  <li>이 방식을 사용하면 HTML과 자바스크립트가 뒤섞이는 문제를 해결할 수 있지만, 이벤트 핸들러 프로퍼티에 하나의 이벤트 핸들러만 바인딩할 수 있다는 단점이 있다.</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+    <span class="kd">const</span> <span class="nx">$button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">);</span>
+
+    <span class="c1">//두 번째 바인딩된 이벤트 핸들러에 의해 재할당되어 이 이벤트 핸들러는 실행되지 않는다.</span>
+    <span class="nx">$button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">button click 1</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="nx">$button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">button click 2</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<ol>
+  <li>addEventListener 메소드 방식
+    <ul>
+      <li>1, 2번 방식은 DOM LEVEL 0 부터 제공되던 방식이다. 이 방식은 DOM LEVEL 2에서 도입되었다.</li>
+      <li>[EventTarget].addEventListener(‘eventType’, event handler, [, useCapture])
+        <ul>
+          <li>3번째 매개변수</li>
+        </ul>
+      </li>
+    </ul>
+    <ul>
+      <li>이벤트를 개치할 이벤트 전파 단계(캡쳐링이나 버블링)를 지정한다.</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+    <span class="kd">const</span> <span class="nx">$button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">);</span>
+
+    <span class="nx">$button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">button click</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>event handler property 방식과 addEventListener 를 함께 사용해도 무방하다. 이벤트 발생 시 2개의 이벤트 핸들러가 모두 호출된다.</li>
+  <li>addEventListener method 는 하나 이상의 이벤트 핸들러를 등록할 수 있다. 이때 이벤트 핸들러는 등록된 순서대로 호출된다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">$button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">button click</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">$button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleClick</span><span class="p">);</span>
+<span class="nx">$button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleClick</span><span class="p">);</span>
+<span class="c1">// 참조가 동일한 이벤트 핸들러를 중복 등록하면 하나의 핸들러만 등록된다.</span>
+</code></pre></div></div>
+
+<h3 id="이벤트-핸들러-제거">이벤트 핸들러 제거</h3>
+<ul>
+  <li>addEventListener 메소드로 등록한 이벤트 핸들러를 제거하려면 EventTarget.prototype.removeEventListener 메소드를 사용한다. removeEventListener 메소드에 전달할 인수와 addEventListener 메소드에 전달할 인수는 동일해야 한다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">$button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">button click</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">$button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleClick</span><span class="p">);</span>
+<span class="nx">$button</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleClick</span><span class="p">);</span> <span class="c1">//성공</span>
+<span class="nx">$button</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleClick</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span> <span class="c1">//실패</span>
+</code></pre></div></div>
+
+<ul>
+  <li>동일한 함수를 인수로 전달해야 하므로, 무명 함수를 이벤트 핸들러에 등록한 경우 제거할 수 없다. 이벤트 핸들러의 참조를 변수나 자료구조에 저장하는 것이 좋다.<br />
+<br /></li>
+  <li>event handler property 방식으로 등록한 이벤트 핸들러는 removeEventListener 로 삭제할 수 없다. 아래와 같이 null을 할당한다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</code></pre></div></div>
+<h3 id="이벤트-객체">이벤트 객체</h3>
+<ul>
+  <li>이벤트가 발생하면 이벤트와 관련한 다양한 정보를 담고 있는 이벤트 객체가 동적으로 생성된다. 생성된 이벤트 객체는 이벤트 핸들러의 첫 번째 인수로 전달된다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//event handler property 방식 - 이벤트 객체의 이름은 자유롭게 사용하면 된다.</span>
+<span class="kd">const</span> <span class="nx">$button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">);</span>
+<span class="nx">$button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">handleClick</span><span class="p">;</span>
+</code></pre></div></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--event handler attribute 방식 - 이벤트 객체의 이름은 반드시 event이어야 한다.--&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"handleClick(event)"</span><span class="nt">&gt;</span>click<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>이벤트 핸들러 어트리뷰트 값은 사실 암묵적으로 생성되는 이벤트 핸들러의 함수 몸체를 의미한다. 이 때 암묵적으로 생성된 onclick 이벤트 핸들러의 첫 번째 argument 이름이 event 로 암묵적으로 명명된다.</li>
+</ul>
+
+<h3 id="이벤트-객체의-상속-구조">이벤트 객체의 상속 구조</h3>
+
+<h3 id="마우스-정보-취득">마우스 정보 취득</h3>
+<ul>
+  <li>click, dblclick, mousedown, mouseup, mousemove, mouseenter, mouseleave 이벤트가 발생하면 생성되는 MouseEvent 타입의 이벤트 객체는 다음과 같은 고유 프로퍼티를 갖는다.
+    <ul>
+      <li>마우스 포인터의 좌표 정보를 나타내는 프로퍼티
+        <ul>
+          <li>screenX/screenY, clientX/clientY, pageX/pageY, offsetX/offsetY</li>
+        </ul>
+      </li>
+      <li>버튼 정보를 나타내는 프로퍼티
+        <ul>
+          <li>altkey, ctrlkey, shiftkey, button</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="event-propagation">Event Propagation</h3>
+<ul>
+  <li>DOM 트리 상에 존재하는 DOM 요소 노드에서 발생한 이벤트는 DOM 트리를 통하여 전파된다. 이를 Event propagation 이라 한다.</li>
+  <li>Capturing phase
+    <ul>
+      <li>이벤트가 상위 요소에서 하위 요소 방향으로 전파 (Target 인 하위 요소까지만)</li>
+    </ul>
+  </li>
+  <li>Target phase
+    <ul>
+      <li>이벤트가 이벤트 타깃에 도착</li>
+    </ul>
+  </li>
+  <li>Bubbling phase
+    <ul>
+      <li>이벤트가 (Target인) 하위 요소에서 상위 요소 방향으로 전파</li>
+    </ul>
+  </li>
+  <li>event handler attribute/property 방식으로 등록한 event handler 는 target, bubbling 단계의 이벤트만 캐치할 수 있다. caturing 단계가 필요하다면, addEventListener 메소드를 사용해야한다. 3번째 인자 값이 true 인 경우 capturing 단계의 이벤트를 캐치할 수 있다.</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"fruits"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"apple"</span><span class="nt">&gt;</span>apple<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"banana"</span><span class="nt">&gt;</span>banana<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"orange"</span><span class="nt">&gt;</span>orange<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+  <span class="kd">const</span> <span class="nx">$fruits</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">fruits</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">$fruits</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">eventPhase</span><span class="p">);</span> <span class="c1">// 3 : bubbling 단계</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span> <span class="c1">// 이벤트가 발생한 element</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span> <span class="c1">// 이벤트 핸들러가 등록된 element</span>
+  <span class="p">});</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>아래와 같이 capturing 단계의 이벤트를 캐치하도록 설정할 수 있다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">$fruits</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">eventPhase</span><span class="p">);</span> <span class="c1">// 1 : capturing 단계</span>
+  <span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="event-delegation-이벤트-위임">Event Delegation (이벤트 위임)</h3>
+<ul>
+  <li>사용자가 li 요소들에 이벤트 핸들러를 등록하고자 한다.</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+  <span class="nf">#fruits</span> <span class="nc">.active</span> <span class="p">{</span>
+    <span class="nl">color</span> <span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"fruits"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"apple"</span><span class="nt">&gt;</span>apple<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"banana"</span><span class="nt">&gt;</span>banana<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"orange"</span><span class="nt">&gt;</span>orange<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="kd">const</span> <span class="nx">$fruits</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">fruits</span><span class="dl">'</span><span class="p">);</span>  
+    <span class="kd">function</span> <span class="nx">activate</span><span class="p">({</span><span class="nx">target</span><span class="p">}){</span>
+      <span class="p">[...</span><span class="nx">$fruits</span><span class="p">.</span><span class="nx">children</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">$fruit</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">$fruit</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="dl">'</span><span class="s1">active</span><span class="dl">'</span><span class="p">,</span> <span class="nx">$fruit</span> <span class="o">===</span> <span class="nx">target</span><span class="p">);</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">apple</span><span class="dl">'</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">activate</span><span class="p">;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">banana</span><span class="dl">'</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">activate</span><span class="p">;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">orange</span><span class="dl">'</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">activate</span><span class="p">;</span>
+    <span class="p">...</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위 예제와 같이 만약 li 요소가 100개라면 100개의 이벤트 핸들러를 등록해야한다. 성능 저하와 유지 보수에 부적합하다.</li>
+  <li>event delegation
+    <ul>
+      <li>여러 개의 하위 DOM 요소에 각각 이벤트 핸들러를 등록하는 대신 하나의 상위 DOM 요소에 이벤트 핸들러를 등록하는 방법.</li>
+      <li>앞서 배운 Event propagation 의 bubbling 으로 인해 가능하다.</li>
+      <li><strong>동적으로 하위 DOM 요소를 추가하더라도 일일이 이벤트 핸들러를 등록할 필요가 없다.</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+  <span class="nf">#fruits</span> <span class="nc">.active</span> <span class="p">{</span>
+    <span class="nl">color</span> <span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"fruits"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"apple"</span><span class="nt">&gt;</span>apple<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"banana"</span><span class="nt">&gt;</span>banana<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"orange"</span><span class="nt">&gt;</span>orange<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="kd">const</span> <span class="nx">$fruits</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">fruits</span><span class="dl">'</span><span class="p">);</span>  
+    <span class="kd">function</span> <span class="nx">activate</span><span class="p">({</span><span class="nx">target</span><span class="p">}){</span>
+      <span class="c1">//이벤트를 발생시킨 요소가 ul#fruits의 li 자식 요소가 아니라면 무시한다.</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">target</span><span class="p">.</span><span class="nx">matches</span><span class="p">(</span><span class="dl">'</span><span class="s1">#fruits &gt; li</span><span class="dl">'</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+      <span class="p">[...</span><span class="nx">$fruits</span><span class="p">.</span><span class="nx">children</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">$fruit</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">$fruit</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="dl">'</span><span class="s1">active</span><span class="dl">'</span><span class="p">,</span> <span class="nx">$fruit</span> <span class="o">===</span> <span class="nx">target</span><span class="p">);</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+
+    <span class="nx">$fruits</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">activate</span><span class="p">;</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>이벤트 객체의 currentTarget property 는 언제나 $fruits 요소를 가리키지만, traget property 는 실제로 이벤트를 발생시킨 DOM 요소를 가리킨다.</li>
+</ul>
+
+<h3 id="dom-요소의-기본-동작-중단">DOM 요소의 기본 동작 중단</h3>
+<ul>
+  <li>DOM 요소마다 각자의 기본 동작이 있다. 예를 들어, a 요소를 클릭하면 href attribute 에 지정된 링크로 이동하고, checkbox, radio 요소를 클릭하면 체크 또는 해제가 된다.</li>
+  <li>이벤트 객체의 preventDefault method 는 이러한 DOM 요소의 기본 동작을 중단시킨다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="stoppropagation">stopPropagation</h3>
+<ul>
+  <li>하위 DOM 요소의 이벤트를 개별적으로 처리하기 위해 이벤트 객체의 stopPropagation method 는 이벤트 전파를 중지시킨다.</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn1"</span><span class="nt">&gt;</span>button 1<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn2"</span><span class="nt">&gt;</span>button 2<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn3"</span><span class="nt">&gt;</span>button 3<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="c1">//event delegation. 클릭된 하위 버튼 요소의 color를 변경한다. </span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.container</span><span class="dl">'</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">({</span><span class="nx">target</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">target</span><span class="p">.</span><span class="nx">matches</span><span class="p">(</span><span class="dl">'</span><span class="s1">.container &gt; button</span><span class="dl">'</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+      <span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.btn2</span><span class="dl">'</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">//.btn2 요소는 이벤트를 전파하지 않기 때문에 (bubbling 발생 x) 상위 요소에서 이벤트를 캐치할 수 없다.</span>
+      <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+      <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">blue</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<h3 id="event-handler-내부의-this">event handler 내부의 this</h3>
+<ul>
+  <li>event handler attribute 방식
+    <ul>
+      <li>this : 전역 객체 window</li>
+      <li>event handler에 의해 일반 함수로 호출된다. 단, 이벤트 핸들러를 호출할 때 인수로 전달하는 this 는 이벤트를 바인딩한 DOM 요소를 가리킨다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"handleClick(this)"</span><span class="nt">&gt;</span>click me<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+  <span class="kd">function</span> <span class="nx">handleClick</span><span class="p">(</span><span class="nx">button</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span> <span class="c1">// 이벤트를 바인딩한 button 요소</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span> <span class="c1">// window</span>
+  <span class="p">}</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>event handler property 와 addEventListener method 방식
+    <ul>
+      <li>event handler 내부의 this : event 를 바인딩한 DOM 요소 = 이벤트 객체의 currentTarget property</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">$button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span> <span class="c1">//$button</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span> <span class="c1">//$button</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span> <span class="c1">// true</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>단, 화살표 함수로 정의한 이벤트 핸들러 내부의 this 는 상위 scope 의 this를 가리킨다. 화살표 함수는 자기 자체의 this 바인딩을 갖지 않기 때문이다.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">$button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span> <span class="c1">//window</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span> <span class="c1">//$button</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span> <span class="c1">// false</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>class 에서 event handler binding 하는 경우</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="nx">App</span><span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(){</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">$button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.btn</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+      <span class="k">this</span><span class="p">.</span><span class="nx">$button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">increase</span><span class="p">;</span>
+      <span class="c1">// -&gt; this.$button.onclick = this.increase.bind(this);</span>
+    <span class="p">}</span>
+
+    <span class="nx">increase</span><span class="p">(){</span>
+      <span class="c1">//this = this.$button</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">$button</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="o">++</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+      <span class="c1">// -&gt; TypeError : Cannot set property 'textContent' of undefined</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">new</span> <span class="nx">App</span><span class="p">();</span>
+</code></pre></div></div>
+
+<ul>
+  <li>increase method 내부의 this 는 class 가 생성할 instance 를 가리키지 않는다. 이벤트 핸들러 내부의 this 는 이벤트를 바인딩한 DOM 요소를 가리킨다.
+    <ol>
+      <li>bind 메소드 사용</li>
+      <li>Class field 에 할당한 화살표 함수를 이벤트 핸들러로 등록한다.</li>
+    </ol>
+    <ul>
+      <li>이때 이벤트 핸들러 increase 함수는 prototype method 가 아닌, instance method가 된다. (권장하지 않음?)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="이벤트-핸들러에-인수-전달">이벤트 핸들러에 인수 전달</h3>
+<ul>
+  <li>event handler attribute 방식은 함수를 호출하기 때문에 인수 전달이 가능하다. 그렇다면, event handler property 와 addEventListener 메소드 방식에서는?
+    <ol>
+      <li>event handler 내부에서 함수를 호출하면서 인수를 전달하는 방법</li>
+    </ol>
+  </li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">const</span> <span class="nx">MIN_LENGTH</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">$input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">input[type=text]</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">checkUserNameLength</span> <span class="o">=</span> <span class="nx">min</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">min</span><span class="p">?</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">$input</span><span class="p">.</span><span class="nx">onblur</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">checkUserNameLength</span><span class="p">(</span><span class="nx">MIN_LENGTH</span><span class="p">);</span>
+  <span class="p">};</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">const</span> <span class="nx">MIN_LENGTH</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">$input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">input[type=text]</span><span class="dl">'</span><span class="p">);</span>
+  <span class="c1">//checkUserNameLength 함수는 함수를 반환한다. </span>
+  <span class="kd">const</span> <span class="nx">checkUserNameLength</span> <span class="o">=</span> <span class="nx">min</span> <span class="o">=&gt;</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$input</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">min</span><span class="p">?</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">$input</span><span class="p">.</span><span class="nx">onblur</span> <span class="o">=</span> <span class="nx">checkUserNameLength</span><span class="p">(</span><span class="nx">MIN_LENGTH</span><span class="p">);</span>
+</code></pre></div></div>
+:ET

@@ -1,0 +1,269 @@
+I"�b<h1 id="socket">Socket</h1>
+
+<ul>
+  <li>서버와 클라이언트가 데이터를 주고 받을 때 통신할 수 있도록 연결해주는 연결부이다.</li>
+  <li>하나의 소켓으로는 하나의 클라이언트와만 통신이 가능하다. 하나의 포트를 사용하는 것 같지만, 내부적으로는 클라이언트 수만큼의 포트를 사용한다.</li>
+</ul>
+
+<h3 id="실시간-데이터-전송-방식">실시간 데이터 전송 방식</h3>
+
+<ul>
+  <li>polling
+    <ul>
+      <li>주기적으로 클라이언트가 서버로 요청을 보내 변경된 정보가 있는지 확인한다. 서버로부터의 메시지가 일정 간격마다 있을 때 사용할 수 있다.</li>
+      <li>단점으로는 데이터 전송 주기가 예측이 안되는 경우, 불필요한 연결을 지속적으로 해야한다는 것이 있다.</li>
+    </ul>
+  </li>
+  <li>long polling
+    <ul>
+      <li>클라이언트가 서버에 정보를 요청하고 일정 시간동안 연결을 열어두는 방법이다. 클라이언트가 정보를 받으면 데이터 처리 후 다시 서버로 재요청을 보내고, 정보가 없으면 일정 시간 후 닫힌 후 다시 요청한다.</li>
+      <li>단점은 정보의 전송이 빈번한 경우에 polling에 비해 성능상 이점이 크지 않다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>HTML5 Websocket</p>
+
+    <ul>
+      <li>이전 HTTP 통신과 다르게 서버 간 양방향 통신이 가능하다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="serverc">server.c</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+   C socket server example
+*/</span>
+
+<span class="cp">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;   //strlen
+#include&lt;sys/socket.h&gt;
+#include&lt;arpa/inet.h&gt;   //inet_addr
+#include&lt;unistd.h&gt;   //write
+</span>
+<span class="c1">//브라우저가 이 서버 주소로 바로 접속하면 http 요청을 보낸다. 이 때, response를 아래와 같이 돌려주면 실제 http response로 인식해 웹페이지를 띄워준다.</span>
+<span class="kt">char</span> <span class="n">response</span><span class="p">[]</span> <span class="o">=</span> <span class="s">"HTTP/1.1 200 OK</span><span class="se">\n</span><span class="s">\
+Date: Mon, 27 Jul 2009 12:28:53 GMT</span><span class="se">\n</span><span class="s">\
+Server: Apache/2.2.14 (Win32)</span><span class="se">\n</span><span class="s">\
+Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT</span><span class="se">\n</span><span class="s">\
+Content-Length: 88</span><span class="se">\n</span><span class="s">\
+Content-Type: text/html</span><span class="se">\n</span><span class="s">\
+Connection: Closed</span><span class="se">\n</span><span class="s">\
+</span><span class="se">\n</span><span class="s">\
+&lt;html&gt;</span><span class="se">\n</span><span class="s">\
+&lt;body&gt;</span><span class="se">\n</span><span class="s">\
+&lt;h1&gt;Hello, World!&lt;/h1&gt;</span><span class="se">\n</span><span class="s">\
+&lt;/body&gt;</span><span class="se">\n</span><span class="s">\
+&lt;/html&gt;</span><span class="se">\n</span><span class="s">\
+"</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span> <span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+   <span class="kt">int</span> <span class="n">socket_desc</span> <span class="p">,</span> <span class="n">client_sock</span> <span class="p">,</span> <span class="n">c</span> <span class="p">,</span> <span class="n">read_size</span><span class="p">;</span>
+   <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">server</span> <span class="p">,</span> <span class="n">client</span><span class="p">;</span>
+   <span class="kt">char</span> <span class="n">client_message</span><span class="p">[</span><span class="mi">2000</span><span class="p">];</span>
+
+   <span class="c1">//Create socket</span>
+   <span class="n">socket_desc</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span> <span class="p">,</span> <span class="n">SOCK_STREAM</span> <span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">socket_desc</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"Could not create socket"</span><span class="p">);</span>
+   <span class="p">}</span>
+   <span class="n">puts</span><span class="p">(</span><span class="s">"Socket created"</span><span class="p">);</span>
+
+   <span class="c1">//Prepare the sockaddr_in structure</span>
+   <span class="n">server</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span> <span class="c1">//IP4</span>
+   <span class="n">server</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">INADDR_ANY</span><span class="p">;</span> <span class="c1">//0.0.0.0</span>
+   <span class="c1">//127.0.0.1 호스트 주소는 나만 접속 가능하다. 다른 컴퓨터에서는 접속 불가.</span>
+   <span class="c1">// 10.13.2.1 은 10.13.2.4에 접속하기 위해서 10.13.2.0 이라 쓰면 된다.</span>
+   <span class="c1">// 0은 여기서 * 같은 의미로 사용됨.</span>
+   <span class="n">server</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span> <span class="mi">8889</span> <span class="p">);</span> <span class="c1">//포트 지정</span>
+
+   <span class="c1">//Bind - 소켓과 서버를 바인딩한다. 이 때 소켓이 열리고 서버가 실행된다.</span>
+   <span class="c1">//바인딩이 실패하는 경우 - 포트를 이미 사용 중일 때.</span>
+   <span class="k">if</span><span class="p">(</span> <span class="n">bind</span><span class="p">(</span><span class="n">socket_desc</span><span class="p">,(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">server</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+   <span class="p">{</span>
+      <span class="c1">//print the error message</span>
+      <span class="n">perror</span><span class="p">(</span><span class="s">"bind failed. Error"</span><span class="p">);</span>
+      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="n">puts</span><span class="p">(</span><span class="s">"bind done"</span><span class="p">);</span>
+
+   <span class="c1">//Listen</span>
+   <span class="n">listen</span><span class="p">(</span><span class="n">socket_desc</span> <span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+
+   <span class="c1">//Accept and incoming connection</span>
+   <span class="n">puts</span><span class="p">(</span><span class="s">"Waiting for incoming connections..."</span><span class="p">);</span>
+   <span class="n">c</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr_in</span><span class="p">);</span>
+
+   <span class="c1">//accept connection from an incoming client</span>
+   <span class="n">client_sock</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">socket_desc</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">client</span><span class="p">,</span> <span class="p">(</span><span class="n">socklen_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">client_sock</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">perror</span><span class="p">(</span><span class="s">"accept failed"</span><span class="p">);</span>
+      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="n">puts</span><span class="p">(</span><span class="s">"Connection accepted"</span><span class="p">);</span>
+
+   <span class="c1">//Receive a message from client</span>
+   <span class="c1">//recv 함수가 클라이언트의 메시지를 받을 때까지 무한루프를 돈다.</span>
+   <span class="k">while</span><span class="p">(</span> <span class="p">(</span><span class="n">read_size</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">client_sock</span> <span class="p">,</span> <span class="n">client_message</span> <span class="p">,</span> <span class="mi">2000</span> <span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span>
+   <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Got %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">client_message</span><span class="p">);</span>
+      <span class="c1">//Send the message back to client</span>
+      <span class="n">write</span><span class="p">(</span><span class="n">client_sock</span> <span class="p">,</span> <span class="n">response</span> <span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">response</span><span class="p">));</span>
+   <span class="p">}</span>
+
+   <span class="k">if</span><span class="p">(</span><span class="n">read_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">puts</span><span class="p">(</span><span class="s">"Client disconnected"</span><span class="p">);</span>
+      <span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+   <span class="p">}</span>
+   <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">read_size</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">perror</span><span class="p">(</span><span class="s">"recv failed"</span><span class="p">);</span>
+   <span class="p">}</span>
+
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="clientc">client.c</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+   C ECHO client example using sockets
+*/</span>
+<span class="cp">#include &lt;stdio.h&gt;   //printf
+#include &lt;string.h&gt;   //strlen
+#include &lt;sys/socket.h&gt;   //socket
+#include &lt;arpa/inet.h&gt;   //inet_addr
+#include &lt;unistd.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span> <span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+   <span class="kt">int</span> <span class="n">sock</span><span class="p">;</span>
+   <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">server</span><span class="p">;</span>
+   <span class="kt">char</span> <span class="n">message</span><span class="p">[</span><span class="mi">1000</span><span class="p">]</span> <span class="p">,</span> <span class="n">server_reply</span><span class="p">[</span><span class="mi">2000</span><span class="p">];</span>
+
+   <span class="c1">//Create socket</span>
+   <span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span> <span class="p">,</span> <span class="n">SOCK_STREAM</span> <span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">sock</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"Could not create socket"</span><span class="p">);</span>
+   <span class="p">}</span>
+   <span class="n">puts</span><span class="p">(</span><span class="s">"Socket created"</span><span class="p">);</span>
+
+   <span class="n">server</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">inet_addr</span><span class="p">(</span><span class="s">"127.0.0.1"</span><span class="p">);</span>
+   <span class="n">server</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+   <span class="n">server</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span> <span class="mi">8888</span> <span class="p">);</span> <span class="c1">//서버의 port와 동일해야 한다.</span>
+   <span class="c1">// 서버에서는 8888포트를 열겠다는 의미이고, 클라이언트에서는 8888포트에 접속한다는 의미이다. 클라이언트는 사용자 입력을 받아 8888포트로 전송을 하고 서버는 8888포트에서 이걸 받아서 클라이언트로 response 한다.</span>
+
+   <span class="c1">//Connect to remote server</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">sock</span> <span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">server</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">perror</span><span class="p">(</span><span class="s">"connect failed. Error"</span><span class="p">);</span>
+      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="n">puts</span><span class="p">(</span><span class="s">"Connected</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+   <span class="c1">//keep communicating with server</span>
+   <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"Enter message : "</span><span class="p">);</span>
+      <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span> <span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+
+      <span class="c1">//Send some data</span>
+      <span class="k">if</span><span class="p">(</span> <span class="n">send</span><span class="p">(</span><span class="n">sock</span> <span class="p">,</span> <span class="n">message</span> <span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="p">{</span>
+         <span class="n">puts</span><span class="p">(</span><span class="s">"Send failed"</span><span class="p">);</span>
+         <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="c1">//Receive a reply from the server</span>
+      <span class="k">if</span><span class="p">(</span> <span class="n">recv</span><span class="p">(</span><span class="n">sock</span> <span class="p">,</span> <span class="n">server_reply</span> <span class="p">,</span> <span class="mi">2000</span> <span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="p">{</span>
+         <span class="n">puts</span><span class="p">(</span><span class="s">"recv failed"</span><span class="p">);</span>
+         <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="n">puts</span><span class="p">(</span><span class="s">"Server reply :"</span><span class="p">);</span>
+      <span class="n">puts</span><span class="p">(</span><span class="n">server_reply</span><span class="p">);</span>
+   <span class="p">}</span>
+
+   <span class="n">close</span><span class="p">(</span><span class="n">sock</span><span class="p">);</span>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="websocket">Websocket</h3>
+
+<ul>
+  <li>사용자의 브라우저와 서버 사이의 동적인 양방향 연결 채널을 구성하는 HTML5 프로토콜이다.</li>
+  <li>WebSocket API 를 통해 서버로 메시지를 보내고, 별도의 요청 없이도 응답을 받아오는 것이 가능하다.</li>
+  <li>
+    <p>HTTP 는 클라이언트가 요청을 보내야 하지만 서버가 변경 사항을 보내줄 수 있지만, WebSocket 연결은 HTTP 통신과는 다르게 클라이언트가 주기를 가지고 polling 하지 않아도 변경된 사항을 시기 적절하게 지속적으로 전달할 수 있는 완전한 양방향 연결 스트림을 만들어주는 기술이다.</p>
+  </li>
+  <li>client(브라우저) websocket (index.html)</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span> <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"input"</span><span class="nt">&gt;&lt;/input&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"chatButton"</span><span class="nt">&gt;</span>chat<span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+          <span class="c1">// 웹소켓 전역 객체 생성</span>
+          <span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="dl">"</span><span class="s2">ws://localhost:3000</span><span class="dl">"</span><span class="p">);</span>
+
+          <span class="c1">// 연결이 수립되면 서버에 메시지를 전송한다</span>
+          <span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">Client message: Hi!</span><span class="dl">"</span><span class="p">);</span>
+          <span class="p">};</span>
+
+          <span class="c1">// 서버로 부터 메시지를 수신한다</span>
+          <span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Server message: </span><span class="dl">"</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+          <span class="p">};</span>
+
+          <span class="c1">// error event handler</span>
+          <span class="nx">ws</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Server error message: </span><span class="dl">"</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+          <span class="p">};</span>
+
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">keyup</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Enter</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">===</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+            <span class="p">}</span>
+          <span class="p">})</span>
+        <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Node.js 기반 서버 (server.js)</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">WebsocketS</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">ws</span><span class="dl">"</span><span class="p">).</span><span class="nx">Server</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">wss</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocketServer</span><span class="p">({</span> <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span> <span class="p">});</span>
+
+<span class="nx">wss</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">connection</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ws</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello, I am a server</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">ws</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">message</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Received : %s</span><span class="dl">"</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="http">HTTP</h3>
+
+<ul>
+  <li>
+    <h2 id="일종의-소켓">일종의 소켓?</h2>
+  </li>
+</ul>
+
+<h3 id="tcpip-model">TCP/IP MODEL</h3>
+:ET

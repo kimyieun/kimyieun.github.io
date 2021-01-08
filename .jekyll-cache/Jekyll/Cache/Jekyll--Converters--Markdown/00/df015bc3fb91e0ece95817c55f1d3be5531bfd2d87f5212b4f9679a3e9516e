@@ -1,0 +1,183 @@
+I"�S<h3 id="promise-의-정적-메소드">Promise 의 정적 메소드</h3>
+
+<ul>
+  <li>함수도 객체이므로 메소드를 가질 수 있다. 5가지 정적 메소드를 제공한다.</li>
+</ul>
+
+<ol>
+  <li>
+    <p>Promise.resolve / Promise.reject</p>
+
+    <ul>
+      <li>이미 존재하는 값을 래핑하여 프로미스를 생성하기 위해서 사용한다.</li>
+      <li>resolve 메소드는 인수로 전달받은 값을 resolve하는 프로미스를 생성한다.</li>
+      <li>reject 메소드는 인수로 전달받은 값을 reject하는 프로미스를 생성한다.</li>
+    </ul>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">resolvedPromise</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
+<span class="nx">resolvedPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span> <span class="c1">//[1,2,3]</span>
+
+<span class="kd">const</span> <span class="nx">resolvedPromise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]));</span>
+<span class="nx">resolvedPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span> <span class="c1">//[1,2,3]</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Promise.all</p>
+
+    <ul>
+      <li>여러 개의 비동기 처리를 모두 병렬 처리할 때 사용한다.</li>
+    </ul>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">requestData1</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span>
+  <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">3000</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">requestData2</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span>
+  <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2000</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">requestData3</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span>
+  <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1000</span><span class="p">));</span>
+
+<span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="nx">requestData1</span><span class="p">,</span> <span class="nx">requestData2</span><span class="p">,</span> <span class="nx">requestData3</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span> <span class="c1">//[1,2,3] =&gt; 약 3초 소요, cf) sequential하게 처리하면 6초 소요</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+</code></pre></div>    </div>
+
+    <p>위 예제와 같이 <strong>순차적으로 처리할 필요가 없는 비동기 처리들의 경우</strong>에는 all 메소드 사용하는 것이 좋다.</p>
+
+    <ul>
+      <li>Promise.all 메소드는 프로미스를 요소로 갖는 배열 등의 이터러블을 인수로 갖는다. 모든 프로미스가 모두 fulfilled가 되면 모든 처리 결과를 배열에 저장해 새로운 프로미스를 반환한다.</li>
+      <li>Promise.all 메소드가 종료되는데 걸리는 시간은 가장 늦게 fulfilled 상태가 되는 프로미스의 처리 시간보다 조금 더 길다.(3초보다 조금 더 소요됨)</li>
+      <li>Promise의 fulfilled 되는 순서가 바뀌어도 첫 번째 프로미스부터 차례로 배열에 저장한다. <strong>처리 순서가 보장</strong>된다.</li>
+    </ul>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">requestData1</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span>
+  <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error 1</span><span class="dl">"</span><span class="p">)),</span> <span class="mi">3000</span><span class="p">)</span>
+  <span class="p">);</span>
+<span class="kd">const</span> <span class="nx">requestData2</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span>
+  <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error 2</span><span class="dl">"</span><span class="p">)),</span> <span class="mi">2000</span><span class="p">)</span>
+  <span class="p">);</span>
+<span class="kd">const</span> <span class="nx">requestData3</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span>
+  <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error 3</span><span class="dl">"</span><span class="p">)),</span> <span class="mi">1000</span><span class="p">)</span>
+  <span class="p">);</span>
+
+<span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="nx">requestData1</span><span class="p">,</span> <span class="nx">requestData2</span><span class="p">,</span> <span class="nx">requestData3</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span> <span class="c1">// Error : Error 3</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Promise.all 메소드는 인수로 전달받은 배열의 프로미스가 하나라도 rejected 상태가 되면 즉시 종료된다.</li>
+      <li>위 예제의 경우 세 번째 프로미스가 가장 먼저 rejected 상태가 된다.</li>
+    </ul>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span> <span class="c1">// [1,2,3]</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>인수로 전달받은 이터러블의 요소가 프로미스가 아닌 경우 Promise.resolve 메소드를 통해서 프로미스로 래핑한다.</li>
+    </ul>
+  </li>
+  <li>Promise.race
+    <ul>
+      <li>프로미스를 요소로 갖는 배열 등의 이터러블을 인수로 갖는다. 가장 먼저 fulfilled 상태가 된 프로미스의 처리 결과를 resolve 하는 새로운 프로미스를 반환한다.
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Promise</span><span class="p">.</span><span class="nx">race</span><span class="p">([</span>
+<span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">3000</span><span class="p">)),</span>
+<span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2000</span><span class="p">)),</span>
+<span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1000</span><span class="p">)),</span>
+<span class="p">])</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span> <span class="c1">// 3</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+</code></pre></div>        </div>
+      </li>
+      <li>프로미스 중 하나가 rejected 상태가 되면 Promise.all 메소드와 동일하게 동작한다.</li>
+    </ul>
+  </li>
+  <li>Promise.allSettled
+    <ul>
+      <li>프로미스를 요소로 갖는 배열 등의 이터러블을 인수로 갖는다. <strong>전달받은 프로미스가 모두 settled상태가 되면 처리 결과를 배열로 반환</strong>한다.
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Promise</span><span class="p">.</span><span class="nx">allSettled</span><span class="p">([</span>
+<span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">2000</span><span class="p">)),</span>
+<span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">_</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span>
+  <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error!</span><span class="dl">"</span><span class="p">)),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="p">),</span>
+<span class="p">]);</span>
+<span class="cm">/*
+ [
+   {status : "fulfilled", value : 1},
+   {status : "rejected", reason : Error : Error! at &lt;anonymous&gt;:3:54}
+ ]
+ */</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="마이크로태스크-큐">마이크로태스크 큐</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>1 -&gt; 2 -&gt; 3 순으로 출력될 것 같지만, 2 -&gt; 3 -&gt; 1 이다.<br />
+프로미스의 후속 처리 메소드의 콜백 함수는 태스크 큐가 아닌 마이크로태스크 큐에 저장되기 때문이다.</p>
+
+<ul>
+  <li>마이크로태스크 큐는 태스크 큐와 별도의 큐로, <strong>태스크 큐보다 우선순위가 높다.</strong> 즉, 이벤트 루프는 콜 스택이 비면 먼저 마이크로태스크 큐에서 대기하고 있는 함수를 가져와서 실행한다. 이후, 마이크로태스크 큐가 비면 캐스크 큐에서 대기하는 함수를 가져와서 실행한다.</li>
+</ul>
+
+<h3 id="fetch">fetch</h3>
+
+<ul>
+  <li>fetch 함수는 XMLHttpRequest 객체와 마찬가지로 HTTP 요청 전송 기능을 제공하는 Web API이다.</li>
+  <li>fetch 함수는 <strong>HTTP 응답을 나타내는 Response 객체를 래핑한 Promise 객체를 반환한다.</strong></li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// const promise = fetch(url, [, options]);</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://jsonplaceholder.typicode.com/posts/1</span><span class="dl">"</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>response 객체는 HTTP 응답을 나타내는 다양한 프로퍼티를 제공한다.</li>
+  <li>Response.prototype.json 메소드</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://jsonplaceholder.typicode.com/posts/1</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+  <span class="c1">//json 은 역직렬화된 HTTP 응답 몸체이다.</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">json</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h3 id="fetch-함수-통해-http-요청-전송">fetch 함수 통해 HTTP 요청 전송</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="kd">get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+  <span class="p">},</span>
+  <span class="nx">post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">payload</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span> <span class="p">},</span>
+      <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">payload</span><span class="p">),</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+  <span class="nx">patch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">payload</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">PATCH</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span> <span class="p">},</span>
+      <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">payload</span><span class="p">),</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+  <span class="k">delete</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span> <span class="p">});</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET
