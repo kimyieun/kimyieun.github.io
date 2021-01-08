@@ -6,3 +6,16 @@
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+.category-wrap {
+  margin-top: 2rem;
+}
+
+.category-title {
+  font-size: 20px;
+  font-family: roboto;
+}
+
+.posts-list * {
+  font-family: roboto;
+  font-size: 15px;
+}

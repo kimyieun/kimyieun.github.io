@@ -7,7 +7,7 @@ main:
   - title: "Home"
     url: /index.html
   - title: "Category"
-    url: /categories/
+    url: /category/
   - title: "Sample Collections"
     url: /collection-archive/
   - title: "Sitemap"
