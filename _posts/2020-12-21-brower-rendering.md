@@ -1,4 +1,14 @@
-# 브라우저의 렌더링 과정 (Chapter 38)
+---
+title : "Browser Rendering(Chapter 38)"
+
+categories :
+    - javascript
+
+tags :
+    - javascript
+
+---
+  ** 모던 자바스크립트 Deep Dive 책을 읽고 정리한 포스팅이다.
 
 ### Parsing
 - 프로그래밍 언어로 작성된 텍스트 파일을 읽어 들여 실행하기 위해 텍스트 문서의 문자열을 토큰으로 분해하고, 토큰에 문법적 의미와 구조를 반영하여 트리 구조의 자료구조인 parse tree/syntax tree를 생성하는 과정

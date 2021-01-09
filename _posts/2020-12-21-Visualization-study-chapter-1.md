@@ -1,8 +1,16 @@
-# "What's Vis, and Why Do It?"
+---
+title : "What's Vis, and Why Do It?"
 
-Book : Visualization Analysis and Design - Tamara Munzner
+categories :
+    - visualization
 
-## Chapter 1
+tags :
+    - visualization
+
+---
+
+
+### Book : Visualization Analysis and Design - Tamara Munzner (Chapter 1)
 
 ### 1.1 The Big Picture
 

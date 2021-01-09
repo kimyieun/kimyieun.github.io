@@ -1,3 +1,15 @@
+---
+title : "Error Handling"
+
+categories :
+    - javascript
+
+tags :
+    - javascript
+
+---
+  ** 모던 자바스크립트 Deep Dive 책을 읽고 정리한 포스팅이다.
+
 ### 에러 처리의 필요성
 
 - 발생한 에러에 대해 대처하지 않고 방치하면 프로그램이 강제 종료된다.

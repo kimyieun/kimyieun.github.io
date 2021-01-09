@@ -1,6 +1,14 @@
-# Asynchronous Programming
+---
+title : "Asynchronous Programming (Chapter 42)"
 
-## Chapter 42
+categories :
+    - javascript
+
+tags :
+    - javascript
+
+---
+  ** 모던 자바스크립트 Deep Dive 책을 읽고 정리한 포스팅이다.
 
 ### 동기 처리와 비동기 처리
 - 함수가 호출되면 함수 코드가 평가되어 함수 실행 컨텍스트가 생성된다. 이 함수 실행 컨텍스트는 실행 컨텍스트 스택(call stack)에 푸시되고 함수 코드가 실행된다. 함수 코드 실행이 종료되면 함수 실행 컨텍스트는 실행 컨텍스트 스택에서 pop되어 제거된다.

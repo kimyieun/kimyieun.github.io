@@ -1,4 +1,14 @@
-# Generator
+---
+title : "Generator"
+
+categories :
+    - javascript
+
+tags :
+    - javascript
+
+---
+  ** 모던 자바스크립트 Deep Dive 책을 읽고 정리한 포스팅이다.
 
 - ES6에서 도입된 generator는 코드 블록의 실행을 일시 중지했다가 필요한 시점에 재개할 수 있는 특수한 함수이다.
 - 일반 함수와의 차이점

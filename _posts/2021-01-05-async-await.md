@@ -1,4 +1,14 @@
-# async/await
+---
+title : "Async / Await"
+
+categories :
+    - javascript
+
+tags :
+    - javascript
+
+---
+  ** 모던 자바스크립트 Deep Dive 책을 읽고 정리한 포스팅이다.
 
 - generator를 사용하여 비동기 처리를 동기 처리처럼 동작하도록 구현했지만 코드가 무척 장황하고 가독성이 떨어진다.
 - ES8에서는 비동기 처리를 동기 처리처럼 동작하도록 구현하는 async/await를 도입하였다.

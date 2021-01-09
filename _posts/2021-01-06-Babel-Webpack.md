@@ -1,4 +1,14 @@
-# Babel과 Webpack을 이용한 ES6+/ES.NEXT 개발 환경 구축
+---
+title : "Babel과 Webpack을 이용한 ES6+/ES.NEXT 개발 환경 구축"
+
+categories :
+    - javascript
+
+tags :
+    - javascript
+
+---
+  ** 모던 자바스크립트 Deep Dive 책을 읽고 정리한 포스팅이다.
 
 - ES.NEXT (제안 단계에 있는 ES 제안 사양)
 - 대부분의 프로젝트가 모듈을 사용하므로 모듈 로더가 필요하다. ES6 모듈은 대부분의 모던 브라우저에서 가능하지만, 아래와 같은 이유로 별도의 모듈을 사용하는 것이 더 일반적이다.
@@ -23,7 +33,7 @@
 - Transpiling
   - Babel CLI 명령어를 사용하여 트랜스파일링할 수도 있으나, 매번 CLI 명령어를 입력하는 것은 번거로우므로, npm scripts 에 Babel CLI 명령어를 등록해 사용한다.
 
-# Webpack
+### Webpack
 
 - 앞서 언급한 ESM의 불완전함을 이유로 Webpack 을 사용하는 것이 더 일반적이다.
 - 의존 관계에 있는 js, css, image 등의 리소스를 하나(또는 여러 개)의 파일로 번들링하는 모듈 번들러이다.
