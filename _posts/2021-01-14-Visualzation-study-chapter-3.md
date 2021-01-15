@@ -88,6 +88,9 @@ _**“See if the results for the tissue samples treated with LL-37 match up with
   - 타겟도 모르고, 위치도 모르는 경우.
   - scatterplot에서 outliers 찾는 것. 가장 많은 종을 가지는 과를 찾아라?
 
+- lookup/locate 와 browse/explore 를 구별하는 방법은, 타겟을 아는 경우에는 (california, id = 10) lookup/locate에 해당되고, 타겟의 특성을 아는 경우에는 (missing value, x > 10) browse/explore 에 해당된다.
+- 예를 들어, 지도에서 캘리포니아의 값을 찾는 search 태스크를 수행할 때, 캘리포니아의 위치를 아는 사람에게는 lookup이고, 모르는 사람에게는 locate이다.
+  
 #### Query
 - 타겟이 발견되고 나면, low-level user goal은 이 타겟을 query하는 것이다. 3단계의 레벨이 있다.
 - identify : single target, compare : multiple target, summarize : full set of targets
