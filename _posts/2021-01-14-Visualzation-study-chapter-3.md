@@ -10,7 +10,7 @@ tags :
 ---
 
 
-### Book : Visualization Analysis and Design - Tamara Munzner (Chapter 1)
+### Book : Visualization Analysis and Design - Tamara Munzner (Chapter 3)
 
 ### 3.1 The Big Picture
 - 저자가 책 중간중간에 강조하는 점으로는 Why와 How는 독립적이라는 것이다. 내가 presentation action을 지원한다고 해서 how가 정해지는 것이 아니라, 이 안에서도 엄청나게 다양한 vis idiom 선택지가 있다고 한다.
