@@ -21,11 +21,7 @@ tags :
 - design process 처음부터 validation 방법을 고려하는 것이 좋다.
   
 ### 4.3 Four Levels of Design
-  <br/>
-  <p align="center">
-  <img src="../assets/images/fourlevel.png" height="250px" width="400px">
-  </p>  
-  <br/>
+![Validation](/assets/images/fourlevel.png){:width="400px" height="200px"}{: .center}
 
   1. **Domain situation level**
       - details of a particular application domain for vis.
@@ -103,11 +99,7 @@ tags :
 - Wrong algorithm: Your code is too slow.
 
 ### 4.6 Validation Approaches
-  <br/>
-  <p align="center">
-  <img src="../assets/images/validation.png" height="400px" width="500px">
-  </p>  
-  <br/>
+![Validation](/assets/images/validation.png){:width="600px" height="700px"}{: .center}
 
 - Immediate validation approach
   - 각 level에 대한 부분적인 validation 만 진행한다.
@@ -181,12 +173,7 @@ tags :
 - 책에서는 여러 시각화 예제를 사용해서 what-why-how 를 설명하고 있다. 
   
 #### 4.7.1 Genealogical Graphs
-
-  <br/>
-  <p align="center">
-  <img src="../assets/images/genealogicalGraph.png" height="300px" width="500px">
-  </p>  
-  <br/>
+![Genealogical Graph](/assets/images/genealogicalGraph.png){:width="600px" height="700px"}{: .center}
 
   - 가계도 시각화 - 다양한 새로운 visual encoding idioms (dual-tree)과 복잡한 interaction idioms (automatic camera framing, animated transition, ..) 사용.
   - 이 논문에서는 4 level 을 모두 다루고 있다. 
@@ -204,10 +191,7 @@ tags :
     - Immediate justification of encoding and iteraction idiom design decisions
     - Downstream method of a qualitative discussion of result images and videos
     - Abstraction level - downstream informal testing (anecdotal evidence 수집)
-  <br/>
-  <p align="center">
-  <img src="../assets/images/genealogyvalidation.png" height="200px" width="500px">
-  </p>  
-  <br/>
+
+![Validation](/assets/images/genealogyvalidation.png){:width="600px" height="400px"}{: .center}
 
  

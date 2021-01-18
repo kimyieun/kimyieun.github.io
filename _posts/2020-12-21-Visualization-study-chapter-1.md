@@ -64,11 +64,7 @@ tags :
 - Diagram
   - 사람의 자연스러운 인지 추론 과정을 도와주기 위해 디자인됨.
   - 아이템이나 정보를 그룹화함으로써 search, recognition을 도와준다. (cf. recall)  
-  <br/>
-  <p align="center">
-  <img src="../assets/images/diagram.png" height="300px" width="500px">
-  </p>  
-  <br/>
+![Validation](/assets/images/diagram.png){:width="500px" height="500px"}{: .center}
 
 ### 1.5 Why depend on vision?
 
@@ -76,15 +72,10 @@ tags :
 - Visual system 은 bandwidth가 넓다(100MB/s, 귀는 < 100B/s).  
   Preattentive processing : Preconscious level과 동등하게 시각적인 정보 처리가 발생한다.
   - Visual popout
-
-<p align="center">
-<img src="../assets/images/visualPopout.png" height="300px" width="500px">
-</p>  
-<br/>
+![Validation](/assets/images/visualPopout.png){:width="500px" height="500px"}{: .center}
 
 - 소리는 vision에 비해 많은 양의 정보의 overview를 제공하는데 적합하지 않다. 또한, 소리는 sequential stream으로 인지하기 때문에 오랜 시간에 걸쳐 발생한 소리는 자동으로 합쳐진다.
 - taste, smell, haptic 등의 감각들은 아직 기술적인 한계로 어렵다.  
-  <br/>
 
 ### 1.6 Why show the data in detail?
 
@@ -93,18 +84,13 @@ tags :
 - Anscombe's Quartet
   - 4가지 데이터셋은 모두 동일한 mean, variance, correlation, linear regression line 을 갖는다.
   - 1 : normal 2 : nonlinear pattern 3 : one outlier 4 : completely misleading
-
-<p align="center">
-<img src="../assets/images/Anscombe's_quartet.png" height="400px" width="600px">
-</p>  
-<br/>
+![Validation](/assets/images/Anscombe's_quartet.png){:width="500px" height="500px"}{: .center}
 
 ### 1.7 Why use interactivity?
 
 - Interactivity 는 vis tool 의 complexity와 volumn을 다루기 위해 필수적이다. dataset이 커질수록 사용자와 display 의 한계로 인해 모든 데이터를 한번에 보여줄 수 없다.
 - 다이나믹 쿼리를 지원하기 위해서는 **interaction 은 필수적**이다.
 - 고차원적인 overview 에서부터 작은 부분의 detailed view 까지 다양한 레벨의 detail 을 지원한다.  
-  <br/>
 
 ### 1.8 Why is the vis idiom design space huge?
 
@@ -112,13 +98,11 @@ tags :
   - a distinct approach to creating and manipulating visual representations.
 - Interaction 까지 추가되면서 design space 는 더 방대해졌다.
   - Interaction 을 사용하여 여러 개의 간단한 차트들을 linking 가능.  
-    <br/>
 
 ### 1.9 Why focus on tasks?
 
 - 동일한 dataset에서 하나의 task에 적합하도록 디자인된 툴은 다른 테스크에는 적절하지 않을 수 있다.
 - Why를 설명하기 위하여 domain-specific한 형태의 사용자의 테스크를 abtract한 형태로 변경하는 작업이 필요하다 (generic words의 필요성).  
-  <br/>
 
 ### 1.10 Why focus on effectiveness?
 
@@ -129,17 +113,14 @@ tags :
 - correctness
   - 데이터에 대한 모든 표현은 abstraction 형태이다. 모든 결정이 어떠한 면을 강조할지에 따라 이루어지기 때문에 correctness를 평가하기 어렵다.
 - 아이러니하게도 targeted design 일수록, popular design 이 될 확률이 높다.  
-  <br/>
 
 ### 1.11 Why are most designs ineffective?
 
 - visual design space는 매우 방대하다. 그러나 대부분은 ineffective하다. 그 이유로는 인간의 인지적, 지각적 시스템에 적합하지 않아서, 또는 의도하는 task에 맞지 않아서 등등. 아주 일부만이 좋은 디자인이라 할 수 있다.
 - 아래 그림과 같이 known space, consideration space 를 넓힐수록 effective design 을 찾을 수 있다.
 - 즉각적으로 하나의 솔루션을 고정하기보다는 다양한 대안들을 충분히 살펴보는 것이 중요하다.
-<p align="center">
-<img src="../assets/images/search_space.png" height="300px" width="600px">
-</p>  
-<br/>
+
+![Validation](/assets/images/search_space.png){:width="600px" height="300px"}{: .center}
 
 ### 1.12 Why is validation difficult?
 
@@ -167,10 +148,7 @@ tags :
   - **change blindness**
     - 사람은 무언가 일을 집중하여 수행하고 있을 때 다른 부분에서 엄청난 변화가 발생해도 이를 눈치채지 못한다.
 - Display capacity - 모든 정보를 동시에 보여주기에는 해상도가 충분하지 못하다. - Information density : 사용하지 않는 공간 대비 encoded된 정보의 양에 대한 measure 방법 - 모든 정보를 한번에 제공함으로써 navigation과 exploration의 필요성을 줄이는 장점과 비용 간의 trade-off가 있다. 좋은 디자인의 목표는 이 둘 사이의 적절한 balance를 찾는 것이다.
-<p align="center">
-<img src="../assets/images/informationDensity.png" height="300px" width="500px">
-</p>  
-<br/>
+![Validation](/assets/images/informationDensity.png){:width="600px" height="300px"}{: .center}
 
 ### 1.14 Why analyze?
 
@@ -178,18 +156,10 @@ tags :
   - **What** data the user sees,
   - **Why** the user intends to use a vis tool,
   - **How** the visual encoding and interaction idioms are constructed in terms of design choices
-
-<p align="center">
-<img src="../assets/images/whatwhyhow.png" height="200px" width="200px">
-</p>  
-<br/>
+![Validation](/assets/images/whatwhyhow.png){:width="200px" height="300px"}{: .center}
 
 - **what-why-how = data-task-idiom**
 - 이 3단계를 하나의 instance라 한다.
 - 단순한 vis tool은 독립된 instance로도 구성할 수 있지만, 복잡한 vis tool은 dependencies가 있는 instances chaining을 필요로 한다. output이 또다른 instance의 input이 되는 형태이다.
 - 예를 들어, 사용자가 vis tool에서 보이는 항목들을 소팅한다. 이는 소팅 그 자체가 결과물로 소팅된 list를 갖는 것이 목적일 수도 있지만, 이를 통해 outlier를 발견하기 위한 수단이 될 수도 있다.
-
-<p align="center">
-<img src="../assets/images/whatwhyhow_chaining.png" height="300px" width="400px">
-</p>  
-<br/>
+![Validation](/assets/images/whatwhyhow_chaining.png){:width="400px" height="300px"}{: .center}
