@@ -123,5 +123,3 @@ _**“See if the results for the tissue samples treated with LL-37 match up with
   - network : topology
   - spatial data : geometric shape
 
-
-- 책에서는 여러 시각화 예제를 사용해서 what-why-how 를 설명하고 있다. 
