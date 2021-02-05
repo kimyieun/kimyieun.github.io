@@ -125,39 +125,85 @@ tags :
 -
 
 ### 7.6 Spatial Axis Orientation
+- spatial axis : rectilinear, parallel, or radial layout.
 
 #### 7.6.1 Rectilinear Layouts
-
-- regions or items are distributed along two perpendicular axes.
-- most common statistical charts.
+- regions 나 items 가 수평과 수직적인 위치에 따라 분포된다. 
+- vis design 에서 굉장히 많이 사용되고, 대부분의 statistical chart 에서 나타난다.
+- 위에서 봤던 예제들 모두 rectilinear layout 사용한다.
 
 #### 7.6.2 Parallel Layouts
-
-- rectilinear layouts 은 two data attributes 에서만 사용 가능하다.
+- scatterplot 을 rectilinear layout 형태로 표현하려면 two data attributes 에서만 가능하다.  
+- three data attributes 를 위해서 nonspatial channels 을 사용할 수 있지만, channel 의 분리가 불가능해지면서 하나의 뷰에 효과적인 channels 조합에 한계가 발생한다.
 - parallel coordinates
-  - many quantitative attributes at once using spatial position.
-  - checking for correlation between attributes.
-    - positive - parallel / negative - cross over each other / uncorrelated - mix of crossing angles
-    - 실제로는 SPLOM이 correlation 을 보는데에 더 적합하다. parallel coordinates 는 전체 attributes 에 대한 overview를 보거나, 각 attribute의 range 를 보거나, outlier detection, items의 범위 선택 등에 유용하다.
-  - scalability - attributes 개수가 dozens is common / items : 수백만. occlusion 발생
-  - pattern 이 잘 보이게 하려면, 이웃하는 축간의 관계를 잘 알아야 한다. 축의 순서를 정하는 것이 중요하지만, 모든 조합을 시도해보는데에는 시간이 굉장히 많이 소요된다.
-  - limitation - training time (처음 보는 사용자는 패턴의 의미에 대한 직관이 없다. 보통 하나의 view로만 사용하지 않고, 여러 개를 조합해서 보는 방식이다.)
-
-![Validation](/assets/images/parallelCoordinate.png){:width="500px" height="400px"}{: .center}
 
 ![Validation](/assets/images/parallelCoordiDescription.png){:width="500px" height="400px"}{: .center}
 
-#### 7.6.3 Radial Layouts
+![Validation](/assets/images/parallelCoordinate.png){:width="500px" height="400px"}{: .center}
 
-- items 원을 그리며 배치된다.
+  - many quantitative attributes at once using spatial position.
+  - checking for correlation between attributes 이 본래 motivation 이었다.
+    - 두 개의 인접한 축이 높은 positive correlation 을 갖는다면, line segments 가 거의 평행하다. 
+    - 두 개의 인접한 축이 높은 negative correlation 을 갖는다면, line segments 가 거의 수직이다. 
+    - 두 개의 인접한 축이 uncorrelated 하다면, line segments 가 여러 각도가 합쳐진 형태이다.
+    - 실제로는 SPLOM이 correlation 을 보는데에 더 적합하다. 
+    parallel coordinates 는 전체 attributes 에 대한 overview를 보거나, 각 attribute의 range 를 보거나, outlier detection, items의 범위 선택 등에 유용하다.
+  - items 개수가 많아지면 occlusion 발생한다.
+  - pattern 이 잘 보이게 하려면, 이웃하는 축간의 관계를 잘 알아야 한다. 따라서 축의 순서를 정하는 것이 중요하다. 그러나 모든 조합을 시도해보는데에는 시간이 굉장히 많이 소요된다.
+  - training time 한계
+    - 처음 보는 사용자는 패턴의 의미에 대한 직관이 없으므로 명시적인 학습이 필요하다. 그래서 보통 하나의 view로만 사용하지 않고, 같은 데이터에 대한 여러 형태의 visual encoding 과 함께 사용된다.
+
+#### 7.6.3 Radial Layouts
+- items 이 angle channel 을 사용해서 원을 그리며 배치된다.
+- polar coordinates
+  - radial layout 에서 자연스러운 coordinate system. 
+  - 하나의 축은 starting line 으로부터의 각도로 결정되고, 다른 축은 특정 point 로부터의 거리로 결정된다.
+- <rectilinear layout 과 비교 그림>
+  - rectilinear layout 과 radial layout 은 수학적인 관점에서는 완벽하게 equivalent 하다.
+  - 그러나, perceptual 관점에서 본다면 전혀 equivalent 하지 않다.
+    - 일단 첫 번째로는 angle channel 은 rectilinear spatial position channel 보다 부정확하게 인지된다.
+    - 두 번째는 angle channel 은 cyclic 한 특성을 갖는다. 시작점과 끝점이 동일하기 때문에. linear 특성과 전혀 반대된다.
+  - expressiveness 와 effectiveness principal 의 가이드라인에 따르면, radial layout 은 patten 의 주기성을 보일 때 훨씬 유용하다. radial layout 은 두 attribute 간의 중요도의 asymmetry 를 내포하기 때문에, 중요도가 동일하다면 사용하지 않는 것을 권한다.
 - Radial Bar Charts
+
+<!-- <그림>
+<설명 표> -->
+
 - Pie Charts
   - 인기는 많지만, 문제가 많다.
-  - angle judgements 가 length judgements 보다 부정확하다.
+
+![Validation](/assets/images/PieChart.png){:width="700px" height="600px"}{: .center}
+
+  - angle judgements 가 length judgements 보다 부정확하다. 
+  - width 가 중심점에 가까울때는 좁고, 바깥으로 갈수록 넓어지기 때문에 area 판단도 정확하게 하기 어렵다.
   - polar area chart - pie chart 처럼 각도로 비교하지 않고, bar length 로 비교한다.
-  - 가장 유용한 특징으로는 전체에 대한 부분의 상대적인 비율을 비교할 수 있다는 것이다. 하지만, pie chart 에서만 보여줄 수 있는 건 아님. normalized stacked bar chart. 심지어 pie chart 보다 더 잘 보여줌.
-  - 공간도 많이 차지한다.
 
-![Validation](/assets/images/pieChart.png){:width="500px" height="400px"}{: .center}
+![Validation](/assets/images/piechartComparison.png){:width="700px" height="600px"}{: .center}
 
-![Validation](/assets/images/piechartComparison.png){:width="500px" height="400px"}{: .center}
+  - 가장 유용한 특징으로는 **전체에 대한 부분의 상대적인 비율을 비교**할 수 있다는 것이다. 하지만, pie chart 에서만 보여줄 수 있는 특성은 아니다. normalized stacked bar chart도 가능하고, 심지어 pie chart 보다 더 잘 보여주고, 공간도 상대적으로 덜 차지한다.
+- Normalizaed stacked bar chart
+  - stacked bar chart 의 bar를 max 길이로 만들어서, percentage 정보를 제공한다. 가장 낮은 위치의 sub-bar 는 common frame 대비 가장 정확한 정보를 가진 position channel 을 제공받지만, 다른 sub-bar 들은 unaligned position 을 사용한다. 그걸 감안하고도 angle comparison 보다 더 정확하다. 
+
+
+- radial versus rectilinear grid layout 에 대한 첫 번째 empirical study
+  - task : memorizing positions of objects for a few seconds.
+  - accuracy, perception speed 
+  - result : 일반적인 상황에서 rectilinear layout 이 radial layout 보다 더 결과가 좋았다. 그러나 하나의 attribute 가 다른 것보다 더 중요하다면 radial layout 이 더 적합하다고도 판단했다. 
+
+
+### 7.7 Spatial Layout Density
+- layout 이 dense 하냐 sparse 하냐?
+#### 7.7.1 Dense
+- dense layout 은 높은 information density 로 많은 items 의 overview 를 제공하기 위해서 작고 dense한 packed 마크들을 사용한다.
+- dense 하기 때문에 size, shape, tilt, curvature, shape 등 충분한 공간을 필요로 하는 것은 사용하지 못하고 position, color channel 을 주로 사용한다.
+- Dense Software Overviews
+<!-- 그림
+설명 그림 -->
+  - line mark 를 사용한 dense display 는 software source code overview 를 제공할 때 주로 사용된다. 
+
+#### 7.7.2 Space-Filling
+- view 에서 가능한 모든 공간을 채우는 것이다. 
+- items 에 대해서는 area makrs 를 사용하고 관계를 표현할 때는 containment marks 를 사용한다. 
+- 장점은 color coding 을 위해 가능한 공간을 maximum 으로 사용한다는 것이다.
+그러나, layout 에서 white space 를 활용할 수 없다. 디자인 가이드라인에서는 white space 를 readability, emphasis, relative importance, visual balance 측면에서 잘 활용하는데, 그런 측면들을 활용할 수 없다. 
+- high information density 를 성취하고자 노력하지만, 항상 공간을 효율적으로 사용한다는 것을 보장할 수는 없다. 
