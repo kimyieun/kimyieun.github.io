@@ -13,7 +13,7 @@ tags :
 ### Book : Visualization Analysis and Design - Tamara Munzner (Chapter 7)
 
 ### 7.2 Why Arrange?
-- The arrange design choice covers all aspects of the use of spatial channels for visual encoding.
+- The arrange design choice covers all aspects of the use of **spatial channels** for visual encoding.
 - quantitative/ordered attributes 에서 가장 효과적인 채널 top3 모두 spatial position과 관련 있다.
   - planar position against a common scale, planar position along an unaligned scale, and length.
 - categorical attributes 에서 가장 효과적인 채널은 동일한 위치에 아이템들을 그루핑하는 것이다.
@@ -92,6 +92,17 @@ tags :
 
 ![Validation](/assets/images/linechartInfo.png){:width="500px" height="300px"}{: .center}
 
+  - line chart, dot chart, bar chart 는 모두 하나의 key attribute 와 하나의 value attribute 를 가진다. 그리고 categorical attribute 를 color 나 shape 채널을 사용해 표현한다. 
+  - line chart
+    - key attribute 의 ordering 을 강조하기 위해서 connection mark 를 사용한다. (trend 강조)
+    - 따라서 categorical key 가 아닌 ordered key 를 사용해야 한다. (categorical 을 사용하면 expressiveness principal 위배)
+    - quantitative data 에 대한 표현을 line chart vs. bar chart 로 진행한 실험이 있다.
+      - 전자에서는 사용자들이 trend와 관련된 답을 했지만, 후자에서는 비교와 관련된 답을 많이 했다.
+    - **aspect ratio**
+      - 전체 차트에서 높이와 너비의 비율
+      - 대부분의 차트 패키치에서는 정사각형이나 다른 고정된 사이즈를 사용한다. 이 경우 dataset 구조가 가려지게 될 수 있다.
+
+
 #### 7.5.2 Matrix Alignment : Two Keys
 
 - 2D matrix alignment 를 주로 사용한다.
@@ -108,7 +119,7 @@ tags :
   - juxtaposed combination of a heatmap and two dendrograms showing the derived data of the cluster hierarchies.
   - dendrogram - tree data.
 
-![Validation](/assets/images/clusterHeatmap.png){:width="500px" height="400px"}{: .center}
+![Validation](/assets/images/clusterheatmap.png){:width="500px" height="400px"}{: .center}
 
 - Scatterplot Matrix (SPLOM)
   - 하나의 cell이 scatterplot chart 를 포함하는 matrix. attributes 의 모든 가능한 pairwise 조합을 제공한다.
@@ -122,7 +133,8 @@ tags :
 
 #### 7.5.4 Recursive Subdivision : Multiple Keys
 
--
+- multiple keys 에 대해서는 이전의 접근 방법들을 recursive 하게 적용하는 것이 가능하다. 
+- 분리된 regions 에 데이터를 파티셔닝하는 다양한 방법이 있다. (ch 12.4)
 
 ### 7.6 Spatial Axis Orientation
 - spatial axis : rectilinear, parallel, or radial layout.
@@ -158,7 +170,9 @@ tags :
 - polar coordinates
   - radial layout 에서 자연스러운 coordinate system. 
   - 하나의 축은 starting line 으로부터의 각도로 결정되고, 다른 축은 특정 point 로부터의 거리로 결정된다.
-- <rectilinear layout 과 비교 그림>
+![Validation](/assets/images/rectilinearcompare.png){:width="400px" height="300px"}{: .center}
+
+
   - rectilinear layout 과 radial layout 은 수학적인 관점에서는 완벽하게 equivalent 하다.
   - 그러나, perceptual 관점에서 본다면 전혀 equivalent 하지 않다.
     - 일단 첫 번째로는 angle channel 은 rectilinear spatial position channel 보다 부정확하게 인지된다.
@@ -166,8 +180,10 @@ tags :
   - expressiveness 와 effectiveness principal 의 가이드라인에 따르면, radial layout 은 patten 의 주기성을 보일 때 훨씬 유용하다. radial layout 은 두 attribute 간의 중요도의 asymmetry 를 내포하기 때문에, 중요도가 동일하다면 사용하지 않는 것을 권한다.
 - Radial Bar Charts
 
-<!-- <그림>
-<설명 표> -->
+![Validation](/assets/images/radialbarchart.png){:width="400px" height="300px"}{: .center}
+
+![Validation](/assets/images/radialbarchartInfo.png){:width="700px" height="600px"}{: .center}
+
 
 - Pie Charts
   - 인기는 많지만, 문제가 많다.
@@ -197,8 +213,10 @@ tags :
 - dense layout 은 높은 information density 로 많은 items 의 overview 를 제공하기 위해서 작고 dense한 packed 마크들을 사용한다.
 - dense 하기 때문에 size, shape, tilt, curvature, shape 등 충분한 공간을 필요로 하는 것은 사용하지 못하고 position, color channel 을 주로 사용한다.
 - Dense Software Overviews
-<!-- 그림
-설명 그림 -->
+![Validation](/assets/images/dense.png){:width="700px" height="600px"}{: .center}
+![Validation](/assets/images/denseinfo.png){:width="700px" height="600px"}{: .center}
+
+
   - line mark 를 사용한 dense display 는 software source code overview 를 제공할 때 주로 사용된다. 
 
 #### 7.7.2 Space-Filling
