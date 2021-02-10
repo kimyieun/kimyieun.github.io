@@ -16,7 +16,7 @@ tags :
 - The arrange design choice covers all aspects of the use of **spatial channels** for visual encoding.
 - quantitative/ordered attributes 에서 가장 효과적인 채널 top3 모두 spatial position과 관련 있다.
   - planar position against a common scale, planar position along an unaligned scale, and length.
-- categorical attributes 에서 가장 효과적인 채널은 동일한 위치에 아이템들을 그루핑하는 것이다.
+- categorical attributes 에서 가장 효과적인 채널은 동일한 위치에 아이템들을 그루핑하는 것으로, space 와 관련 있다.
 
 ### 7.3 Arrange by Keys and Values
 - key
@@ -26,7 +26,7 @@ tags :
   - dependent attribute. table 에서 cell의 값.
   - categorical, ordinal, or quantitative.
 - level
-  - categorical / ordered attribute 의 unique value. (value 랑 혼동 주의)
+  - categorical / ordered attribute 의 unique values. (value 랑 혼동 주의)
 - how many keys and how many values does it have?
   - no key - scatterplot(two values), one key and one value - bar chart, two keys and one value - heatmap
 
@@ -82,8 +82,8 @@ tags :
 
   - a more complex generalized stacked graph display idiom. 
   - layout 은 전체 모양의 외부 실루엣과 baseline 으로부터 각 레이어의 편차, baseline 의 높낮이 정도를 고려하여 절충안으로 최적화된다. 
-  - layer의 순서는 derived value 를 강조하도로고 하는 알고리즘에 의해 배치된다.
-  - Stacked bar chart 와 비교해서 categories 개수를 더 많이 사용할 수 있다. width 에 영향을 주는 것이 아니기 때문.
+  - layer의 순서는 derived value 를 강조하도록 알고리즘에 의해 배치된다.
+  - Stacked bar chart 와 비교해서 categories 개수를 더 많이 사용할 수 있다. width 에 영향을 주는 것이 아니기 때문이다.
 
 - Dot and Line Charts
 ![Validation](/assets/images/dotlinechart.png){:width="500px" height="300px"}{: .center}
@@ -102,6 +102,7 @@ tags :
       - 전체 차트에서 높이와 너비의 비율
       - 대부분의 차트 패키치에서는 정사각형이나 다른 고정된 사이즈를 사용한다. 이 경우 dataset 구조가 가려지게 될 수 있다.
 
+![Validation](/assets/images/aspectratio.png){:width="500px" height="300px"}{: .center}
 
 #### 7.5.2 Matrix Alignment : Two Keys
 
@@ -126,6 +127,9 @@ tags :
   - key 는 rows, columns 에 동일한 attribute 이다.
   - correlations, trends, outliers 를 찾는 task 에서 많이 활용한다.
   - one dozen attributes and hundreds of items.
+
+![Validation](/assets/images/scatterplotMatrix.png){:width="500px" height="300px"}{: .center}
+
 
 #### 7.5.3 Volumetric Grid : Three Keys
 
@@ -219,9 +223,11 @@ tags :
 
   - line mark 를 사용한 dense display 는 software source code overview 를 제공할 때 주로 사용된다. 
 
-#### 7.7.2 Space-Filling
+#### 7.7.2 Space-Filling Layout
 - view 에서 가능한 모든 공간을 채우는 것이다. 
-- items 에 대해서는 area makrs 를 사용하고 관계를 표현할 때는 containment marks 를 사용한다. 
+- items 에 대해서는 area marks 를 사용하고 관계를 표현할 때는 containment marks 를 사용한다. 
 - 장점은 color coding 을 위해 가능한 공간을 maximum 으로 사용한다는 것이다.
 그러나, layout 에서 white space 를 활용할 수 없다. 디자인 가이드라인에서는 white space 를 readability, emphasis, relative importance, visual balance 측면에서 잘 활용하는데, 그런 측면들을 활용할 수 없다. 
 - high information density 를 성취하고자 노력하지만, 항상 공간을 효율적으로 사용한다는 것을 보장할 수는 없다. 
+
+![Validation](/assets/images/treemap.png){:width="400px" height="400px"}{: .center}
