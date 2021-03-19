@@ -43,3 +43,98 @@ tags :
     - 브라우저 외부에서 자바스크립트 실행 환경을 제공하는 것이 주된 목적, DOM API 제공 X, File system 제공
     - Node.js REPL(Read Eval Print Loop) 
 
+
+
+## variable hoisting
+- 소스코드 평가 과정(변수/함수 선언문 실행)이 끝나면, 소스코드를 한 줄씩 순차적으로 실행하는 런타임이 실행된다.
+- 소스코드 평가 과정에서 변수 선언문은 코드의 선두로 끌어 올려진 것처럼 동작한다.
+
+```javascript
+console.log(score); //undefined
+var score; 
+```
+- 변수 뿐만 아니라, var, let, const, function, class 키워드를 사용해 선언하는 모든 식별자는 호이스팅된다. 모든 선언문은 런타임 이전 단계에서 실행되기 때문이다.
+
+```javascript
+console.log(score);
+score = 80;
+var score;
+console.log(score); // ?
+```
+
+## Template literal
+- ES6 부터 도입되었다. 편리한 문자열 처리 기능을 제공하고, 런타임에 일반 문자열로 변환되어 처리된다.
+- Backtick (``) 을 사용해 표현한다.
+
+
+1. multi-line string
+- 일반 문자열 내에서는 줄바꿈 허용되지 않는다. 이스케이프 시퀀스를 사용해야한다.
+
+
+```javascript
+var template = `<ul>
+    <li>a</li>
+    <li>b</li>
+</ul>`;
+console.log(template);
+/*
+<ul>
+    <li>a</li>
+    <li>b</li>
+</ul>
+*/
+```
+
+2. 표현식 삽입
+
+```javascript
+console.log(`1+2=${1+2}`);
+``` 
+
+## undefined / null type
+- undefined 는 개발자가 의도적으로 할당한 값이 아니라 js 엔진이 변수를 초기화할 때 사용하는 값이다.
+- 반면에 null 은 변수에 값이 없다는 것을 의도적으로 명시할 때 사용된다. (intentional absence)
+
+## Dynamic Typing
+- static / strong type language
+  - 변수 선언 시, 변수에 할당 가능한 값의 종류와 타입을 명시해야 한다. **explicit type declaration**
+  - 컴파일 시점에 타입 체크를 수행하여 에러를 발생시킴으로써, 런타임에 발생하는 에러를 줄인다.
+- dynamic / weak type language
+  - js, python 등의 언어는 값을 할당하는 시점에 변수의 타입이 동적으로 결정되고 변수의 타입을 언제든 변경 가능하다.
+
+## 쉼표 연산자 / 지수 연산자
+```javascript
+var x, y, z;
+x = 1, y = 2, z = 3; // 3(제일 마지막 피연산자 평가 결과 반환)
+```
+
+```javascript
+2 ** 2; // 4
+Math.pow(2, 2); // 4 (ES7 지수 연산자 도입 전 사용)
+```
+
+## block
+```javascript
+function sum(a, b) {
+    return a + b;
+}
+// block 문 마지막에는 ; 을 붙이지 않는다. 
+```
+
+## this
+- this는 자기 참조 변수로, 자신이 속한 객체나 자신이 생성할 인스턴스를 가리킨다.
+- 이 때, this 가 가리키는 값은 함수 호출 방식에 의해 동적으로 결정된다.
+- 일반 함수 호출 - 전역 객체
+  - strict mode 가 적용된 일반 함수에서는 undefined 바인딩된다.
+- 메소드 호출 - 메소드를 호출한 객체
+  - 메소드 내 정의된 중첩 함수/콜백 함수, 메소드 함수도 일반 함수로 호출되면 전역 객체 바인딩된다. 
+    - 이를 해결하기 위해 ES6 이전에는 that 변수에 재할당 후 사용하는 방식을 택함.
+    - ES6부터는 화살표 함수를 사용한다. 화살표 함수는 함수 자체의 this binding이 없으므로 상위 스코프의 this 를 사용하기 때문에.
+- 생성자 함수 호출 - 생성자 함수가 생성할 인스턴스
+- Function.prototype.apply/call/bind 메소드에 의한 간접 호출 - 앞의 메소드들의 첫 번째 인수로 전달된 객체
+  - arguments 객체와 같은 유사 배열 객체나 이터러블에 배열 메소드를 사용하기 위해서 사용된다. 
+  - apply는 this와 인자를 list 에 넣어서 parameter 로 사용한다.
+  - call은 this 와 인자를 쉼표로 구별하여 parameter 로 사용한다.
+  - bind는 this 를 parameter 로 사용하고, 함수를 실행하지 않는다.
+- 화살표 함수는?
+  - 화살표 함수는 apply, call, bind 메소드 사용해도 this 변경할 수 없다.
