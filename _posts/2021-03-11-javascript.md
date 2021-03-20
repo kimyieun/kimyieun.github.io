@@ -62,6 +62,33 @@ var score;
 console.log(score); // ?
 ```
 
+- 호이스팅은 scope 단위로 동작한다.
+- 정확히는, 호이스팅은 **변수 선언이 스코프의 선두로 끌어 올려진 것처럼 동작**하는 특징이다.
+
+```javascript
+function foo(){
+  var x = 'local';
+  console.log(x);
+  return x;
+}
+foo();
+console.log(x); // referenceError
+```
+
+```javascript
+var x = 'global';
+
+function foo(){
+  console.log(x); // undefined
+  var x = 'local';
+}
+
+foo();
+console.log(x); // global
+```
+
+
+
 ## Template literal
 - ES6 부터 도입되었다. 편리한 문자열 처리 기능을 제공하고, 런타임에 일반 문자열로 변환되어 처리된다.
 - Backtick (``) 을 사용해 표현한다.
@@ -138,3 +165,77 @@ function sum(a, b) {
   - bind는 this 를 parameter 로 사용하고, 함수를 실행하지 않는다.
 - 화살표 함수는?
   - 화살표 함수는 apply, call, bind 메소드 사용해도 this 변경할 수 없다.
+  - 화살표 함수는 함수 자체의 this 바인딩을 갖지 않기 때문에, 상위 스코프의 this 를 그대로 참조한다. 이를 **lexical this**라 한다. 마치 렉시컬 스코프와 같이 화살표 함수의 this가 함수가 정의된 위치에 의해 결정된다는 것을 의미한다. 
+
+## scope
+- 식별자가 유효한 범위. 자바스크립트 엔진이 식별자를 검색할 때 사용하는 규칙.
+- lexical environment - 코드가 어디서 실행되며 주변에 어떤 코드가 있는지? 코드의 context는 렉시컬 환경으로 이루어진다.
+- 전역 스코프 / 지역 스코프 로 나뉜다.
+  - 여기서 지역이란 함수 몸체 내부를 말한다. 
+  - 전역 변수는 어디서든 참조가 가능하지만, 지역 변수는 지역 스코프와 하위 지역 스코프에서만 유효하다.
+
+## scope chain
+- 함수의 중첩에 의해 스코프도 계층적 구조를 갖는다. 스코프가 계층적으로 연결된 것을 scope chain이라 한다.
+- 변수 참조 시, 자바스크립트 엔진은 scope chain을 통해 변수를 참조하는 코드의 스코프부터 시작하여 상위 스코프 방향으로 이동하며 변수를 검색한다. 함수 호출에서도 마찬가지이다. 
+- 물리적으로 존재한다. 
+
+## 함수 레벨 스코프
+- 지역 = 함수 몸체 내부. 이는 함수에 의해서만 지역 스코프가 생긴다는 의미이다.
+- 블록 레벨 스코프는 함수 몸체뿐만 아니라 모든 코드 블록이 지역 스코프를 만드는 특성. 
+- var 키워드로 선언된 변수는 함수 코드 블록만 지역 스코프로 인정한다. 이를 함수 레벨 스코프라고 한다.
+
+```javascript
+var i = 10;
+for(var i=0;i<5;i++) console.log(i);
+console.log(i); // 5
+```
+
+## lexical scope
+- 함수의 scope 는 함수 정의가 평가되는 시점에 함수가 정의된 위치에 따라 상위 스코프가 결정된다. 
+
+## var/let,const 비교
+- var 키워드
+  - 같은 scope 내에서 변수 중복 선언 허용
+  - 함수 레벨 스코프
+  - 변수 호이스팅
+
+```javascript
+console.log(a); // 1
+a = 123;
+console.log(a); // 2
+var a;
+```
+- 1 - undefined, 2 - 123
+
+- let 키워드
+  - 같은 scope 내에 변수 중복 선언 금지
+  - 블록 레벨 스코프
+  - 변수 호이스팅 - 변수 호이스팅이 발생하지 않는 것처럼 동작한다.
+
+```javascript
+console.log(foo); //referenceError
+let foo; 
+console.log(foo); //undefined
+foo = 1;
+console.log(foo); //1
+```
+- var 키워드로 선언한 변수는 런타임 이전에 선언단계와 초기화단계가 한번에 진행된다. 선언 단계에서 스코프에 변수를 등록하고, 초기화단계에서 undefined 로 초기화한다.
+- let 키워드는 선언단계와 초기화단계가 분리된다. 런타임 이전에 선언 단계는 실행되지만, 초기화 단계는 변수 선언문에 도달했을 때 실행된다. 초기화 단계 이전에 접근하면 referenceError 가 발생한다. (scope 의 시작 지점부터 초기화 시작 지점까지 변수 참조가 불가능한 구간을 temporal dead zone 이라 한다.)
+
+- let 은 호이스팅이 발생하지 않는다고 생각하면 안된다.
+
+```javascript
+let foo = 1;
+{
+  console.log(foo); //referenceError
+  let foo = 2;
+}
+```
+- 호이스팅이 일어나지 않는다면, 전역변수인 foo를 출력해야 하는데 referenceError 가 발생했다.
+- let 으로 선언한 전역 변수는 전역 객체의 프로퍼티가 아니다. var 와 다르게 window. 으로 접근이 불가하다.
+
+- const 키워드
+  - 선언과 동시에 초기화 필수. 재할당 금지
+  - 상수
+    - 원시값 할당 - immutable value. 
+    - 객체 할당 - 값을 변경할 수 있다.

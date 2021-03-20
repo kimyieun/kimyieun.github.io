@@ -1,5 +1,5 @@
 ---
-title : "Frontend Interview Questions"
+title : "Frontend Study Lists"
 
 categories :
     - frontend
