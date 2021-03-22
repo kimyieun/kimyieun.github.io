@@ -1,15 +1,15 @@
 ---
-title : "Frontend Study Lists"
+title: "Frontend Study Lists"
 
-categories :
-    - frontend
+categories:
+  - frontend
 
-tags :
-    - frontend
-
+tags:
+  - frontend
 ---
 
 ## Frontend Study Lists
+
 1. 브라우저 렌더링 과정
 2. OOP
 3. 함수형 프로그래밍
@@ -18,7 +18,7 @@ tags :
 6. Execution context
 7. Closure
 8. Scope
-9. This
+9. [This](https://kimyieun.github.io/javascript/this/)
 10. ES6
 11. RESTful API
 12. CORS
@@ -26,4 +26,8 @@ tags :
 14. javascript event handling
 15. callback, promise, async/await
 16. SSR, CSR
-17. Progressive rendering 
+17. Progressive rendering
+18. Prototype
+19. Web protocol
+20. Arrow Function
+21. 1급 객체
