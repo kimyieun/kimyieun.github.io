@@ -27,7 +27,7 @@ tags:
 15. callback, promise, async/await
 16. SSR, CSR
 17. Progressive rendering
-18. Prototype
+18. [Prototype](https://kimyieun.github.io/javascript/Prototype/)
 19. Web protocol
 20. Arrow Function
 21. 1급 객체

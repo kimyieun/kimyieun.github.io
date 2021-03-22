@@ -8,7 +8,6 @@ tags:
   - prototype, inheritance, proto, for in 문, hasOwnProperty
 ---
 
-- Prototype 이란?
 
 - 모던 자바스크립트 Deep Dive 책을 읽고 정리한 포스팅이다.
 
@@ -17,13 +16,81 @@ tags:
 - javascript 는 클래스가 없다. Class 라는 예약어는 함수의 한 종류이다. 따라서, **javascript 는 prototype 을 기반으로 상속을 구현한다.**
   - 예를 들어, 사람에 관한 property, method 를 가진 user 객체가 있는데 user와 상당히 유사하지만, 약간의 차이가 있는 admin, guest 객체를 만들어야 하는 상황.
 
+## Prototype 을 기반한 상속 구현
+
+### 1. 상속 구현 X
+- getDiameter 메소드는 모든 인스턴스가 동일한 내용의 메소드를 공유하므로 하나만 생성해서 모든 인스턴스가 공유하는 것이 바람직하다.
+- 그러나, 아래 코드에서는 Circle 생성자 함수가 인스턴스를 생성할 때마다 getDiameter 메소드를 중복해서 생성한다.
+
+```javascript
+function Circle(radius){
+  this.radius = radius;
+  this.getDiameter = function(){
+    return 2*this.radius;
+  };
+}
+const circle1 = new Circle(5);
+const circle2 = new Circle(10);
+console.log(circle1.getDiameter === circle2.getDiameter); // false
+```
+
+### 2. 상속 구현 O
+- 모든 인스턴스는 프로토타입 Circle.prototype 으로부터 getDiameter 메소드를 상속받는다. 즉, 하나의 getDiameter 메소드를 공유한다.
+
+```javascript
+function Circle(radius){
+  this.radius = radius;
+}
+Circle.prototype.getDiameter = function(){
+  return 2*this.radius;
+}
+const circle1 = new Circle(5);
+const circle2 = new Circle(10);
+console.log(circle1.getDiameter === circle2.getDiameter); // true
+```
+
+## 프로토타입 객체 = 프로토타입
+- 모든 객체는 [[Prototype]]이라는 내부 슬롯을 가진다. 모든 객체는 하나의 프로토타입을 갖는다. 
+
+## \__proto__ vs. prototype
+- \__proto__ 접근자 프로퍼티는 모든 객체가 가진다. \__proto__ 를 통해 [[Prototype]] 내부 슬롯에 간접적으로 접근할 수 있다.
+- Object.prototype 의 접근자 프로퍼티인 \__proto__ 는 getter/setter 함수라 불리는 접근자 함수를 통해 프로토타입을 취득하거나 할당한다.
+
+```javascript
+const obj = {};
+const parent = {x : 1};
+obj.__proto__ = parent;
+console.log(obj.x); // 1
+```
+- \__proto__ 접근자 프로퍼티는 객체가 직접 소유하지 않고, Object.prototype 의 프로퍼티이다. 모든 객체는 상속을 통해 \__proto__ 접근자 프로퍼티에 접근한다.
+- \__proto__ 접근자 사용 이유? 
+  - 상호 참조에 의해 프로토타입 체인이 cyclic linked list 를 이루지 않도록 하기 위해서이다.
+- \__proto__ 접근자 코드 내의 직접 사용을 권장하지 않는다.
+  - 모든 객체가 \__proto__ 접근자 프로퍼티를 사용할 수 있는 것은 아니다. 직접 상속을 통해 Object.prototype 을 상속받지 않는 객체가 있다.
+
+- prototype 프로퍼티는 함수 객체만 소유한다. 생성자 함수가 생성할 인스턴스의 프로토타입을 가리킨다.
+
+```javascript
+(function(){}).hasOwnProperty('prototype'); // true
+({}).hasOwnProperty('prototype'); // false
+```
+- 생성자 함수로 호출이 불가능한 함수인 화살표 함수와 ES6 메서드 축약 표현으로 정의한 메소드는 prototype property 소유하지 않으며, 프로토타입도 생성하지 않는다.
+- **모든 객체가 가지는 \__proto__ 접근자 프로퍼티와 함수 객체만 가지는 prototype 프로퍼티는 결국 동일한 프로토타입을 가리킨다.**
+
+```javascript
+function Person(name){
+  this.name = name;
+}
+const me = new Person('kim');
+console.log(Person.prototype === me.__proto__); // true
+```
 ## [[Prototype]]
 
 - js 객체는 명세서에 명명한 [[Prototype]] 이라는 숨김 프로퍼티를 갖는다. 이 숨김 property 의 값은 null 이거나, 다른 객체에 대한 참조가 되는데, 다른 객체를 참조하는 경우 참조 대상을 'property'라 부른다.
   - **프로토타입 상속** - object 에서 property 를 읽을 때, 해당 property 가 없으면 js 는 자동으로 prototype 에서 property 를 찾는다.
-  - **proto**를 사용하면 prototype 에 접근하여 값을 설정할 수 있다.
+  - \__proto__를 사용하면 prototype 에 접근하여 값을 설정할 수 있다.
     (엄밀하게는 [[Prototype]]의 getter 이자 setter 이다.)
-  - 근래에는 **proto** 대신, Object.getPrototypeOf 또는 Object.setPrototypeOf 를 써서 get,set 한다.
+  - 근래에는 \__proto__ 대신, Object.getPrototypeOf 또는 Object.setPrototypeOf 를 써서 get,set 한다.
 
 ```javascript
 let animal = {
