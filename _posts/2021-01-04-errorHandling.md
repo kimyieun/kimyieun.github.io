@@ -22,7 +22,9 @@ $button?.classList.add("disabled"); //optional chaining 연산자 사용
 ```
 
 ### try ... catch ... finally 문
-
+- try block - 에러가 발생할 가능성이 있는 코드
+- catch block - try 코드 블록에서 에러가 발생하면 이 코드 블록의 코드가 실행된다. err 인자에는 try 코드 블록에서 발생한 Error 객체가 전달된다.
+- finally block - 에러 발생과 상관없이 반드시 한 번 실행된다.
 에러 처리 방법
 
 1. exceptional 한 상황이 발생하면 반환하는 값(null 또는 -1)을 if 문이나 단축 평가 또는 옵셔널 체이닝 연산자를 통해 확인하는 방법

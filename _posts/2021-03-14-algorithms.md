@@ -1,13 +1,15 @@
 ---
-title : "Binary Search"
+title : "Algorithms"
 
 categories :
-    - algorithm
+    - problemsolving
 
 tags :
     - binary search, contains, first, last, leastGreater, greatestLesser
 
 ---
+- 외워야 하는 알고리즘
+  
 
 ## Binary Search
 
@@ -105,3 +107,7 @@ int greatestLesser(int arr[], int l, int r, int x){
     }
 }
 ```
+
+## mergesort
+
+## quicksort

@@ -170,7 +170,7 @@ tags:
 
 ### 12.5.2 Static Layers
 - 모든 layer 가 동시에 화면에 보여진다. 사용자는 어떤 layer 에 focus 할 지 결정해야 한다.
-![Validation](/assets/images/superimposedlayers.png){:width="400px" height="400px"}{: .center}
+![Validation](/assets/images/superimposelayers.png){:width="500px" height="500px"}{: .center}
 
 - (a)
   - area mark - background layer, color - water, parks, land 구별. 
@@ -178,9 +178,9 @@ tags:
   - luminance contrast 를 제공하므로 각 layer 가 구별되어 보인다.
 
 - Superimposed Line Charts
-![Validation](/assets/images/groupedbarchart.png){:width="400px" height="400px"}{: .center}
+![Validation](/assets/images/groupedbarchart.png){:width="500px" height="500px"}{: .center}
 
-![Validation](/assets/images/superimposedlinechart.png){:width="400px" height="400px"}{: .center}
+![Validation](/assets/images/superimposedlinechart.png){:width="500px" height="500px"}{: .center}
 
   - Superimposed line charts vs. juxtaposed small multiples (area chart)
   - visual clutters vs. available vertical space
@@ -193,6 +193,6 @@ tags:
 
 ### 12.5.3 Dynamic Layers
 - With dynamic layers, a layer with different salience than the rest of the view is constructed interactively, typically in response to user selection.
-![Validation](/assets/images/dynamiclayers.png){:width="400px" height="400px"}{: .center}
+![Validation](/assets/images/dynamiclayers.png){:width="500px" height="500px"}{: .center}
 
   - 사용자가 커서를 움직일 때마다 foreground layer 가 변경된다.
