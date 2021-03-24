@@ -40,6 +40,8 @@ tags:
 
 ### Exploratory Data Visualizer (EDV)
 
+![Validation](/assets/images/edv.png){:width="500px" height="500px"}{: .center}
+
 ### 12.3.2 Share Data : All, Subset, None
 -  how much data is shared between the two views.
    -  shared data.
@@ -61,12 +63,13 @@ tags:
 
 ### Bird's-Eye Maps
 
+![Validation](/assets/images/birdseye.png){:width="400px" height="400px"}{: .center}
 
 - combining the choices of overview-detail for data sharing with multiple views. 
   - **detail-on-demand view.**
   - detail view 는 main view 에서 선택된 몇 가지의 items 에 대해서만 부가적인 정보를 제공한다. popup 형태나, 고정된 위치.
 
-![Validation](/assets/images/detailondemand.png){:width="400px" height="400px"}{: .center}
+![Validation](/assets/images/detailondemand.png){:width="500px" height="500px"}{: .center}
 
 - small multiples
   - small multiples 는 list 나 matrix 형태로 align 한다. 
@@ -83,8 +86,10 @@ tags:
 - small window 에서의 interaction 으로 large window 의 viewpoint 를 변경한다.
 
 ### 12.3.4 Combinations
-- Figure 12.6
-- Fibure 12.7
+![Validation](/assets/images/combination.png){:width="500px" height="500px"}{: .center}
+
+![Validation](/assets/images/combination2.png){:width="500px" height="500px"}{: .center}
+
   - multiform views. sharing the same color encoding. small-multiple views. linked highlighting. overview-detail views.
 
 ### 12.3.5 Juxtapose Views
@@ -121,13 +126,18 @@ tags:
   - small-multiple bars idiom - second-level regions are contiguous within a single first-level region.
 
 ### 12.4.3 Matrix Alignments
-- Figure 12.9
+
+![Validation](/assets/images/matrixalignment.png){:width="400px" height="400px"}{: .center}
+
+![Validation](/assets/images/matrixalignment2.png){:width="400px" height="300px"}{: .center}
 - Main effects ordering
   - partitioning 으로 나눠진 group 간의 derived attribute 를 만들고, 이것을 기준으로 ordering 을 한다.
   - 공간적으로 정보를 ordering 하는 data-driven way 이므로, trends, outliers 발견이 쉽다. 
 
 ### 12.4.4 Recursive Subdivision
-- Figure 12.11
+
+![Validation](/assets/images/recursiveSubdivision.png){:width="400px" height="400px"}{: .center}
+
 - (a)
   - top-level : type attribute, second-level : neighborhood attribute, bottom-level : time
   - house type 별로 굉장히 다르다. 그러나 neighborhood 는 일관적이다. 동일한 neighborhood 인 집 가격은 비슷한 경향이 있다.
@@ -160,15 +170,18 @@ tags:
 
 ### 12.5.2 Static Layers
 - 모든 layer 가 동시에 화면에 보여진다. 사용자는 어떤 layer 에 focus 할 지 결정해야 한다.
-- Figure 12.13
+![Validation](/assets/images/superimposedlayers.png){:width="400px" height="400px"}{: .center}
+
 - (a)
   - area mark - background layer, color - water, parks, land 구별. 
 - (b)
   - luminance contrast 를 제공하므로 각 layer 가 구별되어 보인다.
 
 - Superimposed Line Charts
-- Figure 12.14
-- Figure 12.15
+![Validation](/assets/images/groupedbarchart.png){:width="400px" height="400px"}{: .center}
+
+![Validation](/assets/images/superimposedlinechart.png){:width="400px" height="400px"}{: .center}
+
   - Superimposed line charts vs. juxtaposed small multiples (area chart)
   - visual clutters vs. available vertical space
   - comparison within a local visual span vs. large visual span.
@@ -180,5 +193,6 @@ tags:
 
 ### 12.5.3 Dynamic Layers
 - With dynamic layers, a layer with different salience than the rest of the view is constructed interactively, typically in response to user selection.
-- Figure 12.17
+![Validation](/assets/images/dynamiclayers.png){:width="400px" height="400px"}{: .center}
+
   - 사용자가 커서를 움직일 때마다 foreground layer 가 변경된다.
