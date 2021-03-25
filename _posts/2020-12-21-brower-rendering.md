@@ -81,6 +81,14 @@ tags:
   - 재결합된 렌더 트리를 기반으로 다시 Paint 하는 것.
 - reflow, repaint 는 순차적으로 발생하지 않는다. 레이아웃에 영향이 없는 경우 repaint 만 발생한다.
 
+## Reflow and Repaint 최적화
+1. 화면에 보이지 않는 노드에 visibilty: invisible 보다 display: none을 사용하기
+2. reflow 가 발생하면 repaint 는 필연적으로 발생하므로 reflow 를 줄이자
+   1. transform, opacity 는 reflow, repaint 가 발생하지 않는다. top, left, bottom, right 보다 transform, display, visibiltiy 보다 opacity 를 활용하자.
+3. 클래스를 줘서 css 파일에서 스타일을 주는 방식으로 한번에 입히는 것이 좋다.
+   1. javascript 코드 안에서 스타일을 줄 때마다 매번 DOM 을 호출하는 것은 비효율적이다.
+4. DOM 개수를 최소화하라.
+
 ## 자바스크립트 파싱에 의한 html 파싱 중단
 
 - 지금까지 본 바와 같이 **렌더링 엔진과 자바스크립트 엔진은 병렬적으로 파싱을 실행하지 않고 직렬적으로 수행**한다.
@@ -123,4 +131,6 @@ tags:
     - 다른 도메인에서 리소스를 요청할 때 cross-origin HTTP 에 의해 요청하는데, 대부분의 브라우저는 보안상의 이유로 이를 제한한다.
     - Same origin policy
       - 프론트 서버와 백엔드 서버의 포트가 다른 경우 발생한다.
-    -
+
+  - 리액트를 쓰면 vanillajs 보다 왜 더 빠른거야?
+    - 리액트는 virtual DOM 을 사용한다. 데이터가 업데이트되면 전체 UI 를 virtual DOM 에 리랜더링을 한다. 이전 virtual DOM 에서 바뀐 내용을 확인하고, 그 부분만 DOM 에 반영한다. (연산이 최종적으로 종료가 되면, 실제 DOM 을 업데이트하기 때문에 연산의 횟수를 줄일 수 있다.)
