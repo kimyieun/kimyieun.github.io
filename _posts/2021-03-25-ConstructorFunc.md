@@ -5,7 +5,7 @@ categories:
   - javascript
 
 tags:
-  - javascript, constructor function,
+  - javascript, constructor function
 ---
 
 - 모던 자바스크립트 Deep Dive 책을 읽고 정리한 포스팅이다.
