@@ -48,12 +48,12 @@ function Circle(radius){
 - 함수는 객체이므로 일반 객체와 동일하게 동작한다. 함수 객체는 일반 객체가 가지는 내부 슬롯과 내부 메서드를 모두 가지고 있기 때문이다.
 - 차이점은 **일반 객체는 호출할 수 없지만, 함수는 호출할 수 있다.**
 - 함수는 함수 객체만을 위한 [[Environment]], [[FormalParameters]] 등의 내부 슬롯과 [[Call]], [[Construct]] 같은 내부 메서드를 가진다.
-- 일반 함수로 호출되면 [[Call]] 이 호출되고, new 연산자와 함께 생성자 함수로 호출되면 [[Construct]] 가 호출된다.
+- **일반 함수로 호출되면 [[Call]] 이 호출되고, new 연산자와 함께 생성자 함수로 호출되면 [[Construct]] 가 호출된다.**
 - callable - [[Call]] 메서드 갖는 함수 객체(모든 함수는 호출 가능하다), constructor - [[Construct]] 메서드를 갖는 함수 객체, [[Construct]] 가 없으면 non-constructor 이다.
-- 즉, 모든 함수는 callable 이지만, constructor 인 것은 아니다.
+- 즉, **모든 함수는 callable 이지만, constructor 인 것은 아니다.**
 
 ## constructor vs. non-constructor
-- 함수 정의 방식에 따라 구분한다.
+- **함수 정의 방식**에 따라 구분한다.
 - **constructor - 함수 선언문, 함수 표현식, 클래스 (클래스도 함수다)**
 - **non-constructor - 메서드(ES6 메서드 축약 표현만 포함. 일반 함수로 정의된 것은 constructor), 화살표 함수**
 

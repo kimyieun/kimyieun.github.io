@@ -68,7 +68,8 @@ console.log(obj.x); // 1
 - \__proto__ 접근자 코드 내의 직접 사용을 권장하지 않는다.
   - 모든 객체가 \__proto__ 접근자 프로퍼티를 사용할 수 있는 것은 아니다. 직접 상속을 통해 Object.prototype 을 상속받지 않는 객체가 있다.
 
-- prototype 프로퍼티는 함수 객체만 소유한다. 생성자 함수가 생성할 인스턴스의 프로토타입을 가리킨다.
+- **prototype 프로퍼티는 함수 객체만 소유한다. 생성자 함수가 생성할 인스턴스의 프로토타입을 가리킨다.**
+- 따라서 생성자 함수로서 호출할 수 없는 함수, non-constructor 인 화살표 함수와 메서드(ES6 메서드 축약 표현)은 prototype 프로퍼티 소유하지 않으며, 프로토타입도 생성하지 않는다. 
 
 ```javascript
 (function(){}).hasOwnProperty('prototype'); // true
