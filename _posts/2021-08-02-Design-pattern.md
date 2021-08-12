@@ -2,7 +2,7 @@
 title: "Object-Oriented Paradigm and Solid Principles"
 
 categories:
-  - software engineering
+  - softwareengineering
 
 tags:
   - design pattern
