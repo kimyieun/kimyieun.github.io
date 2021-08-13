@@ -2,7 +2,7 @@
 title: "Singleton Pattern"
 
 categories:
-  - software engineering
+  - softwareengineering
 
 tags:
   - design pattern

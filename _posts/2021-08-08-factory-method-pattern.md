@@ -2,7 +2,7 @@
 title: "Factory Method Pattern"
 
 categories:
-  - software engineering
+  - softwareengineering
 
 tags:
   - design pattern
