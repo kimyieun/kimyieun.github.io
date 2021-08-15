@@ -1,5 +1,5 @@
 ---
-title: "Singleton Pattern"
+title: "Ch13. Singleton Pattern"
 
 categories:
   - softwareengineering
@@ -17,7 +17,7 @@ tags:
 
 
 ### One of a Kind Objects
-- One and Only One
+- One and Only One (유일하다)
   - window manager, printer spooler, thred pool manager, caches, logging, factory
 - issues
   - global variable 로 정의하는게 더 쉽지 않나?
@@ -41,12 +41,13 @@ public class AnyClientProgram{
 ```java
 public class Singleton{
     private static Singleton uniqueInstance;
-    // private - 외부에서 마음대로 조작하지 못하도록 하는 역할. 혹시나 외부에서 이것을 null 로 변경하면 instance 가 하나 더 생성되기 때문이다. static - getInstance 가 호출될 때 instance 가 없기 때문에. class 에 단 하나만 있고 내부 어디서든 공유할 수 있다.
+    // private - 외부에서 마음대로 조작하지 못하도록 하는 역할. 혹시나 외부에서 이것을 null 로 변경하면 instance 가 하나 더 생성되기 때문이다. 
+    // static - getInstance 가 static method 이므로, class 로만 호출 가능하다. getInstance 에서 쓰기 위해서 static 키워드 사용한다. 특징은 class 에 유일하게 단 하나만 있고 내부 어디서든 공유할 수 있다. 
 
     private Singleton(){}
     // private - constructor 인데, 보통은 무조건 public. new 사용을 막아야 하니까 사용한다. 아예 선언을 안하면 자동으로 생성되므로 private 으로 만들어줘야 한다.
 
-    public static singleton getInstance(){
+    public static Singleton getInstance(){
         if(uniqueInstance == null){
             uniqueInstance = new Singleton(); // class 내부(자기자신)이기 때문에 constructor 호출 가능
         }
@@ -64,6 +65,11 @@ public class Singleton{
    1. private static Singleton uniqueInstance
 
 
+### Class Diagram
+![Validation](/assets/images/singleton.png){:width="500px" height="300px"}{: .center}
+- singleton = uniqueInstance
+  
+
 ### Using Singleton on Multi-threads
 - thread 간 context-switching 을 하면서 object 가 2개 생성되는 문제가 있다.
 
@@ -73,7 +79,7 @@ public class Singleton{
 public class Singleton{
     private static Singleton uniqueInstance;
     private Singleton(){}
-    public static synchronized singleton getInstance(){
+    public static synchronized singleton getInstance(){ ///
         if(uniqueInstance == null){
             uniqueInstance = new Singleton(); 
         }
@@ -85,14 +91,14 @@ public class Singleton{
 - 여러 개의 thread 가 getInstance를 동시에 호출하여 문제가 되었으니, 하나만 부를 수 있도록 하자. 
 - correct, but low performance. isn't it too much locking?
 - locking overhead 발생
-  - 예를 들어, A thread 가 먼저 instance 를 생성하였고, B,C,D 는 대기 중이다. B,C,D 는 이미 생성된 instance 그냥 사용하면 되는데, 차례대로 다 기다려야 한다. A->B->C->D 순서로..
+  - 예를 들어, A thread 가 먼저 instance 를 생성하였고, B,C,D 는 대기 중이다. B,C,D 는 이미 생성된 instance 그냥 사용하면 되는데, 차례대로 다 기다려서 해당 함수를 실행해야 한다. A->B->C->D 순서로..
 
 
 ### Option 2
 
 ```java
 public class Singleton{
-    private static Singleton uniqueInstance = new Singleton();
+    private static Singleton uniqueInstance = new Singleton(); /// 
     private Singleton(){}
     public static singleton getInstance(){
         return uniqueInstance;
@@ -102,7 +108,7 @@ public class Singleton{
 
 - class가 memory 에 로드됨과 동시에 생성하면?
 - correct and high performance. but, overhead of global variables.
-  - 요청이 없는대도 무조건 생성한다는 것이 문제다. 덩치가 큰 애들은 메모리 효율이 떨어질 수 있음. 그리고 그럴거면 global variable 사용하지 왜?
+  - 요청이 없는대도 무조건 생성한다는 것이 문제다. 덩치가 큰 애들은 메모리 효율이 떨어질 수 있음. 그리고 그럴거면 **global variable 사용하지** 왜?
     - 실제로 쉬워서 현업에서는 그렇게 사용 많이 함.
 
 
@@ -192,5 +198,7 @@ public class Singleton{
 
 ### Related Patterns and Summary
 - Abstract Factory, Builder, Prototype 에서 구현할 때 Singleton 사용한다.
+  - Abstract Factory 에서 Factory object 는 Singleton 으로 자주 구현한다. product 가 여러 개이지만, product 생성하는 factory instance 는 하나만 있어도 되기 때문이다.
+  - Builder pattern 에서는 director, concrete builder.
 - Facade Object, State Object 도 Singleton 이다.
 

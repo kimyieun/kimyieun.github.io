@@ -1,15 +1,15 @@
 ---
-title: "Adapter Pattern"
+title: "Ch15. Adapter Pattern"
 
 categories:
-  - software engineering
+  - softwareengineering
 
 tags:
   - design pattern
 ---
 
 ### Adapter Pattern
-- wrapper
+- Wrapper
 - Purpose
   - communicate, interact 를 위한 공통 object 를 생성하여 다른 interface를 가진 classes 끼리 함께 일할 수 있도록 한다.
 - Use When
@@ -88,15 +88,19 @@ public class DuckTestDrive{
 ```
 
 ### Object Adapter vs. Class Adapter
+![Validation](/assets/images/adapterpattern.png){:width="500px" height="300px"}{: .center}
+
 - Object Adapter
   - composition 사용. adapter 객체는 Target interface 를 implements 하고, adaptee 객체의 reference 를 갖고 있다. object composition + delegation.
+
+![Validation](/assets/images/adapterpattern2.jpeg){:width="500px" height="300px"}{: .center}
 - Class Adapter
   - inheritance 사용. Adaptee class 상속하고, Target 은 interface 의 경우 implements/아니면 상속한다. 
 
 
 ### Implementation Issues
 - How much adaptation? 
-  - method 이름 변환, arguments 순서 변환 등 수비고 단순한 interface 변경
+  - method 이름 변환, arguments 순서 변환 등 쉽고 단순한 interface 변경
   - 완전히 새로운 set of operations 구성
 - two-way transparency
   - two-way adapter : target, adaptee interface 둘 다 지원한다. adapter가 adaptee로 보이거나, target object 로 보일 수도 있음.
@@ -111,6 +115,8 @@ public class DuckTestDrive{
 
 ### Adapting Enumeration to Iterator 
 
+![Validation](/assets/images/adapterpattern3.jpeg){:width="500px" height="300px"}{: .center}
+
 ```java
 public class EnumerationIterator implements Iterator{
     Enumeration enum;
@@ -123,7 +129,7 @@ public class EnumerationIterator implements Iterator{
     public Object next(){
         return enum.nextElement();
     }
-    public boolean remove(){
+    public boolean remove(){ // 해당 기능은 지원하지 않음
         throw new UnsupportedOperationException();
     }
 }

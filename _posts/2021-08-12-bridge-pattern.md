@@ -1,5 +1,5 @@
 ---
-title: "Bridge Pattern"
+title: "Ch17. Bridge Pattern"
 
 categories:
   - softwareengineering
@@ -57,14 +57,14 @@ class V2Rectangle extends Rectangle{
 
 ```java
 abstract class Shape{
-    abstract public void draw();
+    abstract public void draw(); // 어떤걸 그리는지 모른다.
 }
 
 abstract class Circle extends Shape{
     public void draw(){
-        drawCircle(x, y, r);
+        drawCircle(x, y, r); 
     }
-    abstract protected void drawCircle(double x, double y, double r);
+    abstract protected void drawCircle(double x, double y, double r); // 어떤 library 사용하는지 모른다.
 }
 
 class V1Circle extends Circle{
@@ -102,14 +102,18 @@ class V2Circle extends Circle{
 ### Relating each other
 - Realting the classes by having one use the other (object composition)
 - Option 1 - drawing uses shape
-  - drawing objects 가 shape 을 직접 그릴 수 있으면, shape 에 대한 정보를 갖고 있어야 하므로, information expert 원치에 위배된다.
-  - 이것은 또한 encapsulation 도 위배한다. high coupling, low cohesion.
+  - drawing objects 가 shape 을 직접 그릴 수 있으면, shape 에 대한 정보(어떻게 생겼는지, 무엇인지)를 갖고 있어야 하므로, information expert 원칙에 위배된다.
+  - 이것은 또한 shape 정보가 노출되었으므로 encapsulation 도 위배한다. high coupling, low cohesion. 
 - Option2 - shape uses drawing (better!)
   - shape 는 shape 을 그리기 위해 drawing objects 를 사용한다.
   - shape 은 어떤 타입의 drawing objects 를 써야하는지 모른다. 
 
 ### Visualizing the Solution
 
+![Validation](/assets/images/bridgepattern.jpeg){:width="500px" height="300px"}{: .center}
+- 변하는 것을 찾고 encapsulation 해라.
+- inheritance 보다 object composition 사용해라.
+- 둘 다, 전략 패턴과 유사하다.
 
 ```java
 class Client{
@@ -129,7 +133,7 @@ class Client{
 
 abstract class Shape{
     abstract public void draw();
-    private Drawing _dp;
+    private Drawing _dp; // 사용할 라이브러리 보관한다.
     Shape(Drawing dp){
         _dp = dp;
     }
@@ -157,7 +161,7 @@ class V1Drawing extends Drawing{
 
 class Rectangle extends Shape{
     public Rectangle(Drawing dp, double x1, double x2, double y1, double y2){
-        super(dp);
+        super(dp); // 상위 class constructor 사용
         _x1 = x1; _x2 = x2; _y1 = y1; _y2 = y2;
     }
     public void draw(){
@@ -168,6 +172,8 @@ class Rectangle extends Shape{
     }
 }
 ```
+
+![Validation](/assets/images/bridgepattern2.png){:width="500px" height="300px"}{: .center}
 
 ### Structure of Bridge Pattern
 - Abstraction, RefinedAbstraction is a high-level control layer for some entity.

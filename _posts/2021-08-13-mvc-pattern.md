@@ -1,5 +1,5 @@
 ---
-title: "MVC Pattern"
+title: "Ch18. MVC Pattern"
 
 categories:
   - softwareengineering
@@ -16,7 +16,21 @@ tags:
 - View - UI
 - Controller = UI가 사용자 input 에 어떻게 반응해야 할지 정의
 
+
 ### MVC Structure
+![Validation](/assets/images/mvc.png){:width="500px" height="300px"}{: .center}
+- view(ui layer)
+  - model rendering
+  - 사용자 제스쳐를 controller 에게 보내는 역할
+  - controller가 view 를 선택하도록 하는 역할
+- controller(ui layer)
+  - ui layer 의 brain. 사용자 action 발생하면 모델 업데이트
+  - 각 기능별로 여러 개의 controllers 두기도 한다.
+- model
+  - state encapsulation
+  - notifies views of changes
+- view 는 사용자 인터랙션이 생기면 controller 알리고 controller 는 view 에게 selection 을 보여준다. 그리고 model 의 state 를 변경한다.
+- model 은 view 에게 change notification 을 하고, view 가 state query 를 해온다. 
 - example scenario
   - 사용자는 view 와 interaction 한다.
   - controller 는 사용자 input 을 handling 한다. callback function.
@@ -65,7 +79,7 @@ tags:
 class Model extends Observable{
     // view, controller 관련 코드가 있으면 안된다.
     final int BALL_SIZE = 20;
-    void makeOneStep(){
+    void makeOneStep(){ //controller 가 이 메소드 호출한다.
         ...
         setChanged(); // state 변화
         notifyObservers(); // observer notification
@@ -86,6 +100,7 @@ class View extends Canvas implements Observer{
     int stepNumber = 0;
 
     public void update(Observable obs, Object args){
+      // observable 로부터 noti 받으면 실행되는 부분
         repaint();
     }
 }
@@ -113,13 +128,12 @@ public class Controller extends JApplet{
 
 
 ### Notes
-- litmus test : UI를 변경한다.
-  - MODEL 을 변경하지 않고도 다른 UI에서 잘 동작하나?
+- MVC 패턴 잘 적용되었는지 확인
+  - litmus test : UI를 변경한다.
+    - MODEL 을 변경하지 않고도 다른 UI에서 잘 동작하나?
 - model action 이 빨라야 한다.
   - model 이 실행되는 동안 GUI 는 freezing 상태.
   - multi-threading 사용
-- Sumamry
-  - 
 
 
 

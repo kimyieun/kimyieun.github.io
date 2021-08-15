@@ -1,5 +1,5 @@
 ---
-title: "Factory Method Pattern"
+title: "Ch11. Factory Method Pattern"
 
 categories:
   - softwareengineering
@@ -103,11 +103,11 @@ public class PizzaStore{ // 새로운 피자 타입이 생겨도 변경되지 �
 
 ### Factory Method Pattern
 - Purpose
-  - object 생성하는 method 를 노출하고, subclass 로부터 실제 생성 과정을 컨트롤하도록 한다.
+  - object 생성하는 method 를 노출함으로써 subclasses 가 실제 생성 과정을 컨트롤하도록 한다.
 - Use When
   - class 가 생성해야 하는 class 가 무엇인지 결정하지 못했을 때
   - **subclasses 가 무슨 object 가 생성되어야 하는지 구체화할 때**
-  - parent classes 가 그들의 subclasses 에게 생성을 defer 하고 싶을 때
+  - parent classes 가 그들의 subclasses 에게 생성을 **defer** 하고 싶을 때
 
 
 ### Requiremenet Change
@@ -132,7 +132,7 @@ public abstact class PizzaStore{
 
 ### Factory Method
 - 위 코드에서 createPizza() factory method 를 호출하여, pizza 를 만든다.
-- client - framework 를 subclassing 한다. 즉, 주어진 class 의 subclasses 를 생성하여 특정 product 를 생성하는 method 를 override 한다.
+- framework 의 "client"는 framework 를 subclassing 한다. 즉, framework 의 subclasses 를 생성하여 특정 product 를 생성하는 method 를 override 한다.
   - client : NYPizzaStore, ChicagoPizzaStore ...
 - 공통적으로 그 product를 사용하는 방법 등은 framework 에서 제공해준다. 어떤 product 를 만들지는 이 framework 를 사용하는 사용자가 결정해야 한다.
 
@@ -173,10 +173,10 @@ public class NYStyleCheesePizza extends Pizza{
 ```
 
 ### Ordering a pizza using the Factory Method
-1. PizzaStore instance 생성
-2. orderPizza() 호출
-3. orderPizza() 가 createPizza() 호출
-4. orderPizza() 가 prepare, back, cut and box the pizza
+1. PizzaStore instance 생성 (PizzaStore nyPizzaStore = new NYPizzaStore())
+2. orderPizza() 호출 (nyPizzaStore.orderPizza("cheese"))
+3. orderPizza() 가 createPizza() 호출 (Pizza pizza = createPizza("cheese"))
+4. orderPizza() 가 prepare, back, cut and box the pizza (pizza.prepare(); pizza.bake(); ...)
 
 
 ### Test Drive
@@ -209,6 +209,10 @@ public class DependentPizzaStore{
 }
 ```
 
+### Dependency Inversion Principle
+- abstraction 에 의존하고, concrete class 에 의존하지 마라.
+- high-level components 는 low-level components 에 의존하면 안된다. 둘 다, abstraction에 의존해야 한다.
+- factory method 가 DIP 를 따른다.
 
 ### Factory Method Pattern
 
@@ -217,13 +221,10 @@ public class DependentPizzaStore{
 - subclass 가 어떤 object 를 생성할지 결정하게 함으로써, object creation encapsulation. 
   - Creator class 는 어떤 concrete product class 가 생성될지 모른다. 
   - concrete product class 는 concrete creator subclass에 의해 생성되고, 사용된다.
-  - **subclass 가 어떤 concreteproduct class 를 생성할지 runtime 에 결정한다는 의미가 아니다. compile time 에 결정된다.**
+  - subclass 가 생성한다는게 무슨 의미인가?
+    - **subclass 가 어떤 concreteproduct class 를 생성할지 runtime 에 결정한다는 의미가 아니다. compile time 에 결정된다.**
 - FactoryMethod 에는 어떤 object 생성할지 모른다.
 
-### Dependency Inversion Principle
-- abstraction 에 의존하고, concrete class 에 의존하지 마라.
-- high-level components 는 low-level components 에 의존하면 안된다. 둘 다, abstraction에 의존해야 한다.
-- factory method 가 DIP 를 따른다.
 
 ### Abstract Factory Pattern
 - Purpose
@@ -270,7 +271,7 @@ Button b = new MofiButton();
 Button b = guiFactory.createButton();
 ```
 
-### Making facotires for Ingredients (Abstract Factory + Factory Method)
+### Making Factories for Ingredients (Abstract Factory + Factory Method)
 
 ```java
 public interface PizzaIngredientFactory{
@@ -283,7 +284,7 @@ public interface PizzaIngredientFactory{
 
 public class NYPizzaIngredientFactory implements PizzaIngredientFactory{
   public Dough createDough(){
-    return new ThunCrustDough();
+    return new ThinCrustDough();
   }
   public Sauce createSauce(){
     return new MarinaraSauce();
@@ -304,6 +305,19 @@ public class NYPizzaStore extends PizzaStore{
     ...
     return pizza;
   }
+}
+
+public abstract class Pizza{
+  String name;
+  String dough;
+  String sauce;
+  ArrayList toppings = new ArrayList();
+
+  abstract public void prepare(); // 재료 세팅
+  void bake(){
+    ...
+  }
+  ...
 }
 
 public class CheesePizza extends Pizza{
@@ -327,7 +341,7 @@ public class CheesePizza extends Pizza{
    1. createPizza() 가 ingredientFactory 를 필요로 한다.
       1. Pizza pizza = new CheesePizza(nyIngredientFactory);
    2. prepare() 는 ingredient factory 를 사용해서 ingredient 생성한다.
-   3. 끝
+   3. Abstract Factory 끝
 5. orderPizza() 가 back, cut, box 를 호출한다.
 
 ### When to Use Abstract Factory Pattern?
@@ -339,11 +353,11 @@ public class CheesePizza extends Pizza{
   - 관련 있는 family of product objects 가 함께 사용되어야 하고, constraint 가 있을 때 사용해야 한다.
 - 장점
   - isolate concrete classes
-    - factory 가 parts 생성 과정과 책임을 encapsulation 한다.
+    - factory 가 parts 생성하는 과정과 책임을 encapsulation 한다.
     - client 를 implementation classes 로부터 분리한다.
   - exchanging product families easy
-    - concrete factory 는 그것이 초기화될 때만 나타난다
-  - products 간의 consistency 유지 가능
+    - concrete factory 는 그것이 초기화될 때 한번만 등장한다.
+  - products 간의 consistency 유지 가능하다. 조건 별로 factory 디자인만 하면 되니까 편하다.
 - 단점
   - 새로운 product 추가가 어렵다.
     - not impossible, but costly.

@@ -1,5 +1,5 @@
 ---
-title: "Builder Pattern"
+title: "Ch12. Builder Pattern"
 
 categories:
   - softwareengineering
@@ -10,7 +10,7 @@ tags:
 
 ### Builder Pattern
 - purpose
-  - 쉽게 변경 가능한 알고리즘을 기반으로 dynamically object 생성 지원 
+  - 쉽게 변경 가능한 알고리즘을 기반으로 dynamically object 생성하기 위해 사용한다.
 - use when
   - creation 과정에서 runtime control 이 필요할 때
   - 다양한 형태의 creation 알고리즘이 필요할 때
@@ -19,6 +19,9 @@ tags:
 
 
 ### Builder - Structure
+
+![Validation](/assets/images/builderpattern.gif){:width="500px" height="300px"}{: .center}
+
 - responsibility 가 다르다 - director / concrete builder
 - director
   - final product 를 위해 어떤 부분이 필요한지 알고 있다.
@@ -30,26 +33,24 @@ tags:
 
 
 ### Builder - Collaborations
-- client 
-  - director 생성. product 생성 요청한다. 각 part 에 대해 아는 정보가 없고, product 만 알고 있다.
-  - getProduct() 를 통해 최종 product 만 get 한다.
-- director
-  - product 를 위해 어떤 builder 가 필요한지 아니까 만들어달라고 지시한다. 
-  - buildPartA(), buildPartB(), buildPartC()
+
+![Validation](/assets/images/builderpattern.png){:width="500px" height="300px"}{: .center}
 
 ### Builder - Participants
 - client
   - product 생성에 필요한 director, concrete builder 를 선택한다. director 에게 어떤 concrete builder 와 일할지 알려준다.
-  - concrete builder 에게 final product return 을 요구한다. director 한테 할 수도 있을 듯?
+  - concrete builder 에게 final product return 을 요구한다. director 가 가지고 있으면 director 에 요청도 가능하다. 
+  - 각 part 에 대해 아는 정보가 없고, product 만 알고 있다.
 - director
-  - product 생성을 위한 steps 를 알고 있다.
-  - 어떻게 각 step 이 수행되어야 하는지는 모른다.
+  - product 를 위해 어떤 builder 가 필요한지 아니까 만들어달라고 지시한다. 
+  - buildPartA(), buildPartB(), buildPartC()
+  - product 생성을 위한 steps 를 알고 있지만, 어떻게 각 step 이 수행되어야 하는지는 모른다.
 - builder
   - product object 의 parts 생성을 위한 abstract interface 역할
 - concrete builder
   - builder interface 를 implementation 하여 parts 를 생성한다.
-  - 생성된 representation 을 정의하고 계속 관리한다.
-  - product 를 위한 interface 를 제공한다.
+  - 생성하는 representation 을 정의하고 계속 관리한다.
+  - product 를 검색하기 위한 interface 를 제공한다.
 - product
   - complex object under construction
 
@@ -72,7 +73,7 @@ public class AerospaceEngineer{
         return airplaneBuilder.getAirplane();
     }
 
-    public void constructAirplane(){
+    public void constructAirplane(){ //steps to construct product
         airplaneBuilder.createNewAirplane();
         airplaneBuilder.buildWings();
         airplaneBuilder.buildPowerplant();
@@ -86,11 +87,11 @@ public class AerospaceEngineer{
 
 ```java
 public abstract class AirplaneBuilder{
-    protected Airplane airplane;
+    protected Airplane airplane; // product
     protected String customer;
     protected String type;
 
-    public Airplane getAirplane(){
+    public Airplane getAirplane(){ // get final airplane product
         return airplane;
     }
 
@@ -156,26 +157,29 @@ public class BuilderExample{
     public static void main(String[] args){
         AerospaceEngineer aero = new AerospaceEngineer();
         AirplaneBuilder crop = new CropDuster("farmer joe");
-        aero.setAirplaneBuilder(crop);
-        aero.constrctAirplane();
-        Airplane completedCropDuster = aero.getAirplane();
+        aero.setAirplaneBuilder(crop); // director 와 concrete builder 가 함께 일하도록 세팅
+        aero.constrctAirplane(); // 작업 지시
+        Airplane completedCropDuster = aero.getAirplane(); // 완성된 product 받아오기
     }
 }
 ```
 
 ### Real-life Example
-
+- RTF reader 는 RTF -> 다양한 텍스트 포맷으로 변경하는 역할을 한다.
+- builder pattern 을 이용하면 reader 를 변경하지 않고도 새로운 conversion 방식을 도입하는 것은 쉽다.
 
 
 ### When a Builder Should't Be Used
-- interface 가 stable 하지 않으면 이 패턴 사용의 장점이 없다.
+- concrete builder 에 대한 interface 가 stable 하지 않으면 이 패턴 사용의 장점이 없다.
   - interface 가 바뀌면 controller, abstract base class, 그들의 objects 에 영향을 준다.
-  - base class 를 변경하기 위해 새로운 method 가 필요하고, concrete classes 는 새로운 method 를 overriding 해야 한다.
+  - base class 에 새로운 method 가 필요하면, concrete classes 는 새로운 method 를 overriding 해야 한다.
   - 구체적인 method interface 변화는 모든 concrete classes 가 오래된 method 도 지원하도록 요구한다.
 
 
 ### Related Patterns and Summary
 - builder 가 만드는 것은 composite (complex object 의 representation)
+- builder 는 composite object 또는 data structure 
+를 생성하기 위한 일종의 전략 패턴의 특수한 형태이다.
 - abstract factory
   - builder 는 object 를 step-by-step 만들고, 결과가 제일 마지막에 요청된다.
   - abstract factory 는 요청된 object 를 즉각 return하고, abstract builder 사용하지 않는다. application 이 factory method 를 직접적으로 호출한다.

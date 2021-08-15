@@ -1,5 +1,5 @@
 ---
-title: "Decorator Pattern"
+title: "Ch14. Decorator Pattern"
 
 categories:
   - softwareengineering
@@ -16,13 +16,13 @@ tags:
   - concrete implementation이 responsibility, behavior 랑 분리되어야 할 때
   - 변경을 위한 subclassing 이 비효율/불가능할 때
   - 구체적인 기능이 object 계층 구조의 상위에 위치하지 않을 때
-  - 많은 작은 objects 들이 있을 때 
+  - concrete implementation 을 둘러싼 많은 작은 objects 들이 있을 때 
 - 기존의 class 에 추후에 기능을 추가할 때 보통 subclass 를 만드는데, class 개수가 많아진다. 이 때 decorator pattern 사용한다.
 
 ### Original Design
 - Beverage class - HouseBlend, DarkRoast, Decaf, Espresso
 - condiments 를 추가하려면?
-  - beverage 종류 * condiment 종류 개의 class 생성 (class number explosion)
+  - beverage 종류 * condiment 종류 개의 class 생성 **(class number explosion)**
   - bevarage class 의 attribute 로 추가하면?
 
 
@@ -39,13 +39,15 @@ public class Beverage{
     }
 }
 ```
+- 문제점
+  - condiment 별 가격이 달라지거나 새로운 condiment 추가되면?
+  - 새로운 음료가 추가되는데, 기존 condiments 에 적합하지 않으면?
+  - double mocha 원하면?
 
-- condiment 별 가격이 달라지거나 새로운 condiment 추가되면?
-- 새로운 음료가 추가되는데, 기존 condiments 에 적합하지 않으면?
-- double mocha 원하면?
-
-### OCP
+### Open Close Principle
+- open for extension, closed for modification.
 - OCP 를 매번 적용하려고 하지 마라. 
+  - Indirect polymorphism 사용하여 과하게 사용하면 복잡하고, runtime performance 가 저하된다.
   
 ### Decorator Pattern
 - DarkRoast object 를 생성한다.
@@ -56,11 +58,12 @@ public class Beverage{
 ### Review of Decorator Idea
 - decorator 는 본인의 behavior 를 더한다.
 - object wrapping 을 위해 하나 이상의 decorator 사용 가능하다.
+- original (wrapped) object 위치에 decorated object 를 넘길 수 있다.
 - decorators 는 decorate 하는 object 와 동일한 super type 을 갖는다.
 - runtime 에 dynamically decorating 가능하다.
 
 
-![Validation](/assets/images/decorator.png){:width="400px" height="200px"}{: .center}
+![Validation](/assets/images/decorator.png){:width="500px" height="600px"}{: .center}
 
 - 하나의 decorator 와 association 관계를 갖는 component 객체는 하나이다. 이 때, component 객체는 자신이 wrapping 하고자 하는 객체를 가리킨다.
 - Decorator pattern 에서는 특이하게 두 class 간의 관계가 association, inheritance 둘 다 있다.
@@ -125,7 +128,7 @@ public class StarbuzzCoffee{
 ```java
 public class LowerCaseInputStream extends FilterInputStream{
     public LowerCaseInputStream(InputStream in){
-        super(in); // 부모 class 
+        super(in); // 부모 class의 생성자 호출 (자기가 꾸미는 객체 가리킴)
     }
 
     public int read() throws IOException{

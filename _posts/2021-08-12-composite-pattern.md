@@ -1,5 +1,5 @@
 ---
-title: "Composite Pattern"
+title: "Ch16. Composite Pattern"
 
 categories:
   - softwareengineering
@@ -32,7 +32,9 @@ if(current instanceOf(menuItem)){
 ![Validation](/assets/images/compositepattern.gif){:width="400px" height="400px"}{: .center}
 
 - Composite 입장에서는 자식이 Leaf 또는 Composite 이 될 수 있다. 
-  - shared aggregation 으로 Component 에 연결하면 2개의 관계를 1개의 관계로 줄일 수 있다(Decorator Pattern).
+  - shared aggregation 으로 Component 에 연결하면 2개의 관계(leaf, composite 각각에 aggregation) 를 1개의 관계로 줄일 수 있다
+    - Decorator Pattern - 각 concrete component 에 연결하는 것보다 abstract component 에 shared aggregation 으로 하나만 연결한다.
+- 하나의 composite 이 다수의 component 를 가질 수 있다(leaf 또는 또다른 composite).
 
 ### Component Class
 
@@ -42,7 +44,7 @@ public class MenuComponent{ // Concrete Class - why??
     throw new UnsupportedOperationException();
   }
   ...
-  // 모든 operation 에 대해서 exception 발생 (동일한 interface 제공을 위한 class 이므로 MenuComponent 를 만드는건 의미가 없다)
+  // 모든 operation 에 대해서 exception 발생 (동일한 interface 제공을 위한 class 이므로 채우는 것은 의미가 없다.)
 }
 ```
 
@@ -89,7 +91,7 @@ public class Menu extends MenuComponent{
   public void print(){
     Iterator iterator = menuComponents.iterator();
     while(iterator.hasNext()){
-      MenuComponent menuComponent = (MenuComponent)iterator.next();
+      MenuComponent menuComponent = (MenuComponent)iterator.next(); // Menu, MenuItem 구별하지 않겠다는 의미
       menuComponent.print();
     }
   }
@@ -196,7 +198,7 @@ public class NullIterator implements Iterator{
 }
 ```
 
-### Iterator for Composite
+### Iterator for Composite (Preorder)
 
 ```java
 public class CompositeIterator extends Iterator{
@@ -240,7 +242,7 @@ public class CompositeIterator extends Iterator{
     - composite - tree 모양의 계층 구조를 **표현**하기 위해서 사용한다. 
   - 혼용해서 같이 쓰는 경우도 많다.
 
-- iterator pattern
+- iterator pattern 와 같이 쓰이기도 한다.
   - underlying representation 을 노출하지 않고도 일관된 elements of an aggregate object 에 대한 접근을 가능하게 해준다.
 - Summary
   - composes objects into tree structures to represent whole-part hierarchies.
