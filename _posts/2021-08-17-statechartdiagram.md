@@ -1,5 +1,5 @@
 ---
-title: "Ch08. Statechart Diagram"
+title: "Ch8. Statechart Diagram"
 
 categories:
   - ooad
@@ -91,13 +91,12 @@ tags:
 
 ### History State (syntatic sugar)
 - composite state 에서 가장 마지막으로 active 된 substate 를 기억하기 위해서 사용한다.
-- shallow history state
+- shallow history state (H)
   - composite state의 동일한 level 의 state 로 복구
-  - h 의 level과 튕겨져 나간 state 의 state 계층 구조에서 
-  - h 의 level 과 동일한 state 부터 다시 시작한다.
-- deep history state
+  - h 의 level과 튕겨져 나간 state 의 state 계층 구조에서 h 의 level 과 동일한 state 부터 다시 시작한다.
+- deep history state (H*)
   - 전체 nesting depth 에서 마지막으로 active substate 복구
-  -  튕겨져서 나간 그 state 부터 다시 시작한다.
+  - 튕겨져서 나간 그 state 부터 다시 시작한다.
 
 ![Validation](/assets/images/historystate.png){:width="500px" height="300px"}{: .center}
 1. H

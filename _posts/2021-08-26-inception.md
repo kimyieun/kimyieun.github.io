@@ -17,7 +17,7 @@ tags:
   - proceed or stop
 - inception 은 짧아야 한다. 
   - one week. 대부분의 requirement analysis 는 inception 이 아닌, elaboration 단계에서 일어난다 -> casual format 의미한다. 
-  - inception 은 대부분의 requirements 를 찾지만, brief format 정도로 찾는다.
+  - **inception 은 대부분의 requirements 를 찾지만, brief format 정도로 찾는다.**
 
 ### Artifacts start in inception
 - use-case model 
@@ -33,7 +33,7 @@ tags:
 - inception 의 목적은 최대한 정보를 많이 모으는 것!
   - common vision 확립
   - feasibility test, elaboration phase 로 진입할지 결정
-- 대부분의 UML 다이어그램이 필요 없다.
+- **대부분의 UML 다이어그램이 필요 없다.**
   - inception 은 basic scope, 10% of the requirements 를 이해하는데 대부분 사용한다.
   - 실제로 대부분의 UML 다이어그램은 elaboration phase 에 등장한다.
 
@@ -41,9 +41,9 @@ tags:
 ### Requirements
 - 시스템이 갖춰야 할 capabilities, conditions 
 - requirement analysis
-  - client 와 team members 에 명확한 형태로 적힌 필요한 requirements 를 찾고, communicate, organize 한다.
+  - client 와 team members 에게 명확한 형태로 적힌 필요한 requirements 를 찾고, communicate, organize 한다.
   - requirement engineering - requirement identification - requirement analysis - requirement validation
-- UP 에서는 requirements analysis 가 iterative, skillfull 하게 수행된다.
+- UP 에서는 requirements analysis 가 iterative, skillful 하게 수행된다.
   - skillful elicitation (finding)
     - client 와 함께 use case 를 작성한다.
     - 모두가 함께 requirement workshop에 참여한다.
@@ -52,7 +52,7 @@ tags:
 
 ### Types and Categories of requirements
 - UP 에서 requirement 는 FURPS+ model 에 따라 카테고리화 된다.
-  - Functional
+  - Functional (이것만 기능. 아래는 다 비기능)
   - Usability
   - Reliability
   - Performance
@@ -60,10 +60,8 @@ tags:
 - reference model 로서 checklist 로만 활용해라.
 
 ### Quality Attributes/Requirements
-- usability, reliability, performance, supportability 
-- non-functional requirements 
+- usability, reliability, performance, supportability  : non-functional requirements 
 - quality attributes 도 system 의 architecture 에 큰 영향을 준다.
-
 
 ### How requirements are organized
 - UP는 여러 requirements artifacts 를 제공한다(단, optional).
@@ -79,7 +77,7 @@ tags:
   - glossary
   - vision
   - business rules
-- 위의 내용들을 다 적은 문서가 software requirements specification (SRS)가 된다. 
-- Waterfall 모델에서는 inception -> requirements analysis -> SRS -> design -> SDS -> coding 단계로 수행된다.
+- 위의 내용들을 다 적은 문서가 **software requirements specification (SRS)**가 된다. 
+- Waterfall 모델에서는 inception -> requirements analysis -> SRS -> design -> SDS(software design specification) -> coding 단계로 수행된다.
 - UP 에서는 Elaboration 단계 이후에 SRS 가 나온다. 
   
