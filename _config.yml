@@ -238,7 +238,8 @@ category_list:
     visualization,
     problemsolving,
     react,
-    softwareengineering,
+    ooad,
+    designpattern
   ]
 # category_archive:
 #   type: liquid
