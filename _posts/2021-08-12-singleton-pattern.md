@@ -2,7 +2,7 @@
 title: "Ch13. Singleton Pattern"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

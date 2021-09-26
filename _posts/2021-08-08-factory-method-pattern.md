@@ -2,7 +2,7 @@
 title: "Ch11. Factory Method Pattern"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

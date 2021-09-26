@@ -2,7 +2,7 @@
 title: "Ch12. Inception"
 
 categories:
-  - softwareengineering
+  - ooad
 
 tags:
   - uml

@@ -2,7 +2,7 @@
 title: "Ch12. Builder Pattern"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

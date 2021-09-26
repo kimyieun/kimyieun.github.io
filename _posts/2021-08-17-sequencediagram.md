@@ -2,7 +2,7 @@
 title: "Ch7. Sequence Diagram"
 
 categories:
-  - softwareengineering
+  - ooad
 
 tags:
   - uml
@@ -56,13 +56,15 @@ tags:
 - asynchronous message
   - 실선 화살표. response message 를 기다리지 않는다. 
   - thread 만 제외하고 대부분은 sync!
-- response message
-  - synchronous message 와 세트! 생략되기도 한다.
+- response message = ack
+  - synchronous message 와 세트! 내용과 위치가 명확하면 생략되기도 한다.
   
 
 ### Message Syntax
 - return = message (params : paramsType) : returnType
-- e.g., initialize, d = getProduct(id), ...
+- e.g.,
+  - initialize - void 이므로 input 부분 생략 가능하다.
+  - d = getProduct(id), ...
 
 ![Validation](/assets/images/message.png){:width="300px" height="300px"}{: .center}
 - d1 = aData

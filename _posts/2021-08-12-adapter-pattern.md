@@ -2,7 +2,7 @@
 title: "Ch15. Adapter Pattern"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

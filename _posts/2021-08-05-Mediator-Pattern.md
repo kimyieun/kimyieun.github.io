@@ -2,7 +2,7 @@
 title: "Ch10. Mediator Pattern"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

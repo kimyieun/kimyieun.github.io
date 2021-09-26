@@ -2,7 +2,7 @@
 title: "Ch18. MVC Pattern"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

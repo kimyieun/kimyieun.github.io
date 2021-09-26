@@ -2,7 +2,7 @@
 title: "Ch14. Decorator Pattern"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

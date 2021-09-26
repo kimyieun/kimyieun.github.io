@@ -2,7 +2,7 @@
 title: "Ch17. Bridge Pattern"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

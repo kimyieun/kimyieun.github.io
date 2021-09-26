@@ -1,8 +1,8 @@
 ---
-title: "Ch8. Statechart Diagram"
+title: "Ch08. Statechart Diagram"
 
 categories:
-  - softwareengineering
+  - ooad
 
 tags:
   - uml

@@ -1,8 +1,8 @@
 ---
-title: "Object-Oriented Paradigm and Solid Principles"
+title: "Ch02. Object-Oriented Paradigm and Solid Principles"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

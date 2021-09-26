@@ -2,7 +2,7 @@
 title: "Ch6. Class Diagram"
 
 categories:
-  - softwareengineering
+  - ooad
 
 tags:
   - uml
@@ -17,14 +17,14 @@ tags:
 ### Object
 - system 의 개별 요소
 - notations
-  - object name은 소문자로 시작하고, class name 은 대문자로 시작한다.  
+  - **object name은 소문자로 시작하고, class name 은 대문자로 시작한다.** 
   - object name:class name - maxMiller:Person
   - :class name - :Person (anonymous objects = no object name)
     - 현재 시점에서 object name 결정하지 못했거나, 할 필요가 없는 경우
   
 
 ### UML Object Diagram
-- 특정 시점에서의 objects 와 그들의 관계를 표현한다.
+- **특정 시점**에서의 objects 와 그들의 관계를 표현한다.
 
 
 ### From Object to Class
@@ -48,16 +48,16 @@ tags:
 
 
 ### Attribute syntax - Derived Attribute
-- 내가 직접 값을 넣는게 아니라, 다른 attributes, association 으로부터 도출된다.
+- 내가 직접 값을 넣는게 아니라, 다른 attributes, association 으로부터 계산되어 도출된다.
 - e.g., \+/age : int (/ : derived attribute)
 
 ![Validation](/assets/images/attributesyntax.png){:width="500px" height="300px"}{: .center}
 - Data types
   - primitive data type
     - pre-defined : Boolean, Integer, Unlimited Natural, String
-    - User-defined : \<\<primitive>>>
-    - Composite data type : \<\<datatype>>
-  - Enumerations : \<\<enumeration>>
+    - User-defined : << primitive >>
+    - Composite data type : << datatype >>
+  - Enumerations : << enumeration >>
 - User-defined classes
 
 ### Attribute syntax - Multiplicity
@@ -84,9 +84,14 @@ tags:
 - class varaible(class attribute, static attribute)
   - class 마다 한번만 선언 가능하다. class 의 instances 에서 공유 가능하다. 예를 들어, class new 를 몇 번 했는지 저장할 때 유용하다.
 - class operation(static operation)
-  - instance 가 없을 때 사용된다.
+  - **instance 가 없을 때 사용된다.**
   - constructors, counting operations
 - notation : class diagram 에서 밑줄 긋는 것
+
+```java
+private static int pNumber;
+public static int getPNumber(){...};
+```
 
 ### Operations to Access Attributes in DCDs
 - accessing operations - get or set all private attributes
@@ -104,18 +109,18 @@ tags:
   - class 이름만 표기 -> class 이름, attribute visibility, name, type, derived value, operations ... 등등 아주 디테일하게 표현
 
 ### Types of Class Relationship (5 types)
-1. dependency
-2. association
-3. aggregation
-4. composition
-5. inheritance
+1. dependency - parameter 로 받아서 잠깐 같이 일하고 마는 경우
+2. association - 특정 기간동안 같이 일을 하는 경우
+3. aggregation - reference 를 소유하지만 다른 class 와도 공유하는 경우
+4. composition - reference 를 나만 소유하는 경우
+5. inheritance - 다른 class 의 type 이 되는 경우
 
 
 ### 1. Dependency
 - 점선 화살표로 표현한다.
 - class 간의 가장 약한 관계를 모델링 한다.
 - briefly 하게 objects 를 사용하기 위한 것으로, parameter 로 받는다.
-- class diagram 에서 보다, component diagram 에서 사용된다.
+- class diagram 보다, component diagram 에서 사용된다.
 - a ---> b : a 가 b에 dependency 를 갖는다. a 의 operation 의 parameters 로 b를 받는다. operation 실행이 종료되면 dependency 가 끊어진다.
     - b 가 변경되면 a 가 영향을 받는다!
 
@@ -130,7 +135,7 @@ tags:
 - Navigability
   - object 가 상대 object 를 알고, visible attributes, operations 에 접근 가능하다는 의미이다.
   - open arrow head, cross 로 표현한다.
-  - A x-> B 
+  - A x-> B =  A -> B
     - A 는 B 의 visible attributes, operations 에 접근 가능하다. (not private, but public)
     - B 는 A 에 대해서 아무 것도 모른다.
     - A 는 B 를 role 이름을 가진 attribute 로서 갖는다. 
@@ -154,7 +159,7 @@ class Student{
 3. both of them
 
 ### Attribute Text vs. Association Lines for Attributes
-- data type objects 를 위한 attribute text notation 을 사용하고, 다른 것들은 association 사용해서 작성해라.
+- 일반적인 data type objects 를 위한 attribute text notation 을 사용하고, 다른 것들은 association 사용해서 작성해라.
   - association line 을 보여주는게 visual 강조할 수 있다.
 
 
@@ -175,11 +180,18 @@ class Student{
   - salary - 이 정보가 company 에 저장되면 attr 가 너무 많고 복잡하다. person attr 로 저장하면 되지만, 한 명이 여러 회사를 다니면 또 company 별로 필요하다...
 
 ### Singleton Classes
-
+- class 의 instance 가 한개만 있다. OOP 에서는 권장하지 않는다.
 
 ### Active Class
+- class의 instance 가 나중에 thread 가 된다. (active object)
+- active object 의 class 를 active class 라 한다.
+
 
 ### Interfaces
+- UML 에서 interface realization 표기 방법이 3가지가 있다.
+  - socket + lollipop notation
+  - dependency line notation
+  - interface implementation - class diagram 에서 제일 많이 사용. 점선 삼각형 화살표 (realization)
 
 ### 3. Arregation
 - association 의 특별한 형태
@@ -217,7 +229,8 @@ class Student{
 
 ![Validation](/assets/images/composition.png){:width="400px" height="250px"}{: .center}
 - beamer 는 lecturehall 의 부분이고, lecturehall 은 building 의 부분이다.
-- lecturehall 이 1이면, building 이 사라지면, lecturehall 도 사라지고 beamer 도 사라진다. 
+- building 이 없으면 lecturehall 은 존재할 수 없다.
+- lecturehall 이 1이면, beamer 는 lecturehall 에 속하므로 building 이 사라지면, lecturehall 도 사라지고 beamer 도 사라진다. 
 - lecturehall 이 0이면, beamer 자체는 있을 수 있다. 0 인 경우는 shared aggregation 이라고 보면 된다. 
 
 
@@ -225,18 +238,18 @@ class Student{
 ![Validation](/assets/images/sharedexample.png){:width="400px" height="250px"}{: .center}
 1. O. car 가 0 이어도 타이어 4개는 있을 수 있다. car = 1 이면 타이어는 4개를 가진다. 
 2. X. tire 는 car 가 없으면 존재할 수 없다. composition 을 shared aggregation 으로 바꾸면 맞는 말이다.
-3. X. car 여러 개가 4개의 tire 를 공유한다. 
+3. X. car 여러 개가 4개의 tire 를 공유한다. 하나의 타이어는 여러개의 차에 속할 수 없다.
 4. O. car 여러 개가 1-2개의 tire type 을 공유한다.
 
 ### 5. Generation(Inheritance)
 - class 의 모든 것이 subclasses 에 전달된다.
   - subclass 의 모든 instance 는 동시에 superclass 의 indirect instance 이다.
-  - subclass 는 private 을 제외하고 superclass 의 attribute, operations, association 관계, aggregations 관계를 모두 상속받고 추가로 더 가질 수 있다.
+  - subclass 는 **private 을 제외하고** superclass 의 attribute, operations, association 관계, aggregations 관계를 모두 상속받고 추가로 더 가질 수 있다.
 - generalizations are transitive.
 
 ### Generalization - Abstract Class
 - {abstract} A 또는 *class name* 
-- subclass 의 공통 속성을 강조하기 위해 사용한다.
+- **subclass 의 공통 속성을 강조하기 위해 사용한다.**
 - superclass 의 직접적인 instance 가 없고, descendants 만 instance 를 만들 수 있다.
 - 공통의 attr, op 는 fully 정의되어 있어야 하고, 비어있는 경우는 abstract operation 이라 한다.
 
@@ -258,3 +271,4 @@ class Student{
 - 모든 attribute, operation 은 visibility 가 항상 표현되어야 한다. (x)
 - 모든 private attribute 에 대해서는 getter, setter operations 을 항상 만들어야 한다. (o)
 - everything of a general class are passed on to its subclasses. (x)
+- a -<> b - b 와 a는 동등한 개념이다 (x) b가 a 를 가진다.

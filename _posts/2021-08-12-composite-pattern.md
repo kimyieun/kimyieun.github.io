@@ -2,7 +2,7 @@
 title: "Ch16. Composite Pattern"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

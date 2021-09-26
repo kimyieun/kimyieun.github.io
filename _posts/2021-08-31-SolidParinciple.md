@@ -1,8 +1,8 @@
 ---
-title: "Solid Principle"
+title: "Ch03. Solid Principle"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - uml

@@ -1,8 +1,8 @@
 ---
-title: "Ch9. State Pattern"
+title: "Ch09. State Pattern"
 
 categories:
-  - softwareengineering
+  - designpattern
 
 tags:
   - design pattern

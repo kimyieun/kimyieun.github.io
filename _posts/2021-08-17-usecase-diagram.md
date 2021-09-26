@@ -2,7 +2,7 @@
 title: "Ch5. Use Case Diagram"
 
 categories:
-  - softwareengineering
+  - ooad
 
 tags:
   - uml
@@ -10,8 +10,10 @@ tags:
 
 ### Use Cases
 - text stories of some actors using a system to meet goals.
+- use case diagram 보다 더 중요하다.
+- OOAD 뿐만 아니라 SASD 에서도 사용된다. OOAD 에서는 use case = functional requirements 로 간주한다.
   - requirements 발견하고 분석하기 위한 메커니즘
-  - not a diagram, but a text (3 formats)
+  - diagram 이 아닌 text 로 표현된다. (3 formats)
     - brief -> casual -> fully dressed
 
 ### Use Case Diagram
@@ -25,6 +27,7 @@ tags:
 - Actor
   - 상황에 따라 actor role 이 바뀔 수 있다.
   - primary actor : system 직접 사용해서 목표를 충족시키는 actor (cashier)
+  - secondary actor : primary actor에게 일을 요청하는 actor 
   - supporting actor : system 에 service 를 제공하는 actor (payment authorization service) 
   - offstage actor : use case 의 행동에 관심은 있지만, not primary or supporting. (tax agency)
 
@@ -40,16 +43,17 @@ tags:
     - main success scenario
       - 가장 많이(typical) 발생하는 시나리오
     - alternate scenario (extensions)
-      - 그 외 success 는 하지만 not typical 시나리오
+      - 그 외. success 는 하지만 not typical 시나리오
     - exceptional scenario
       - success 하지 못하는 시나리오
 - Fully dressed
   - 디자인 단계(OOD)에서 작성하는 가장 디테일한 단계이다.
   - all steps, variations, supporting sections 도 표현한다.
     - preconditions - use case 시작하기 전에 system 상태
+    - extensions - alternative scenario
 
 ### Guideline - write in an essential style
-- essential writing style
+- essential writing style <-> concrete writing style
   - 구체적인 action 은 제외하고 사용자 인터랙션과 시스템 책임을 표현한다.
     - UI free-style (flexible, implementation detail 은 가급적 포함하지 않는다.)
     - 초기 requirements 분석 단계에서는 구체적인 use case 는 피하는 것이 좋다.
@@ -66,4 +70,3 @@ tags:
 - YES (in OOAD)
 - not functional requirements 는 SRS 의 F(use case)/NF 에서 NF 로 표현된다.
 - use cases는 requirements, 특히 functional requirements 다.
-- 
