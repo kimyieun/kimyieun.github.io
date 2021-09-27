@@ -2,10 +2,10 @@
 title: "Ch7. Template Method Pattern"
 
 categories:
-  - ooad
+  - designpattern
 
 tags:
-  - uml
+  - designpattern
 ---
 
 ### Template Method Pattern
@@ -72,7 +72,7 @@ public class Coffee extends CaffeineBeverage{
 
 ### Hook Method
 - hook
-    - abstract class 에 정의된 method 중 implementation 이 없거나 default 인 경우.
+    - abstract class 에 정의된 method 중 implementation 이 없거나 default 인 method 를 말한다.
     - subclasses 가 override 할 수 있다.
 
 ```java
@@ -95,7 +95,7 @@ public abstract class CaffeineBeverage{
         System.out.println("pourincup");
     }
 
-    boolean customerWantsCondiments(){
+    boolean customerWantsCondiments(){ // default
         return true;
     }
 }
@@ -118,7 +118,7 @@ public class Coffee extends CaffeineBeverage{
 ```
 
 ### design principle : hollywood principle
-- don't call use, we'll call you.
+- don't call us, we'll call you.
 - dependency rot 방지
     - high-level component 가 low-level component 에 의존하고, low-level component 가 high-level component 에 의존하는 것.
 - hollywood principle
