@@ -212,7 +212,7 @@ public class DependentPizzaStore{
 ### Dependency Inversion Principle
 - abstraction 에 의존하고, concrete class 에 의존하지 마라.
 - high-level components 는 low-level components 에 의존하면 안된다. 둘 다, abstraction에 의존해야 한다.
-- factory method 가 DIP 를 따른다.
+- factory method 가 DIP 를 따른다. PizzaStore 는 Pizza 만 안다. 
 
 ### Factory Method Pattern
 
@@ -376,11 +376,11 @@ public class CheesePizza extends Pizza{
   - DIP - abstraction 에 의존하라.
   - Factory method
     - object 생성하는 interface 선언하고, subclasses 가 생성할 class 를 선택하도록 한다.
-    - class-scope pattern (inheritance)
+    - class-scope pattern (inheritance) - 바로 subclass 의 함수를 호출한다. (createA())
     - client : 주어진 framework 상속
   - Abstract Factory 
     - client : 제3자 입장에서 product 생성해준다.
     - 관련 있는 families of objects 를 생성하기 위한 interface 를 제공한다.
-    - object-scope pattern (object composition & delegation)
+    - object-scope pattern (object composition & delegation) - 외부로부터 factory 객체를 받아서 함수를 호출한다. (factory.createA())
 
 
