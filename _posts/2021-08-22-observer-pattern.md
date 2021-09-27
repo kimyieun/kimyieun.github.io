@@ -1,5 +1,5 @@
 ---
-title: "Ch06. Observer Pattern"
+title: "Ch6. Observer Pattern"
 
 categories:
   - designpattern

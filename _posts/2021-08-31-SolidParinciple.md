@@ -1,5 +1,5 @@
 ---
-title: "Ch03. Solid Principle"
+title: "Ch3. Solid Principle"
 
 categories:
   - designpattern
@@ -48,10 +48,12 @@ tags:
 ### 2. Open-closed Principle
 - sw entities(classes, modules, functions, etc)는 확장에는 open, 변화에는 close 되어야 한다.
 - 확장을 하되, 과도한 변경을 일으키면 안된다.
-- rigidity, fragility 
-  - 새로운 타입이 추가되면 코드 변경이 많이 필요하다. if/else, switch/case 문이 증가하고 발견하기 어렵고 이해하기 어려운 코드가 될 수 있다.
+- rigidity
+  - 새로운 타입이 추가되면 코드 변경이 많이 필요하다. 
+- fragility 
+  - if/else, switch/case 문이 증가하고 발견하기 어렵고 이해하기 어려운 코드가 될 수 있다.
 - immobile
-  - 함수 재활용하고 싶은데, 그 함수내에 포함된 여러 class types 도 같이 필요해진다.
+  - 다른 application 에서도 이 함수 재활용하고 싶은데, 그 함수내에 포함된 여러 class types 도 같이 필요해진다.
 - abstraction 이 중요하다.
   - 고정되어 있지만, 가능한 behaviors 의 제한이 없다. 
   - concrete class(implementation)가 아닌, abstract class(interface)에 프로그래밍해라.
@@ -66,7 +68,7 @@ tags:
 ### 3. Liskov Substitution Principle
 - subtypes(derived class) 는 base type(base class) 로 대체 가능해야 한다. 
 - 상속을 사용할지 말지 체크하기 위해서 사용된다.
-- C가 P의 subtype 이면, P를 C로 대체해도 아무 문제가 없어야 한다.
+- **C가 P의 subtype 이면, P를 C로 대체해도 아무 문제가 없어야 한다.**
 - subtyping vs. implementation inheritance
   - subtyping 
     - is A 관계. interface inheritance. 상속 관계만 설정하고 implementation 을 가져오는 것은 아니다.
@@ -89,10 +91,14 @@ dateValue = date.getDate(); // throws
 - java.util.Date 는 java.sql.Date 와 java.sql.Time 의 상위 type 이다.
   - 상위 타입으로 하위 타입의 instance을 가리킬 수 있으므로, date 의 타입은 base type 이다.
   - 그런데, java.sql.Time 에는 getDate 라는 method 가 정의되어있지 않다. 그래서 에러가 발생한다.
-- LSP 위반은 OCP 위반도 불러온다.
+- **LSP 위반은 OCP 위반도 불러온다.**
+  - Ctype 이 Ptype 을 상속하므로 Ptype 을 인자로 받는 함수에 인자로 들어갈 수 있다.
+  - 근데, Ctype 과 PType 은 상속관계가 아닌데 implementation 을 위해 간단하게 상속을 사용했더니 if(x instanceof(Ctype)) throw new error(); 구문 추가가 필요하다.
+  - 이는, OCP 를 어긴다. Ptype 에 close 하지 않다.
+
   
 ### 4. Dependency Inversion Principle
-- High level modules 은 low level modules 에 의존하면 안된다. abstraction 에 의존해야 한다.
+- High level modules 은 low level modules 에 의존하면 안된다. 둘 다 abstraction 에 의존해야 한다.
 - abstraction 은 detail 에 의존하면 안되고, detail 이 abstraction 에 의존해야 한다.
 - inversion?   
   - DIP 는 기존의 structured analysis and design 접근에서의 의존성 역전을 시도한다.
@@ -101,6 +107,10 @@ dateValue = date.getDate(); // throws
 - dependency 의 역전뿐만 아니라, onwership 의 역전이다.
 - 기존에는 서버가 interface 를 소유했지만, DIP 에서는 client 가 interface 를 소유해야 한다.
 - client 는 lower-level layer 가 아니라 interface 를 소유해야 한다.
+- layered architecture
+  - policy layer -> mechanism layer -> utility layer 순서로 호출하면 안된다.
+  - mechanism layer 에서 policy service interface 를 구현하고 policy layer 는 그 interface 에 의존한다.
+  - 이름은 client 입장에서 만드는 것이 좋다. 여러 clients 가 존재할 수 있기 때문이다.
 
 ### 5. Interface Segregation Principle
 - client 는 사용하지 않는 method 에 의존하면 안된다.
