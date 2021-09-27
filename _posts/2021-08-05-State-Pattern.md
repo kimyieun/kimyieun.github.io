@@ -1,5 +1,5 @@
 ---
-title: "Ch09. State Pattern"
+title: "Ch9. State Pattern"
 
 categories:
   - designpattern

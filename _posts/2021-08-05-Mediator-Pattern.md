@@ -58,6 +58,6 @@ tags:
 
 ![Validation](/assets/images/mediatorpattern4.png){:width="500px" height="300px"}{: .center}
 1. showDialog()
-2. 사용자가 listbox 를 수정해서 windgetChanged() 
+2. 사용자가 listbox 를 수정해서 windgetChanged() - colleague 의 값이 변했다는 것을 알려준다.
 3. getSelection() 통해 변한 상태값을 쿼리한다.
 4. setText() 를 호출해 필요한 조취를 취한다.

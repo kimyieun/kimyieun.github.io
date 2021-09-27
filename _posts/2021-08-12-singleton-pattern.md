@@ -21,7 +21,7 @@ tags:
   - window manager, printer spooler, thred pool manager, caches, logging, factory
 - issues
   - global variable 로 정의하는게 더 쉽지 않나?
-  - multi-threading 환경
+  - multi-threading 환경에서는 고려할 문제가 좀 있다.
 - implementation
   - singleton pattern 은 언어에 따라 접근 방법이 달라서, 코딩 패턴으로 보기도 한다.
 
