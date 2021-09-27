@@ -2,10 +2,10 @@
 title: "Ch8. Iterator Pattern"
 
 categories:
-  - ooad
+  - designpattern
 
 tags:
-  - uml
+  - designpattern
 ---
 
 ### Iterator pattern
@@ -111,7 +111,7 @@ public class waitress{
 
 ### single responsibility
 - class 는 한가지 이유에 의해서만 변화되어야 한다.
-- aggregate and iteration - 두 개의 다른 responsibilities 
+- aggregate and iteration - 두 개의 다른 responsibilities 로 iterator pattern 에서는 분리한다.
 - cohesion
     - high cohesion 하게 만들고 싶다.
 
