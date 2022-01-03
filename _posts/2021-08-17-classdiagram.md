@@ -9,10 +9,9 @@ tags:
 ---
 
 ### UML Class Diagrams
-- 동일한 UML Class Diagram 이 다양한 관점에서 사용될 수 있다.
-  - conceptual perspective - Domain Model (OOA)
+- 동일한 UML Class Diagram 이 서로 다른 관점에서 사용될 수 있다.
+  - conceptual perspective - Domain Model (OOA) - class diagram notation 을 사용한다고 보면 된다. 
   - design perspective - Design Class Diagram (OOD)
-
 
 ### Object
 - system 의 개별 요소
@@ -25,7 +24,6 @@ tags:
 
 ### UML Object Diagram
 - **특정 시점**에서의 objects 와 그들의 관계를 표현한다.
-
 
 ### From Object to Class
 - class 는 system 에서 유사한 objects 집합에 대한 construction plan 이다.
@@ -84,7 +82,7 @@ tags:
 - class varaible(class attribute, static attribute)
   - class 마다 한번만 선언 가능하다. class 의 instances 에서 공유 가능하다. 예를 들어, class new 를 몇 번 했는지 저장할 때 유용하다.
 - class operation(static operation)
-  - **instance 가 없을 때 사용된다.**
+  - **instance 가 없어도 사용할 수 있다.**
   - constructors, counting operations
 - notation : class diagram 에서 밑줄 긋는 것
 
@@ -113,17 +111,25 @@ public static int getPNumber(){...};
 2. association - 특정 기간동안 같이 일을 하는 경우
 3. aggregation - reference 를 소유하지만 다른 class 와도 공유하는 경우
 4. composition - reference 를 나만 소유하는 경우
-5. inheritance - 다른 class 의 type 이 되는 경우
+5. inheritance - 다른 class 의 type 이 되는 경우 (is a)
 
 
 ### 1. Dependency
-- 점선 화살표로 표현한다.
+- 점선 화살표로 표현한다. (- - - ->)
 - class 간의 가장 약한 관계를 모델링 한다.
 - briefly 하게 objects 를 사용하기 위한 것으로, parameter 로 받는다.
 - class diagram 보다, component diagram 에서 사용된다.
-- a ---> b : a 가 b에 dependency 를 갖는다. a 의 operation 의 parameters 로 b를 받는다. operation 실행이 종료되면 dependency 가 끊어진다.
+- a - - - > b : a 가 b에 dependency 를 갖는다. a 의 operation 의 parameters 로 b를 받는다. operation 실행이 종료되면 dependency 가 끊어진다.
     - b 가 변경되면 a 가 영향을 받는다!
 
+```java
+public class Sale{
+  public void updatePriceFor(ProductDescription description){
+    Money basePrice = description.getPrice();
+  
+  } // 여기서 description object 에 대한 reference 가 사라진다.
+}
+```
 
 ### 2. Association
 - 실선으로 표현한다. 화살표 사용할 수도 아닐수도.
@@ -138,7 +144,7 @@ public static int getPNumber(){...};
   - A x-> B =  A -> B
     - A 는 B 의 visible attributes, operations 에 접근 가능하다. (not private, but public)
     - B 는 A 에 대해서 아무 것도 모른다.
-    - A 는 B 를 role 이름을 가진 attribute 로서 갖는다. 
+    - A 는 B 를 'lecturer' 라는 role 이름을 가진 attribute 로서 갖는다. 
 - Navigability undefined
   - bidirectional navigability (- = <->)
 - e.g., Student -> Professor
