@@ -239,7 +239,9 @@ category_list:
     problemsolving,
     react,
     ooad,
-    designpattern
+    designpattern,
+    graphics,
+    architecturestyle,
   ]
 # category_archive:
 #   type: liquid

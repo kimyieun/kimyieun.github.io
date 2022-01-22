@@ -167,7 +167,6 @@ public class LightOnCommand implements Command{
 }
 ```
 
-
 ### Supporting Undo
 
 ```java

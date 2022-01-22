@@ -15,7 +15,7 @@ tags:
 - Command pattern 은 request 를 객체로 만들어서 보관
 
 
-![Validation](/assets/images/mementoc.png){:width="500px" height="300px"}{: .center}
+![Validation](/assets/images/mementoc.PNG){:width="500px" height="300px"}{: .center}
 
 - originator 
   - memento **생성**하여 현재 상태 반환하는 역할
@@ -75,7 +75,7 @@ public class Main {
 
 ```
 
-![Validation](/assets/images/mementos.png){:width="500px" height="300px"}{: .center}
+![Validation](/assets/images/mementos.PNG){:width="500px" height="300px"}{: .center}
 
 
 ### Discussion
