@@ -235,6 +235,7 @@ category_list:
   [
     javascript,
     frontend,
+    recommendation,
     visualization,
     problemsolving,
     react,
