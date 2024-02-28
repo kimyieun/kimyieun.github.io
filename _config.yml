@@ -93,7 +93,7 @@ analytics:
 author:
   name: "Yieun Kim"
   avatar: # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio: "BigData Center, Samsung Electronics"
+  bio: ""
   location: "Seoul, Republic of Korea"
   email:
   links:
