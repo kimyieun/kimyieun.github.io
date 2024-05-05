@@ -243,6 +243,7 @@ category_list:
     designpattern,
     graphics,
     architecturestyle,
+    datascience
   ]
 # category_archive:
 #   type: liquid
