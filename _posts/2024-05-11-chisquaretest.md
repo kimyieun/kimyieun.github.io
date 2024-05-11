@@ -30,6 +30,7 @@ categories:
   - 카이제곱 검정은 대표본에서만 유효하다.
   - 그 때는 **피셔의 정확 검정**을 사용한다.
     - 소표본일 때, 빈도수가 적은 것이 많이 나올 때.
+- 
 
 
 ## 적합도 검정 (goodness of fit test)
@@ -49,6 +50,32 @@ categories:
 
 - df : 3
 
+## 적합도 검정 예제 코드
+
+- df_titanic dataframe 에서 성별이 0.5, 0.5 비율로 남, 여 동일한지 검정하라.
+
+```python
+from scipy.stats import chi2
+
+n = len(df_titanic)
+chi = df_titanic.groupby('Sex')['Sex'].agg('count').apply(lambda x : (x - 0.5*n)**2/(0.5*n)).sum()
+n, chi # (891, 77.63075196408529)
+
+chi2.sf(chi, 1) # sf = 1 - cdf / df = 성별(2) - 1
+# 1.2422095313910336e-18 (pvalue)
+
+# 2. 더 간단한 방법
+from scipy.stats import chisquare
+
+n = len(df_titanic)
+obs = df_titanic.groupby('Sex')['Sex'].agg('count').tolist()
+exp = [0.5*n, 0.5*n]
+chisquare(obs, exp) 
+# Power_divergenceResult(statistic=77.63075196408529, pvalue=1.2422095313910336e-18)
+
+```
+
+
 ## 독립성 검정 (test of independence)
 - 2 개의 요인
 - 2개의 요인이 관찰값에 영향을 주는지 아닌지? 서로 연관이 있는지 없는지?
@@ -65,6 +92,29 @@ categories:
 - 연관성이 있으려면 얼마나 차이가 나야 할까?
 - df = (행수-1)(열수-1) = (성별-1)(구매/비구매-1) = 1
 
+![Validation](/assets/images/chi4.PNG){:width="900px" height="400px"}{: .center}
+
+## 독립성 검정 예제 코드
+
+- df_titanic 에서 Survived와 Embarked가 독립인지 카이제곱 독립성 검정으로 검정해봅니다.
+(contingency : 우연성)
+
+```python
+from scipy.stats import chi2_contingency
+o_conti = pd.crosstab(df_titanic['Survived'], df_titanic['Embarked'])
+chi2_contingency(o_conti)
+
+# (25.964452881874784,
+#  2.3008626481449577e-06,
+#  2,
+#  array([[103.51515152,  47.44444444, 398.04040404],
+#         [ 64.48484848,  29.55555556, 247.95959596]]))
+
+```
+
+![Validation](/assets/images/contingency.PNG){:width="300px" height="200px"}{: .center}
+- chi2_contingency return value
+  - chi2 statistics, pvalue, dof, expected_freq
 
 ## 동질성 검정 (test of homogeneity)
 - 2 개의 요인
