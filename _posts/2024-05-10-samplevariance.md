@@ -15,7 +15,7 @@ categories:
 
 ## 표본평균의 분포
 
-![Validation](/assets/images/sd.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/sd.PNG){:width="=500px" height="300px"}{: .center}
 
 - 모집단의 분포가 주어졌을 때 표본 X1, X2, ...., Xn 표본을 뽑는다.
 - 표본평균의 평균 = 모평균, 분산 = 모분산/n
@@ -24,7 +24,7 @@ categories:
 
 ## 표본분산의 분포
 
-![Validation](/assets/images/sd2.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/sd2.PNG){:width="=500px" height="300px"}{: .center}
 
 - 모집단의 분포(정규분포)가 주어졌을 때, N개의 샘플을 추출한다.
 - (Statistics)는 자유도가 n-1 인 카이제곱분포를 따른다.
@@ -33,7 +33,7 @@ categories:
 
 ## 그럼 카이제곱분포가 뭐야?
 
-![Validation](/assets/images/chi.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/chi.PNG){:width="=500px" height="300px"}{: .center}
 
 - 확률변수 N개가 있을 때 각각의 N(0,1) 표준정규분포를 따른다.
 - 각 각을 제곱을 취한 Z 는 카이제곱분포를 따른다.
@@ -48,14 +48,14 @@ categories:
 - 자유도에 따라 기울어진 정도가 다르다.
   
 
-![Validation](/assets/images/chi2.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/chi2.PNG){:width="=500px" height="300px"}{: .center}
 
 - alpha(면적) : 0.95, v(df) = 5 일 때 카이제곱값은 1.145
 - 카이제곱값이 1.145 보다 클 확률은? 0.95 (면적)
 
 ## 표본분산으로 다시 돌아가보자.
 
-![Validation](/assets/images/sv.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/sv.PNG){:width="=500px" height="300px"}{: .center}
 
 - 모집단이 정규분포를 따른다고 했을 때 N개의 샘플을 뽑으면, ~ 통계량은 카이제곱분포를 따른다.
 - n : 샘플의 개수
@@ -75,7 +75,7 @@ categories:
 - 모집단 - 평균 = 15, 분산 = 100
 - 25개의 샘플 추출 -> df = 24
 
-![Validation](/assets/images/sv3.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/sv3.PNG){:width="=500px" height="300px"}{: .center}
 
 
 - 표본분산이 c보다 클 확률이 0.95 인 c를 찾아라
@@ -90,13 +90,13 @@ categories:
   - 자유도가 커질수록 꼬리가 얇아진다.
   - **비정규분포!**
 
-![Validation](/assets/images/t2.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/t2.PNG){:width="=500px" height="300px"}{: .center}
 
 
 - 모집단이 정규분포이다.
   - 정규분포, 카이제곱분포, t분포, f분포 모두 모집단은 정규분포이다!
 
-![Validation](/assets/images/t3.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/t3.PNG){:width="=500px" height="300px"}{: .center}
 
 - 표준정규분포 형태와 거의 동일한데, 표준편차 대신 S 를 사용한다는 차이만 있다.
   - sigma 는 모집단의 표준편차. S 는 샘플의 표준편차
@@ -105,7 +105,7 @@ categories:
 
 ## 예제
 
-![Validation](/assets/images/t4.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/t4.PNG){:width="=500px" height="300px"}{: .center}
 
 
 ## F 분포
@@ -113,22 +113,22 @@ categories:
   - 자유도는 v1, v2 로 2개이다.
 
 
-![Validation](/assets/images/f.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/f.PNG){:width="=500px" height="300px"}{: .center}
 
 
-![Validation](/assets/images/f2.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/f2.PNG){:width="=500px" height="300px"}{: .center}
 
 
-![Validation](/assets/images/f3.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/f3.PNG){:width="=500px" height="300px"}{: .center}
 - 카이제곱분포랑 비슷하게 오른쪽으로 skew 된 형태이다.
 - 2개의 자유도가 1이면 거의 지수분포 형태.
 
 
-![Validation](/assets/images/f4.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/f4.PNG){:width="=500px" height="300px"}{: .center}
 
 
 - 표본분산의 비율이 궁금하다!
 - 두 모집단 사이의 분산 차이를 알고 싶을 때 보통 사용하는 식 => S1^2/S2^2
   
 
-![Validation](/assets/images/f5.png){:width="=500px" height="300px"}{: .center}
+![Validation](/assets/images/f5.PNG){:width="=500px" height="300px"}{: .center}
