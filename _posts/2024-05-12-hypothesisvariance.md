@@ -11,7 +11,7 @@ categories:
 - 귀무가설 : 모분산 = ? 
 - 대립가설 : 모분산 < ? or 모분산 > ? or 모분산 != ?
 
-![Validation](/assets/images/var.PNG){:width="900px" height="400px"}{: .center}
+![Validation](/assets/images/var.PNG){:width="900px" height="300px"}{: .center}
 
 
 ## 예제 1
@@ -44,7 +44,7 @@ chi2.cdf(Chi2, n-1)
 - 두 모집단은 정규 분포를 따르고, 각 표본은 서로 독립입니다.
 - 귀무가설 : A 모분산 = B 모분산
 
-![Validation](/assets/images/var2.PNG){:width="900px" height="400px"}{: .center}
+![Validation](/assets/images/var2.PNG){:width="400px" height="300px"}{: .center}
 
 - F검정
 
