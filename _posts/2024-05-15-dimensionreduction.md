@@ -25,6 +25,29 @@ categories:
       3. 선형 피쳐 추출 - PCA, LDA
       4. 비선형 피쳐 추출 - t-SNE
 
+## 고윳값과 고유벡터
+- 행렬은 선형 변환 연산이다. 즉 벡터를 변환시켜 다른 벡터를 만들어준다.
+
+![Validation](/assets/images/eigen.PNG){:width="900px" height="300px"}{: .center}
+
+- 정의 : 임의의 n x n 행렬 A 에 대해, 0이 아닌 벡터 x 가 존재한다면 **숫자 lambda** 는 행렬 A 의 고윳값이라고 할 수 있다.
+  - A x = lambda x
+- 이 때 벡터 x 는 고윳값 lambda 에 대응하는 고유벡터이다.
+
+## 고윳값과 고유벡터 예시
+![Validation](/assets/images/eigen2.PNG){:width="200px" height="200px"}{: .center}
+- 이 행렬 A 에 대한 고윳값과 고유벡터를 구해보자.
+
+- det(A-lambdaI) = 0 이므로 (2-lambda)^2 -1 = 0 이다.
+  - lambda1 = 1, lambda2 = 3
+  - 즉 선형변환 A의 고윳값은 1, 3 이다.
+  - 선형 변환을 했을 때 그 크기는 변하고 방향은 변하지 않는 벡터가 있다고 할 때, 그 벡터의 크기는 1배, 3배가 된다는 의미이다.
+- 1) lambda1 = 1 인 경우, Ax = lambda x 식에 대입해서 문제를 풀면 x = [1, -1] 이 나온다.
+- 2) lambda2 = 3 인 경우, x = [1, 1] 이다.
+  - x = [1, 1] 벡터는 선형변환 A 를 취해주면 그 방향은 변하지 않고 크기가 3배가 된다.
+  - x = [1, -1] 벡터는 선형 변환 A를 취해주면 그 방향은 변하지 않고 크기가 1배가 된다.
+
+
 ## PCA(principal component analysis) - 비지도 학습 기법
 - 고차원의 원본 데이터를 저차원의 새로운 **부분 공간으로 투영**하여 데이터를 축소하는 기법
 - 원본 데이터가 가지는 데이터 변동성(분산)을 가장 중요한 정보로 간주한다.
@@ -116,3 +139,7 @@ lda = LinearDiscriminantAnalysis()
 result = lda.fit_transform(X_train[columns], y_train)
 # LDA 는 학습할 때 y label 도 필요하다!
 ```
+
+
+## references
+- https://angeloyeo.github.io/2019/07/17/eigen_vector.html#fn:2
